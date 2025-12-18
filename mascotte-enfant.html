@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>HAVRE – Choix de la mascotte</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      /* HAVRE V1 */
+      --bg-main: #f6f4ee;
+      --bg-gradient-top: #faf8f3;
+      --bg-gradient-bottom: #f1eee7;
+
+      --bg-card: #ffffff;
+      --bg-soft: #eef7f2;
+
+      --accent: #4cc38a;       /* Vert principal */
+      --accent-alt: #3ba7c9;   /* Bleu-vert */
+      --accent-deep: #2a8f68;  /* Vert profond */
+
+      --text-main: #102018;
+      --text-muted: #5f7b6d;
+
+      --border-soft: rgba(120, 164, 143, 0.45);
+      --border-subtle: rgba(76, 195, 138, 0.35);
+
+      --radius-xl: 18px;
+      --shadow-soft: 0 22px 45px rgba(24, 48, 32, 0.18);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      background: radial-gradient(circle at top, var(--bg-gradient-top) 0, var(--bg-main) 55%, var(--bg-gradient-bottom) 100%);
+      color: var(--text-main);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      padding: 24px 10px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    /* Nav capsule (inchangée) */
+    .global-nav {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .nav-logo {
+      width: 22px;
+      height: 22px;
+      border-radius: 7px;
+      background: url("assets/img/logo-havre.png") center/cover no-repeat;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 8px 16px rgba(24, 48, 32, 0.14);
+      display: inline-block;
+      flex-shrink: 0;
+      padding: 0;
+      line-height: 0;
+    }
+
+    .global-nav a:not(.nav-logo) {
+      font-size: 12px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      color: var(--text-muted);
+      border: 1px solid transparent;
+      transition: background 0.2s ease, color 0.2s ease;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .global-nav a:not(.nav-logo).active,
+    .global-nav a:not(.nav-logo):hover {
+      background: linear-gradient(120deg, var(--accent), var(--accent-alt));
+      color: #ffffff;
+    }
+
+    .lang-note {
+      margin-top: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--text-muted);
+      justify-content: center;
+      width: 100%;
+    }
+
+    /* Phone shell */
+    .phone-shell {
+      width: 100%;
+      max-width: 430px;
+      border-radius: 32px;
+      background: radial-gradient(circle at top, #e9f7ef 0, #dff2e9 65%);
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--border-soft);
+      padding: 12px 12px 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .phone-notch {
+      width: 40%;
+      height: 18px;
+      border-radius: 999px;
+      background: #d4ebdd;
+      margin: 0 auto 10px;
+    }
+
+    .phone-screen {
+      border-radius: 24px;
+      background: radial-gradient(circle at top, #fdfefc 0, #edf7f1 80%);
+      padding: 10px 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      border: 1px solid rgba(42, 143, 104, 0.35);
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* ✅ Logo inline dans la top-bar (sans casser la mise en page) */
+    .app-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .app-logo {
+      width: 16px;
+      height: 16px;
+      border-radius: 6px;
+      background: url("assets/img/logo-havre.png") center/cover no-repeat;
+      box-shadow: 0 6px 12px rgba(24, 48, 32, 0.16);
+      flex-shrink: 0;
+    }
+
+    .app-header { margin-top: 6px; }
+
+    .app-title {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--text-main);
+    }
+
+    .app-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .info-pill {
+      margin-top: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      font-size: 10px;
+      color: var(--text-muted);
+      background: rgba(238, 247, 242, 0.9);
+    }
+
+    .info-pill span:first-child { font-size: 12px; }
+
+    /* Mascotte grid */
+    .mascot-grid {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    @media (max-width: 400px) {
+      .mascot-grid { grid-template-columns: minmax(0, 1fr); }
+    }
+
+    .mascot-card {
+      border-radius: 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      padding: 8px 8px 9px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      cursor: pointer;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.08s ease;
+      box-shadow: 0 10px 22px rgba(24, 48, 32, 0.10);
+    }
+
+    .mascot-card:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 28px rgba(24, 48, 32, 0.14);
+    }
+
+    .mascot-card.selected {
+      border-color: rgba(76,195,138,0.95);
+      box-shadow: 0 0 0 1px rgba(76,195,138,0.55);
+    }
+
+    .mascot-top { display: flex; align-items: center; gap: 8px; }
+
+    .mascot-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      box-shadow: 0 10px 18px rgba(24, 48, 32, 0.14);
+      border: 1px solid rgba(120, 164, 143, 0.35);
+      background: rgba(238, 247, 242, 0.9);
+    }
+
+    /* Garde tes thèmes, mais adaptés HAVRE (plus doux) */
+    .mascot-avatar.pixel   { background: radial-gradient(circle at 20% 0%, rgba(59,167,201,0.30) 0, rgba(59,167,201,0.10) 55%); }
+    .mascot-avatar.nature  { background: radial-gradient(circle at 20% 0%, rgba(76,195,138,0.30) 0, rgba(76,195,138,0.10) 55%); }
+    .mascot-avatar.music   { background: radial-gradient(circle at 20% 0%, rgba(59,167,201,0.24) 0, rgba(76,195,138,0.10) 60%); }
+    .mascot-avatar.sport   { background: radial-gradient(circle at 20% 0%, rgba(76,195,138,0.22) 0, rgba(59,167,201,0.12) 60%); }
+    .mascot-avatar.neutral { background: radial-gradient(circle at 20% 0%, rgba(95,123,109,0.18) 0, rgba(95,123,109,0.08) 65%); }
+
+    .mascot-info { display: flex; flex-direction: column; gap: 2px; }
+
+    .mascot-name { font-size: 13px; font-weight: 600; color: var(--text-main); }
+
+    .mascot-tagline { font-size: 11px; color: var(--text-muted); }
+
+    .mascot-badges { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 2px; }
+
+    .badge {
+      font-size: 9px;
+      padding: 2px 6px;
+      border-radius: 999px;
+      border: 1px solid rgba(120,164,143,0.55);
+      color: var(--text-muted);
+      background: rgba(238,247,242,0.70);
+    }
+
+    .badge.theme-gamer   { border-color: rgba(59,167,201,0.65); color: #1e6f86; }
+    .badge.theme-nature  { border-color: rgba(76,195,138,0.70); color: #1f6d4f; }
+    .badge.theme-music   { border-color: rgba(59,167,201,0.55); color: #2a6f86; }
+    .badge.theme-sport   { border-color: rgba(76,195,138,0.55); color: #2a6d52; }
+    .badge.theme-neutral { border-color: rgba(120,164,143,0.55); color: #3c5a4d; }
+
+    .mascot-quote {
+      font-size: 10px;
+      color: var(--text-muted);
+      border-top: 1px dashed rgba(120, 164, 143, 0.55);
+      padding-top: 4px;
+      margin-top: 2px;
+    }
+
+    /* Bottom zone */
+    .bottom-panel {
+      margin-top: 10px;
+      border-radius: 14px;
+      background: var(--bg-soft);
+      border: 1px solid var(--border-soft);
+      padding: 8px 9px 9px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .bottom-title {
+      font-size: 11px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: var(--text-main);
+    }
+
+    .bottom-actions {
+      margin-top: 8px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      flex: 1;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, var(--accent), var(--accent-alt));
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 7px 10px;
+      cursor: pointer;
+    }
+
+    .btn-ghost {
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      background: rgba(255,255,255,0.75);
+      color: var(--text-main);
+      font-size: 11px;
+      padding: 6px 10px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 480px) {
+      body { padding: 16px 6px 24px; }
+      .phone-shell { border-radius: 26px; }
+    }
+  </style>
+</head>
+
+<body>
+<div class="global-nav">
+  <a class="nav-logo" href="index.html" aria-label="HAVRE"></a>
+  <a href="index.html">Concept HAVRE</a>
+  <a href="mascotte-enfant.html" class="active">App enfant</a>
+  <a href="ecran -enfant.html">Écran enfant</a>
+  <a href="havre-parent-mockups.html">App parent</a>
+  <a href="mascotte-parents.html">Mascotte (parents)</a>
+  <a href="havrepro.html">HAVRE Pro / TES</a>
+  <a href="securite.html">Sécurité</a>
+</div>
+
+<div class="lang-note">🇬🇧 English translation coming soon.</div>
+
+<div class="phone-shell">
+  <div class="phone-notch"></div>
+  <div class="phone-screen">
+    <div class="top-bar">
+      <span>10:24</span>
+      <span class="app-brand">
+        <span class="app-logo" aria-hidden="true"></span>
+        <span>HAVRE – Enfant</span>
+      </span>
+    </div>
+
+    <div class="app-header">
+      <div class="app-title">Choisis ta mascotte</div>
+      <div class="app-sub">C’est ton compagnon. Il reste avec toi pour t’aider avec tes émotions.</div>
+      <div class="info-pill">
+        <span>💡</span>
+        <span>Tu pourras changer plus tard avec ton parent si tu en as envie.</span>
+      </div>
+    </div>
+
+    <!-- Grille de mascottes -->
+    <div class="mascot-grid">
+      <div class="mascot-card selected">
+        <div class="mascot-top">
+          <div class="mascot-avatar pixel">🎮</div>
+          <div class="mascot-info">
+            <div class="mascot-name">Pixel</div>
+            <div class="mascot-tagline">“On passe au niveau suivant, ensemble.”</div>
+            <div class="mascot-badges">
+              <span class="badge theme-gamer">Gamer</span>
+              <span class="badge">Énergie + missions</span>
+            </div>
+          </div>
+        </div>
+        <div class="mascot-quote">
+          Pixel est parfait si tu aimes les jeux vidéo et les “missions”. Il t’aide à voir ta journée
+          comme un jeu où on avance étape par étape.
+        </div>
+      </div>
+
+      <div class="mascot-card">
+        <div class="mascot-top">
+          <div class="mascot-avatar nature">🌿</div>
+          <div class="mascot-info">
+            <div class="mascot-name">Lya</div>
+            <div class="mascot-tagline">“Respire, je suis là.”</div>
+            <div class="mascot-badges">
+              <span class="badge theme-nature">Nature</span>
+              <span class="badge">Calme & douceur</span>
+            </div>
+          </div>
+        </div>
+        <div class="mascot-quote">
+          Lya t’accompagne comme un petit esprit de la forêt. Elle est idéale si tu aimes le calme,
+          les animaux et les endroits tranquilles.
+        </div>
+      </div>
+
+      <div class="mascot-card">
+        <div class="mascot-top">
+          <div class="mascot-avatar music">🎵</div>
+          <div class="mascot-info">
+            <div class="mascot-name">Melo</div>
+            <div class="mascot-tagline">“On reste dans le bon rythme.”</div>
+            <div class="mascot-badges">
+              <span class="badge theme-music">Musique</span>
+              <span class="badge">Rythme & flow</span>
+            </div>
+          </div>
+        </div>
+        <div class="mascot-quote">
+          Melo est là si la musique t’aide à te sentir mieux. Elle te rappelle que même les journées
+          difficiles peuvent retrouver un bon tempo.
+        </div>
+      </div>
+
+      <div class="mascot-card">
+        <div class="mascot-top">
+          <div class="mascot-avatar sport">⚡</div>
+          <div class="mascot-info">
+            <div class="mascot-name">Bolt</div>
+            <div class="mascot-tagline">“Tu gères ça comme un champion.”</div>
+            <div class="mascot-badges">
+              <span class="badge theme-sport">Sport</span>
+              <span class="badge">Énergie & force</span>
+            </div>
+          </div>
+        </div>
+        <div class="mascot-quote">
+          Bolt t’encourage quand tu as beaucoup d’énergie ou de colère dans le corps. Il t’aide à
+          transformer tout ça en courage.
+        </div>
+      </div>
+
+      <div class="mascot-card">
+        <div class="mascot-top">
+          <div class="mascot-avatar neutral">⭐</div>
+          <div class="mascot-info">
+            <div class="mascot-name">Nova</div>
+            <div class="mascot-tagline">“On avance doucement, à ton rythme.”</div>
+            <div class="mascot-badges">
+              <span class="badge theme-neutral">Neutre</span>
+              <span class="badge">Rassurant</span>
+            </div>
+          </div>
+        </div>
+        <div class="mascot-quote">
+          Nova est une étoile qui reste avec toi dans toutes les situations. Si tu ne sais pas encore
+          ce que tu préfères, elle est un bon début.
+        </div>
+      </div>
+
+      <div class="mascot-card" style="opacity:0.45;">
+        <div class="mascot-top">
+          <div class="mascot-avatar neutral">➕</div>
+          <div class="mascot-info">
+            <div class="mascot-name">Bientôt…</div>
+            <div class="mascot-tagline">De nouvelles mascottes arrivent.</div>
+            <div class="mascot-badges">
+              <span class="badge">Dragon</span>
+              <span class="badge">Robot</span>
+            </div>
+          </div>
+        </div>
+        <div class="mascot-quote">
+          Cet emplacement pourra accueillir une future mascotte
+          (par exemple dragon, robot, animal précis…).
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-panel">
+      <div class="bottom-title">Tu as choisi : Pixel 🎮</div>
+      <p>
+        Cette mascotte va t’accompagner dans tes routines et sur ta barre d’émotion.
+        Si ce n’est pas le bon choix, tu peux en essayer une autre avec ton parent.
+      </p>
+      <div class="bottom-actions">
+        <button class="btn-primary">Je choisis Pixel</button>
+        <button class="btn-ghost">Je veux voir les autres avant</button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

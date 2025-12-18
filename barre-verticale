@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>HAVRE – Test jauge verticale & missions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="assets/css/havre.css">
+</head>
+<body class="app-page">
+<nav class="global-nav">
+  <a href="index.html">Concept HAVRE</a>
+  <a href="mascotte-enfant.html">App enfant</a>
+  <a href="havre-parent-mockups.html">App parent</a>
+  <a href="Havres-mascotte.html">Mascottes</a>
+  <a href="havrepro.html">HAVRE Pro</a>
+  <a href="securite.html">Sécurité</a>
+  <a class="active" href="test.html">Jauge test</a>
+</nav>
+
+<div class="phone-shell">
+  <div class="phone-notch"></div>
+  <div class="phone-screen">
+    <div class="top-bar">
+      <span>10:24</span>
+      <span>HAVRE – Prototype</span>
+    </div>
+
+    <div class="app-header">
+      <div>
+        <div class="app-title">Ta météo intérieure</div>
+        <div class="app-sub">
+          Indique comment tu te sens, puis choisis une ou deux missions.
+        </div>
+      </div>
+      <div class="avatar-chip">
+        <div class="avatar-badge">😊</div>
+        <span>Mascotte</span>
+      </div>
+    </div>
+
+    <div class="mood-main-grid" style="margin-top:14px;">
+      <!-- Colonne gauche : jauge verticale -->
+      <div class="mood-card">
+        <p style="font-size:13px;font-weight:600;">Ta jauge d’émotion</p>
+        <p style="font-size:12px;color:var(--text-muted);">
+          Clique sur la barre pour dire où tu en es. Plus tu montes, plus tu es proche
+          de la “cocotte-minute”.
+        </p>
+
+        <div class="mood-column" style="margin-top:10px;">
+          <span class="mood-label-top">Cocotte-minute 🧨</span>
+
+          <div class="mood-bar-wrapper">
+            <div id="moodBar" class="mood-bar">
+              <div id="moodHandle" class="mood-handle">60%</div>
+            </div>
+          </div>
+
+          <span class="mood-label-bottom">Plutôt calme 🌱</span>
+          <p id="moodValue" class="mood-value">Ressenti actuel : 60%</p>
+        </div>
+
+        <p style="font-size:12px;color:var(--text-muted);margin-top:8px;">
+          D’après ta jauge, tu te sens <strong id="mood-word">stressé</strong> pour le moment.
+        </p>
+      </div>
+
+      <!-- Colonne droite : missions -->
+      <div class="mood-card">
+        <p style="font-size:13px;font-weight:600;">Missions possibles</p>
+        <p style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">
+          Tu peux en cocher une ou deux. L’idée n’est pas de tout réussir,
+          mais d’essayer quelque chose qui pourrait t’aider.
+        </p>
+
+        <div class="missions-list">
+          <div class="mission-item">
+            <div class="mission-checkbox">
+              <span class="mission-check-icon">✓</span>
+            </div>
+            <div class="mission-text">Prendre 3 grandes respirations lentes.</div>
+          </div>
+
+          <div class="mission-item">
+            <div class="mission-checkbox">
+              <span class="mission-check-icon">✓</span>
+            </div>
+            <div class="mission-text">Boire un verre d’eau et faire une mini-pause.</div>
+          </div>
+
+          <div class="mission-item">
+            <div class="mission-checkbox">
+              <span class="mission-check-icon">✓</span>
+            </div>
+            <div class="mission-text">Demander à un adulte de te prendre dans ses bras.</div>
+          </div>
+
+          <div class="mission-item">
+            <div class="mission-checkbox">
+              <span class="mission-check-icon">✓</span>
+            </div>
+            <div class="mission-text">Ranger un petit coin (bureau, sac, étagère).</div>
+          </div>
+        </div>
+
+        <p id="pill-text" style="font-size:11px;color:var(--text-muted);margin-top:10px;">
+          Beaucoup de choses en tête.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/havre.js"></script>
+</body>
+</html>

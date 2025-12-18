@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>HAVRE Pro – Tableau émotionnel pour professionnels</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      /* Palette HAVRE harmonisée avec l’index */
+      --bg-main: #f6f4ee;
+      --bg-soft: #eef7f2;
+      --bg-card: #ffffff;
+      --bg-card-light: #ffffff;
+      --accent: #4cc38a;
+      --accent-soft: #3ba7c9;
+      --accent-strong: #2a8f68;
+      --text-main: #102018;
+      --text-muted: #5f7b6d;
+      --text-dark: #102018;
+      --border-soft: rgba(120, 164, 143, 0.45);
+      --shadow-soft: 0 22px 45px rgba(24, 48, 32, 0.18);
+      --radius-xl: 18px;
+      --radius-2xl: 26px;
+      --max-width: 1120px;
+      --havre-logo: url("assets/img/logo-havre.png");
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      background: radial-gradient(circle at top, #faf8f3 0, var(--bg-main) 55%, #f1eee7 100%);
+      color: var(--text-main);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body { min-height: 100vh; }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .page-shell {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 20px 16px 40px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(14px);
+      background: rgba(255, 255, 255, 0.85);
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .header-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* LOGO HAVRE (image) */
+    .brand-logo {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: var(--havre-logo) center/cover no-repeat;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 0 10px rgba(76, 195, 138, 0.35);
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-name {
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      font-size: 14px;
+      text-transform: uppercase;
+    }
+
+    .brand-tagline {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+    }
+
+    nav a {
+      padding: 6px 10px;
+      border-radius: 999px;
+      color: var(--text-muted);
+      transition: background 0.18s ease, color 0.18s ease, transform 0.1s ease;
+    }
+
+    nav a:hover {
+      background: var(--bg-soft);
+      color: var(--text-main);
+      transform: translateY(-1px);
+    }
+
+    .global-nav {
+      max-width: var(--max-width);
+      margin: 0 auto 16px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .nav-logo {
+      width: 22px;
+      height: 22px;
+      border-radius: 7px;
+      background: var(--havre-logo) center/cover no-repeat;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 8px 16px rgba(24, 48, 32, 0.14);
+      display: inline-block;
+      flex-shrink: 0;
+      padding: 0;
+      line-height: 0;
+    }
+
+    .global-nav a:not(.nav-logo) {
+      font-size: 12px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      color: var(--text-muted);
+      border: 1px solid transparent;
+      transition: background 0.2s ease, color 0.2s ease, border 0.2s ease;
+    }
+
+    .global-nav a:not(.nav-logo).active,
+    .global-nav a:not(.nav-logo):hover {
+      background: linear-gradient(120deg, var(--accent), var(--accent-soft));
+      color: #ffffff;
+      border-color: transparent;
+    }
+
+    /* CTA nav (vert/bleu) */
+    .nav-cta {
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-soft));
+      color: #ffffff;
+      font-weight: 600;
+      box-shadow: 0 10px 25px rgba(76,195,138,0.24);
+    }
+
+    .nav-cta:hover {
+      filter: brightness(1.05);
+      transform: translateY(-0.5px);
+    }
+
+    /* Hero */
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.95fr);
+      gap: 32px;
+      padding-top: 32px;
+      align-items: center;
+    }
+
+    @media (max-width: 880px) {
+      .hero { grid-template-columns: minmax(0, 1fr); }
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(56,189,248,0.10);
+      border: 1px solid rgba(56,189,248,0.35);
+      font-size: 11px;
+      color: var(--accent-soft);
+      width: fit-content;
+    }
+
+    .hero-title {
+      font-size: clamp(26px, 4vw, 34px);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-title span {
+      background: linear-gradient(135deg, var(--accent-soft), var(--accent), var(--accent-soft));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+      max-width: 520px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    /* Bouton principal vert/bleu */
+    .btn-primary {
+      padding: 11px 18px;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, var(--accent), var(--accent-soft));
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 14px 35px rgba(76,195,138,0.22), 0 14px 35px rgba(59,167,201,0.18);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: transform 0.08s ease, box-shadow 0.12s ease, filter 0.12s ease;
+      text-decoration: none;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.03);
+      box-shadow: 0 18px 40px rgba(34,197,94,0.22), 0 18px 40px rgba(56,189,248,0.22);
+    }
+
+    .btn-ghost {
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      background: var(--bg-soft);
+      color: var(--text-main);
+      font-size: 13px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.15s ease, border-color 0.15s ease, transform 0.08s ease;
+    }
+
+    .btn-ghost:hover {
+      background: var(--bg-card);
+      border-color: var(--border-soft);
+      transform: translateY(-1px);
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 6px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .hero-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-meta-badge {
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: var(--bg-soft);
+      border: 1px solid var(--border-soft);
+    }
+
+    /* Mockup panel */
+
+    .hero-right {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .pro-panel {
+      width: 100%;
+      max-width: 420px;
+      border-radius: var(--radius-2xl);
+      background: radial-gradient(circle at top, #fdfefc 0, #edf7f1 80%);
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-soft);
+      padding: 16px 18px 18px;
+      font-size: 11px;
+    }
+
+    .pro-panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      color: var(--text-muted);
+      font-size: 10px;
+      gap: 10px;
+    }
+
+    .pro-badge {
+      padding: 3px 7px;
+      border-radius: 999px;
+      border: 1px solid rgba(56,189,248,0.55);
+      color: var(--accent-soft);
+      font-size: 10px;
+    }
+
+    .pro-panel-main {
+      border-radius: var(--radius-xl);
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      padding: 10px 10px 12px;
+    }
+
+    .pro-panel-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+      gap: 10px;
+    }
+
+    .pro-child-name {
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .pro-chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .pro-chip {
+      font-size: 10px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: var(--bg-soft);
+      border: 1px solid var(--border-soft);
+      color: var(--text-muted);
+    }
+
+    .pro-chip-strong {
+      border-color: rgba(34,197,94,0.65);
+      color: var(--accent-strong);
+    }
+
+    .pro-graph {
+      margin-top: 10px;
+      border-radius: 12px;
+      background: linear-gradient(145deg, #ffffff, #f4fbf6);
+      padding: 8px 10px 10px;
+      border: 1px solid var(--border-soft);
+    }
+
+    .pro-graph-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      gap: 10px;
+    }
+
+    .pro-graph-canvas {
+      height: 80px;
+      border-radius: 10px;
+      background: linear-gradient(to top, #eef7f1, #ffffff);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pro-graph-gradient {
+      position: absolute;
+      inset: 0;
+      opacity: 0.35;
+      background: linear-gradient(to top, #ef4444, #f97316, #facc15, #22c55e);
+    }
+
+    .pro-graph-curve {
+      position: absolute;
+      inset: 0 6px 6px;
+      border-radius: 999px;
+      border: 2px solid rgba(56,189,248,0.78);
+      clip-path: polygon(0% 60%, 20% 30%, 40% 35%, 60% 80%, 80% 40%, 100% 65%);
+    }
+
+    .pro-legend {
+      margin-top: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 9px;
+      color: var(--text-muted);
+    }
+
+    .pro-legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .dot { width: 8px; height: 8px; border-radius: 999px; }
+    .dot-blue { background: #38bdf8; }
+    .dot-red { background: #ef4444; }
+    .dot-yellow { background: #facc15; }
+
+    .pro-footer-note {
+      margin-top: 10px;
+      font-size: 9px;
+      color: var(--text-muted);
+    }
+
+    /* Sections */
+
+    section { margin-top: 56px; }
+
+    .section-heading {
+      margin-bottom: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .section-kicker {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent-soft);
+    }
+
+    .section-title { font-size: 20px; letter-spacing: -0.02em; }
+
+    .section-description {
+      font-size: 13px;
+      color: var(--text-muted);
+      max-width: 640px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 880px) {
+      .grid-2 { grid-template-columns: minmax(0, 1fr); }
+    }
+
+    .card-dark {
+      border-radius: var(--radius-xl);
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      padding: 18px 16px;
+      box-shadow: var(--shadow-soft);
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .card-light {
+      border-radius: var(--radius-xl);
+      background: var(--bg-card);
+      color: var(--text-dark);
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-soft);
+      padding: 18px 16px;
+      font-size: 13px;
+    }
+
+    .card-light h3,
+    .card-dark h3 { font-size: 15px; margin-bottom: 8px; }
+
+    .tag-pill-light {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: rgba(239,246,255,0.9);
+      border: 1px solid rgba(191,219,254,1);
+      color: #1e293b;
+    }
+
+    ul.clean {
+      list-style: none;
+      margin-top: 10px;
+      font-size: 13px;
+    }
+
+    ul.clean li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 4px 0;
+    }
+
+    ul.clean li::before {
+      content: "•";
+      color: var(--accent-soft);
+      margin-top: 2px;
+    }
+
+    .pill-row {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 11px;
+    }
+
+    .pill {
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: var(--bg-soft);
+      border: 1px solid var(--border-soft);
+      color: var(--text-muted);
+    }
+
+    .pill-strong {
+      border-color: rgba(34,197,94,0.65);
+      color: var(--accent-strong);
+    }
+
+    .role-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    .role-card {
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border-soft);
+      background: linear-gradient(145deg, #ffffff, #f7fbf8);
+      padding: 12px 12px 14px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .role-title {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: var(--text-main);
+    }
+
+    .role-badge {
+      font-size: 10px;
+      padding: 3px 7px;
+      border-radius: 999px;
+      border: 1px solid rgba(56,189,248,0.55);
+      color: var(--accent-soft);
+      margin-left: 6px;
+    }
+
+    .security-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    .security-card {
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border-soft);
+      background: var(--bg-card);
+      padding: 12px 12px 14px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .security-title {
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--text-main);
+    }
+
+    /* CTA */
+
+    .cta {
+      margin-top: 60px;
+      margin-bottom: 24px;
+      border-radius: var(--radius-2xl);
+      background: radial-gradient(circle at top left, rgba(59,167,201,0.16), transparent 55%),
+                  radial-gradient(circle at bottom right, rgba(76,195,138,0.18), transparent 55%),
+                  linear-gradient(to bottom right, #ffffff, #f7fbf8);
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-soft);
+      padding: 22px 18px 20px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 18px;
+      align-items: center;
+    }
+
+    @media (max-width: 780px) {
+      .cta { grid-template-columns: minmax(0, 1fr); }
+    }
+
+    .cta-title {
+      font-size: 18px;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+
+    .cta-text { font-size: 13px; color: var(--text-muted); }
+
+    .cta-form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    @media (max-width: 780px) {
+      .cta-form { justify-content: flex-start; }
+    }
+
+    .btn-ghost-light {
+      padding: 9px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      background: var(--bg-soft);
+      color: var(--text-main);
+      font-size: 13px;
+      cursor: pointer;
+      transition: background 0.15s ease, transform 0.08s ease;
+    }
+
+    .btn-ghost-light:hover {
+      background: var(--bg-card);
+      transform: translateY(-1px);
+      border-color: var(--border-soft);
+    }
+
+    footer {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: center;
+      padding: 12px 16px 28px;
+    }
+
+    .lang-note {
+      margin-top: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--text-muted);
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="global-nav">
+    <a class="nav-logo" href="index.html" aria-label="HAVRE"></a>
+    <a href="index.html">Concept HAVRE</a>
+    <a href="mascotte-enfant.html">App enfant</a>
+    <a href="ecran -enfant.html">Écran enfant</a>
+    <a href="havre-parent-mockups.html">App parent</a>
+    <a href="mascotte-parents.html">Mascotte (parents)</a>
+    <a href="havrepro.html" class="active">HAVRE Pro / TES</a>
+    <a href="securite.html">Sécurité</a>
+  </div>
+
+  <header>
+    <div class="header-inner">
+      <div class="brand">
+        <div class="brand-logo" aria-hidden="true"></div>
+        <div class="brand-text">
+          <div class="brand-name">HAVRE PRO</div>
+          <div class="brand-tagline">Tableau émotionnel pour praticiens</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#concept">Concept</a>
+        <a href="#usages">Cas d’usage</a>
+        <a href="#roles">Profils & accès</a>
+        <a href="#securite">Confidentialité</a>
+        <a href="#cta" class="nav-cta">Manifester son intérêt</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-left">
+        <div class="hero-label">
+          <span>🧑‍⚕️ Pour psychologues, pédopsychiatres, TES & écoles</span>
+        </div>
+        <h1 class="hero-title">
+          HAVRE Pro transforme le quotidien émotionnel d’un enfant<br />
+          en <span>tableau lisible, partageable et exploitable</span>.
+        </h1>
+        <p class="hero-subtitle">
+          Loin d’être un outil de diagnostic, HAVRE Pro offre un éclairage continu sur les moments où
+          l’enfant monte, redescend ou reste stable. Un support concret pour mieux comprendre, ajuster
+          les interventions et accompagner les familles.
+        </p>
+        <div class="hero-actions">
+          <a
+            class="btn-primary"
+            href="mailto:contact.havre@icloud.com?subject=Pilote%20clinique%20-%20HAVRE%20Pro&body=Bonjour%20%C3%A9quipe%20HAVRE,%0A%0AJe%20souhaite%20discuter%20d%27un%20pilote%20clinique.%0A%0ANom%20:%0AProfession%20:%0AStructure%20/-%20%C3%A9tablissement%20:%0ALieu%20(ville%2C%20pays)%20:%0ANombre%20d%27enfants%20suivis%20concern%C3%A9s%20:%0ADisponibilit%C3%A9s%20pour%20un%20%C3%A9change%20:%0A%0AMerci!%0A"
+          >
+            📅 Discuter d’un pilote clinique
+          </a>
+          <button class="btn-ghost" onclick="document.getElementById('concept').scrollIntoView({behavior:'smooth'})">
+            🔎 Explorer la plateforme
+          </button>
+        </div>
+        <div class="hero-meta">
+          <span class="hero-meta-badge">Co-construit avec un parent d’enfant anxieux</span>
+          <span>•</span>
+          <span>Pensé pour s’intégrer à votre pratique, pas la remplacer</span>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="pro-panel" aria-hidden="true">
+          <div class="pro-panel-header">
+            <span>Dossier : Enfant A – 9 ans</span>
+            <span class="pro-badge">Aperçu HAVRE Pro</span>
+          </div>
+          <div class="pro-panel-main">
+            <div class="pro-panel-row">
+              <div>
+                <div class="pro-child-name">Vue émotionnelle – Semaine</div>
+                <div style="font-size:10px;color:var(--text-muted);">Données déclaratives via app enfant + éventuel bracelet HAVRE</div>
+              </div>
+              <div style="text-align:right;font-size:10px;color:var(--text-muted);">
+                Dernière sync :<br />Aujourd’hui – 08:42
+              </div>
+            </div>
+
+            <div class="pro-chip-row">
+              <div class="pro-chip-strong">Pics récurrents : fin de matinée</div>
+              <div class="pro-chip">Transitions sensibles : école → maison</div>
+              <div class="pro-chip">Sommeil : 3 nuits agitées / 7</div>
+            </div>
+
+            <div class="pro-graph">
+              <div class="pro-graph-header">
+                <span>Intensité émotionnelle (7 derniers jours)</span>
+                <span>Vert = calme · Rouge = pics</span>
+              </div>
+              <div class="pro-graph-canvas">
+                <div class="pro-graph-gradient"></div>
+                <div class="pro-graph-curve"></div>
+              </div>
+              <div class="pro-legend">
+                <span><span class="dot dot-blue"></span> Trajectoire globale</span>
+                <span><span class="dot dot-red"></span> Moments “cocotte-minute”</span>
+                <span><span class="dot dot-yellow"></span> Maths / devoirs</span>
+              </div>
+            </div>
+
+            <div class="pro-footer-note">
+              Exemple : “Les mardis, la courbe montre un pic constant vers 10h30 (maths) et un second vers 17h (devoirs maison).
+              Cela rejoint ce que les parents décrivent en consultation.”
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONCEPT -->
+    <section id="concept">
+      <div class="section-heading">
+        <div class="section-kicker">Concept</div>
+        <h2 class="section-title">Un “electrocardiogramme émotionnel” simple, continu et narratif.</h2>
+        <p class="section-description">
+          HAVRE Pro agrège les données émotionnelles quotidiennes issues de l’app enfant, de l’app parent
+          et éventuellement d’un bracelet HAVRE Band. Le résultat : une courbe émotionnelle contextualisée,
+          qui vient soutenir votre lecture clinique ou éducative.
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card-dark">
+          <h3>Ce que vous voyez en séance</h3>
+          <ul class="clean">
+            <li>Une vue jour / semaine / mois de l’intensité ressentie par l’enfant.</li>
+            <li>Des marqueurs temporels associés : école, devoirs, transitions, activités spécifiques.</li>
+            <li>Des corrélations possibles avec le sommeil ou la variabilité cardiaque (si bracelet activé).</li>
+            <li>Des commentaires des parents ou TES intégrés au fil de l’eau.</li>
+          </ul>
+          <p style="margin-top:10px;color:var(--text-muted);">
+            HAVRE Pro n’“explique” pas l’enfant. Il documente le vécu émotionnel perçu, pour
+            nourrir une réflexion clinique, psychoéducative ou pédagogique.
+          </p>
+        </div>
+
+        <div class="card-light">
+          <span class="tag-pill-light">🧩 Intégration dans votre pratique</span>
+          <ul class="clean" style="color:#4b5563;">
+            <li>Préparer une rencontre parent-enfant avec des exemples concrets : “Regardez cette journée-là.”</li>
+            <li>Illustrer l’impact d’un changement : nouvelle routine, arrêt/reprise de médication, ajustement d’outils.</li>
+            <li>Rendre visibles des patterns que le parent “ressent” mais n’arrive pas à situer précisément.</li>
+          </ul>
+          <p style="margin-top:10px;color:#6b7280;">
+            L’enfant, lui, continue de vivre l’app comme un soutien : mascotte, routines, jauge glissable.
+            HAVRE Pro est une couche au-dessus, réservée aux professionnel(le)s autorisé(e)s.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CAS D'USAGE -->
+    <section id="usages">
+      <div class="section-heading">
+        <div class="section-kicker">Cas d’usage</div>
+        <h2 class="section-title">Ce que HAVRE Pro change concrètement dans vos rencontres.</h2>
+        <p class="section-description">
+          Nous avons identifié plusieurs situations où un tableau émotionnel enrichi change la discussion :
+          TDAH, anxiété, troubles d’apprentissage, difficultés de régulation, contextes familiaux tendus, etc.
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card-light">
+          <h3>En clinique ou en cabinet</h3>
+          <ul class="clean" style="color:#4b5563;">
+            <li>Explorer avec l’enfant : “Ce jour-là, qu’est-ce qui s’est passé vers 10h30 ?”</li>
+            <li>Donner aux parents un retour basé sur quelque chose de visible, pas seulement sur du ressenti.</li>
+            <li>Suivre l’évolution d’un plan d’intervention (psychoéducation, exposition graduelle, etc.).</li>
+          </ul>
+          <div class="pill-row">
+            <span class="pill-strong">Pédopsychiatrie</span>
+            <span class="pill-strong">Psychologie</span>
+            <span class="pill">Neuropsychologie</span>
+          </div>
+        </div>
+
+        <div class="card-dark">
+          <h3>À l’école ou en milieu</h3>
+          <ul class="clean">
+            <li>Permettre à un TES / éducateur de noter rapidement contexte + comportement observé.</li>
+            <li>Partager un langage commun “couleur” avec l’enseignant, la direction, les parents.</li>
+            <li>Repérer que les mercredis matin ou les tests créent systématiquement des pics.</li>
+          </ul>
+          <div class="pill-row">
+            <span class="pill">TES</span>
+            <span class="pill">Éducateurs spécialisés</span>
+            <span class="pill">Écoles spécialisées</span>
+            <span class="pill">Centres jeunesse</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROLES & ACCES -->
+    <section id="roles">
+      <div class="section-heading">
+        <div class="section-kicker">Profils & accès</div>
+        <h2 class="section-title">Tout le monde ne voit pas la même chose, volontairement.</h2>
+        <p class="section-description">
+          HAVRE Pro permet de définir des profils selon le rôle : un TES n’a pas les mêmes besoins ni responsabilités
+          qu’un psychiatre, un psychologue ou un enseignant. Les accès sont donc différenciés, pour respecter les
+          cadres de chacun.
+        </p>
+      </div>
+
+      <div class="role-grid">
+        <div class="role-card">
+          <div class="role-title">TES / Éducateur spécialisé<span class="role-badge">Vue terrain</span></div>
+          <p>
+            • Accès aux courbes quotidiennes et aux événements clés.<br/>
+            • Possibilité d’ajouter des notes de contexte (ex. “conflit à la récréation”, “transition difficile”).<br/>
+            • Ne voit pas les sections médicales sensibles ni les notes psychiatriques.
+          </p>
+        </div>
+
+        <div class="role-card">
+          <div class="role-title">Psychologue / Pédagogue<span class="role-badge">Vue clinique éducative</span></div>
+          <p>
+            • Accès aux tendances jour/semaine/mois, corrélées avec les routines et activités.<br/>
+            • Lecture des notes TES/parents, possibilité d’ajouter des hypothèses cliniques.<br/>
+            • Accès limité ou anonymisé des données biométriques selon consentement.
+          </p>
+        </div>
+
+        <div class="role-card">
+          <div class="role-title">Psychiatre<span class="role-badge">Vue médicale</span></div>
+          <p>
+            • Accès à la chronologie émotionnelle fine + éventuelles variables physiologiques (si activées).<br/>
+            • Intégration possible dans le dossier clinique (via export sécurisé).<br/>
+            • Peut restreindre certains accès ou recommander un usage particulier à la famille.
+          </p>
+        </div>
+
+        <div class="role-card">
+          <div class="role-title">Parent invité<span class="role-badge">Vue familiale</span></div>
+          <p>
+            • Accès limité, centré sur la compréhension et la collaboration.<br/>
+            • Peut voir une synthèse construite avec le professionnel, pas tout ce qui est noté entre pros.<br/>
+            • Le consentement parental reste central pour tout partage de données.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONNEXION FAMILLE → HAVRE PRO -->
+    <section id="connexion">
+      <div class="section-heading">
+        <div class="section-kicker">Connexion familles & praticiens</div>
+        <h2 class="section-title">Une clé d’accès, limitée dans le temps, contrôlée par le parent.</h2>
+        <p class="section-description">
+          Pour relier un enfant suivi dans HAVRE à un professionnel HAVRE Pro, nous utilisons un système
+          de “token” (clé) inspiré des accès sécurisés que l’on retrouve dans le monde du développement.
+          La famille décide, le praticien se connecte, HAVRE applique les bons niveaux d’accès.
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card-dark">
+          <h3>Côté famille (app HAVRE)</h3>
+          <ul class="clean">
+            <li>Le parent choisit l’enfant concerné et le type de professionnel (TES, psy, psychiatre).</li>
+            <li>Il crée une clé HAVRE Pro, avec une durée de validité : quelques heures, quelques jours, ou plus longtemps
+                en cas de suivi stable.</li>
+            <li>L’app affiche un code unique (ex. <code>HAVRE-PRO-7F3Q-92LZ</code>) que le parent transmet au praticien.</li>
+            <li>Le parent voit à tout moment la liste des clés actives et peut révoquer une clé en un tap.</li>
+          </ul>
+          <p style="margin-top:10px;color:var(--text-muted);">
+            L’accès ne vient jamais “d’en haut” : c’est la famille qui décide, à qui, pendant combien de temps, et sur quoi.
+          </p>
+        </div>
+
+        <div class="card-light">
+          <span class="tag-pill-light">🧑‍⚕️ Côté professionnel (HAVRE Pro)</span>
+          <ul class="clean" style="color:#4b5563;">
+            <li>Le praticien choisit “Se connecter à une famille via une clé HAVRE”.</li>
+            <li>Il saisit le code reçu en séance ou par e-mail sécurisé.</li>
+            <li>HAVRE Pro affiche un résumé : enfant, rôle, durée, type de données partagées.</li>
+            <li>Après validation, le praticien accède aux courbes émotionnelles et au contexte,
+                dans la limite des droits définis par le rôle (TES, psy, psychiatre).</li>
+          </ul>
+          <p style="margin-top:10px;color:#6b7280;">
+            En fin de suivi, le parent ou le praticien peuvent mettre fin à la connexion. La clé est révoquée,
+            exactement comme une clé d’API ou un token GitHub : simple, traçable et maîtrisé.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECURITE & CONFIDENTIALITE -->
+    <section id="securite">
+      <div class="section-heading">
+        <div class="section-kicker">Confidentialité & cadre</div>
+        <h2 class="section-title">Un outil d’observation, pas un dispositif de diagnostic.</h2>
+        <p class="section-description">
+          HAVRE Pro s’inscrit dans une approche de soutien à la clinique, en respectant à la fois l’éthique
+          professionnelle, la confidentialité des données et la place de l’enfant comme sujet, pas comme “profil”.
+        </p>
+      </div>
+
+      <div class="security-grid">
+        <div class="security-card">
+          <div class="security-title">🔐 Accès role-based (RBAC)</div>
+          <p>
+            Les fonctionnalités disponibles dépendent du profil connecté (TES, psy, psychiatre). Cela réduit
+            le risque de sur-information ou d’accès non pertinent pour une fonction donnée.
+          </p>
+        </div>
+        <div class="security-card">
+          <div class="security-title">🧒 Respect de l’enfant</div>
+          <p>
+            HAVRE ne note pas, ne score pas et ne “classe” pas un enfant. Il visualise un vécu émotionnel
+            subjectif et contextuel, à interpréter par un professionnel formé.
+          </p>
+        </div>
+        <div class="security-card">
+          <div class="security-title">👨‍👩‍👦 Consentement parental</div>
+          <p>
+            Aucun accès Pro sans accord explicite des parents / tuteurs. Possibilité de limiter la période,
+            le type de données partagées et le(s) professionnel(s) habilité(s).
+          </p>
+        </div>
+        <div class="security-card">
+          <div class="security-title">⚖️ Complément, pas substitut</div>
+          <p>
+            HAVRE Pro n’est ni un outil de triage automatique, ni un algorithme de diagnostic. Il vient s’ajouter
+            à l’observation clinique, aux tests, aux entretiens et aux autres éléments déjà présents.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="cta" class="cta">
+      <div>
+        <h2 class="cta-title">Vous souhaitez explorer HAVRE Pro dans votre milieu ?</h2>
+        <p class="cta-text">
+          Nous cherchons des partenaires pilotes : cliniques, cabinets privés, écoles, ressources spécialisées.
+          Si l’idée de disposer d’un tableau émotionnel continu pour quelques enfants suivis vous interpelle,
+          laissez-nous vos coordonnées.
+        </p>
+        <p class="cta-text">
+          Pour un échange direct, écrivez-nous à
+          <a href="mailto:contact.havre@icloud.com">contact.havre@icloud.com</a>.
+        </p>
+      </div>
+      <div class="cta-form">
+        <button class="btn-primary">Être contacté(e)</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    HAVRE Pro – concept en développement pour professionnels de la santé mentale & de l’éducation.<br />
+    Cette page est une maquette conceptuelle, non un dispositif médical homologué.<br />
+    <span class="lang-note">🇬🇧 English translation coming soon.</span>
+  </footer>
+</body>
+</html>

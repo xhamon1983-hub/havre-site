@@ -1,0 +1,8 @@
+{
+  "levels": [
+    { "label": "Calme", "emoji": "🙂", "color": "#22c55e" },
+    { "label": "Concentré", "emoji": "🟡", "color": "#fbbf24" },
+    { "label": "Stressé", "emoji": "🟠", "color": "#f97316" },
+    { "label": "Cocotte-minute", "emoji": "🔺", "color": "#ef4444" }
+  ]
+}

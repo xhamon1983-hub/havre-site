@@ -1,0 +1,14 @@
+{
+  "childProfiles": [
+    {
+      "id": "child-1",
+      "displayName": "Enfant",
+      "age": 9
+    }
+  ],
+  "defaultMissions": [
+    "Préparer ton sac pour demain",
+    "Prendre 5 minutes de respiration calme",
+    "Ranger un petit coin de ta chambre"
+  ]
+}

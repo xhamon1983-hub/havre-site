@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>HAVRE – Sécurité & garde-fous</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    :root {
+      --bg-main: #f6f4ee;
+      --bg-gradient-top: #faf8f3;
+      --bg-gradient-bottom: #f1eee7;
+      --bg-card: #ffffff;
+      --bg-card-soft: #eef7f2;
+      --accent: #4cc38a;
+      --accent-soft: #2a8f68;
+      --accent-alt: #3ba7c9;
+      --text-main: #102018;
+      --text-muted: #5f7b6d;
+      --border-subtle: rgba(76, 195, 138, 0.35);
+      --border-soft: rgba(120, 164, 143, 0.45);
+      --danger-soft: #ff6b6b;
+      --success-soft: #4cc38a;
+      --warning-soft: #f7b955;
+      --shadow-soft: 0 18px 28px rgba(24, 48, 32, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at top, var(--bg-gradient-top) 0%, var(--bg-main) 55%, var(--bg-gradient-bottom) 100%);
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* HEADER / NAV */
+    header {
+      border-bottom: 1px solid var(--border-soft);
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(14px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-logo {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: url("assets/img/logo-havre.png") center/cover no-repeat;
+      box-shadow: 0 0 10px rgba(76, 195, 138, 0.35);
+      border: 1px solid var(--border-soft);
+      flex-shrink: 0;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-name {
+      letter-spacing: 0.18em;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .brand-tagline {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 13px;
+    }
+
+    .nav-link {
+      padding: 7px 12px;
+      border-radius: 999px;
+      color: var(--text-muted);
+      border: 1px solid transparent;
+      transition: 0.16s ease;
+      backdrop-filter: blur(6px);
+    }
+
+    .nav-link:hover {
+      border-color: var(--border-subtle);
+      color: var(--text-main);
+      background: var(--bg-card-soft);
+    }
+
+    .nav-link.active {
+      border-color: transparent;
+      color: white;
+      background: linear-gradient(120deg, var(--accent), var(--accent-alt));
+      box-shadow: 0 0 12px rgba(76, 195, 138, 0.3);
+    }
+
+    /* MAIN CONTENT */
+    main {
+      flex: 1;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px 20px 40px;
+    }
+
+    .page-heading {
+      margin-bottom: 20px;
+    }
+
+    .page-kicker {
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent-soft);
+      margin-bottom: 6px;
+    }
+
+    .page-title {
+      font-size: clamp(26px, 4vw, 32px);
+      font-weight: 650;
+      margin-bottom: 8px;
+    }
+
+    .page-subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+      max-width: 640px;
+      line-height: 1.5;
+    }
+
+    /* GRID */
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 20px;
+      margin-top: 26px;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 880px) {
+      .grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .nav-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    /* LEFT: CARDS LIST */
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .section-note {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .cards-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .card {
+      border-radius: 16px;
+      padding: 14px 14px 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .card-chip {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      background: var(--bg-card-soft);
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .card-body {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-top: 4px;
+    }
+
+    .card-body ul {
+      list-style: none;
+      margin-top: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .card-body li::before {
+      content: "•";
+      margin-right: 6px;
+      color: var(--accent-soft);
+    }
+
+    /* RIGHT: SUMMARY PANEL */
+    .summary-panel {
+      border-radius: 20px;
+      padding: 16px 16px 14px;
+      background: linear-gradient(135deg, #ffffff, #f7fbf8);
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-soft);
+      position: sticky;
+      top: 82px;
+    }
+
+    .summary-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      background: rgba(76, 195, 138, 0.12);
+      font-size: 11px;
+      color: var(--accent-soft);
+      margin-bottom: 10px;
+    }
+
+    .summary-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--success-soft);
+      box-shadow: 0 0 10px rgba(76, 195, 138, 0.4);
+    }
+
+    .summary-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .summary-text {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+
+    .summary-list {
+      font-size: 12px;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .summary-list strong {
+      color: var(--text-main);
+      font-weight: 500;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .pill {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+    }
+
+    .pill.danger {
+      border-color: rgba(255, 107, 107, 0.6);
+      color: var(--danger-soft);
+    }
+
+    .pill.safe {
+      border-color: rgba(99, 230, 190, 0.6);
+      color: var(--success-soft);
+    }
+
+    .pill.neutral {
+      border-color: rgba(255, 214, 102, 0.6);
+      color: var(--warning-soft);
+    }
+
+    footer {
+      border-top: 1px solid var(--border-soft);
+      padding: 10px 20px 18px;
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    .lang-note {
+      margin-top: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--text-muted);
+      justify-content: center;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav-inner">
+      <div class="brand">
+        <div class="brand-logo"></div>
+        <div class="brand-text">
+          <div class="brand-name">HAVRE</div>
+        <div class="brand-tagline">Un refuge, pas un contrôle</div>
+      </div>
+    </div>
+
+    <nav>
+      <a class="nav-link" href="index.html">Concept HAVRE</a>
+      <a class="nav-link" href="mascotte-enfant.html">App enfant</a>
+      <a class="nav-link" href="ecran -enfant.html">Écran enfant</a>
+      <a class="nav-link" href="havre-parent-mockups.html">App parent</a>
+      <a class="nav-link" href="mascotte-parents.html">Mascotte (parents)</a>
+      <a class="nav-link" href="havrepro.html">HAVRE Pro / TES</a>
+      <a class="nav-link active" href="securite.html">Sécurité</a>
+    </nav>
+  </div>
+</header>
+
+  <main>
+    <div class="container">
+      <section class="page-heading">
+        <div class="page-kicker">Sécurité & garde-fous</div>
+        <h1 class="page-title">Comment HAVRE protège l’enfant, les parents et les données</h1>
+        <p class="page-subtitle">
+          HAVRE n’est pas un outil de contrôle, ni un dispositif médical. C’est un espace pour
+          <strong>exprimer le ressenti</strong>, structurer les journées et faciliter le dialogue,
+          avec des garde-fous clairs pour éviter la sur-surveillance et les dérives.
+        </p>
+      </section>
+
+      <section class="grid">
+        <!-- COLONNE GAUCHE : CARTES DETAILLEES -->
+        <div>
+          <h2 class="section-title">1. Sécurité émotionnelle</h2>
+          <p class="section-note">
+            L’enfant reste au centre. L’application ne doit jamais augmenter sa pression, ni remplacer le parent.
+          </p>
+
+          <div class="cards-stack">
+            <article class="card">
+              <div class="card-header">
+                <span class="card-chip">Mode automatique</span>
+                <h3 class="card-title">Jamais en pilote automatique permanent</h3>
+              </div>
+              <div class="card-body">
+                HAVRE peut envoyer des réponses rassurantes via l’avatar
+                <strong>pendant une durée limitée</strong> (ex. réunion, déplacement).
+                <ul>
+                  <li>Activation manuelle par le parent uniquement.</li>
+                  <li>Durée limitée (quelques heures, au maximum une demi-journée).</li>
+                  <li>Une seule réponse par période sensible, pas de spam.</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="card-header">
+                <span class="card-chip">Ressenti</span>
+                <h3 class="card-title">La jauge appartient à l’enfant</h3>
+              </div>
+              <div class="card-body">
+                La barre de ressenti est un outil d’<strong>expression</strong>, pas de notation.
+                <ul>
+                  <li>Seul l’enfant peut modifier son niveau.</li>
+                  <li>Aucune “bonne” ou “mauvaise” réponse.</li>
+                  <li>Pas de score, pas de classement, pas de gamification agressive.</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="card-header">
+                <span class="card-chip">Messages</span>
+                <h3 class="card-title">Un langage qui ne juge pas</h3>
+              </div>
+              <div class="card-body">
+                L’avatar et l’app utilisent un vocabulaire pensé pour réduire la pression :
+                <ul>
+                  <li>« Tu n’es pas seul », « Merci de me dire comment tu te sens ».</li>
+                  <li>Jamais de « tu devrais », « tu dois », « ce n’est pas normal ».</li>
+                  <li>Les messages ne posent pas de diagnostic, ils accueillent le ressenti.</li>
+                </ul>
+              </div>
+            </article>
+          </div>
+
+          <h2 class="section-title" style="margin-top:24px;">2. Sécurité technique</h2>
+          <p class="section-note">
+            Accès limités, rôles distincts, données minimales : on protège d’abord la vie privée de l’enfant.
+          </p>
+
+          <div class="cards-stack">
+            <article class="card">
+              <div class="card-header">
+                <span class="card-chip">Accès</span>
+                <h3 class="card-title">Codes temporaires & rôles séparés</h3>
+              </div>
+              <div class="card-body">
+                L’accès aux données est basé sur des rôles et des codes d’appairage :
+                <ul>
+                  <li>Parents, TES, professionnels, secours : chacun son niveau d’accès.</li>
+                  <li>Codes / liens <strong>temporaires</strong> pour les professionnels (durée limitée).</li>
+                  <li>Chaque accès peut être tracé (date / heure / rôle).</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="card-header">
+                <span class="card-chip">Données</span>
+                <h3 class="card-title">Moins on stocke, mieux on protège</h3>
+              </div>
+              <div class="card-body">
+                HAVRE se limite à des données de vie émotionnelle et de routine :
+                <ul>
+                  <li>Ressenti, horodatage, missions réalisées, avatar.</li>
+                  <li><strong>Pas</strong> de diagnostic, pas de traitements, pas de dossier médical.</li>
+                  <li>Une éventuelle version “santé” (HAVRE Pro+) serait séparée et dédiée.</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="card-header">
+                <span class="card-chip">Confidentialité</span>
+                <h3 class="card-title">Chiffrement & canaux sécurisés</h3>
+              </div>
+              <div class="card-body">
+                Sans rentrer dans les détails techniques, HAVRE est pensé comme une application
+                <strong>chiffrée de bout en bout</strong> :
+                <ul>
+                  <li>Connexion sécurisée (HTTPS/TLS) pour toutes les communications.</li>
+                  <li>Identifiants protégés, jamais stockés en clair.</li>
+                  <li>Serveurs et stockage dimensionnés pour la confidentialité des familles.</li>
+                </ul>
+              </div>
+            </article>
+          </div>
+
+          <h2 class="section-title" style="margin-top:24px;">3. Sécurité d’usage & limites volontaires</h2>
+          <p class="section-note">
+            HAVRE est un support, pas un outil de contrôle permanent ni un substitut aux parents ou aux professionnels.
+          </p>
+
+          <div class="cards-stack">
+            <article class="card">
+              <div class="card-header">
+                <span class="card-chip">Positionnement</span>
+                <h3 class="card-title">Pas un dispositif médical</h3>
+              </div>
+              <div class="card-body">
+                HAVRE ne remplace jamais un suivi professionnel :
+                <ul>
+                  <li>Ne pose pas de diagnostic et ne donne pas de prescription.</li>
+                  <li>Complète le travail des parents et des pros, ne s’y substitue pas.</li>
+                  <li>Orienté “soutien émotionnel” et structuration du quotidien.</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="card-header">
+                <span class="card-chip">Anti-surveillance</span>
+                <h3 class="card-title">Pas un tracker, pas un espion</h3>
+              </div>
+              <div class="card-body">
+                Par choix, certaines fonctions ne seront <strong>jamais</strong> intégrées :
+                <ul>
+                  <li>Pas de géolocalisation en temps réel de l’enfant.</li>
+                  <li>Pas de contrôle des applications utilisées sur son téléphone.</li>
+                  <li>Pas de classement entre enfants ou familles.</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="card-header">
+                <span class="card-chip">Missions</span>
+                <h3 class="card-title">Structurer sans mettre la pression</h3>
+              </div>
+              <div class="card-body">
+                Les “missions” servent de repères, pas de système de récompense agressif :
+                <ul>
+                  <li>Pas de pénalité si tout n’est pas coché.</li>
+                  <li>Pas de lien direct entre missions et couleur de la jauge.</li>
+                  <li>Les parents restent libres d’ajuster selon le contexte réel.</li>
+                </ul>
+              </div>
+            </article>
+          </div>
+
+          <h2 class="section-title" style="margin-top:24px;">4. Bracelet HAVRE Band & NFC</h2>
+          <p class="section-note">
+            Un support complémentaire, pensé pour le terrain (école, TES, premiers secours), avec un accès limité.
+          </p>
+
+          <div class="cards-stack">
+            <article class="card">
+              <div class="card-header">
+                <span class="card-chip">Bracelet</span>
+                <h3 class="card-title">Informations visibles sur le bracelet</h3>
+              </div>
+              <div class="card-body">
+                Le bracelet affiche uniquement des informations <strong>simples et immédiates</strong> :
+                <ul>
+                  <li>Niveau de ressenti (ex. couleur/jauge très lisible).</li>
+                  <li>Éventuellement rythme cardiaque / sommeil, de manière globale.</li>
+                  <li>Aucune information médicale détaillée stockée en clair sur le bracelet.</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="card-header">
+                <span class="card-chip">NFC & secours</span>
+                <h3 class="card-title">Accès limité pour les pros de terrain</h3>
+              </div>
+              <div class="card-body">
+                À terme, HAVRE pourrait proposer une app dédiée police/pompiers :
+                <ul>
+                  <li>Lecture NFC du bracelet seulement avec une app reconnue.</li>
+                  <li>Accès ultra limité : <strong>contacts des parents</strong>, médecin traitant, personne ressource.</li>
+                  <li>Pas d’accès direct à l’historique émotionnel ou aux notes privées.</li>
+                </ul>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <!-- COLONNE DROITE : RESUME -->
+        <aside class="summary-panel">
+          <div class="summary-badge">
+            <span class="summary-dot"></span>
+            <span>Principes fondateurs de HAVRE</span>
+          </div>
+
+          <h2 class="summary-title">Ce que HAVRE promet de ne jamais devenir</h2>
+          <p class="summary-text">
+            HAVRE est conçu dès le départ autour de garde-fous. Le but : aider les familles,
+            pas créer un nouvel espace de pression ou de surveillance.
+          </p>
+
+          <div class="summary-list">
+            <div><strong>HAVRE n’est pas</strong> :</div>
+            <ul style="list-style:none; padding-left:0; margin-top:4px;">
+              <li>• un outil de contrôle permanent de l’enfant,</li>
+              <li>• un dispositif médical ou de diagnostic,</li>
+              <li>• un système de notation ou de performance.</li>
+            </ul>
+          </div>
+
+          <div class="summary-list">
+            <div><strong>HAVRE est</strong> :</div>
+            <ul style="list-style:none; padding-left:0; margin-top:4px;">
+              <li>• un espace pour mettre des mots (ou des couleurs) sur le ressenti,</li>
+              <li>• un soutien pour structurer la journée sans écraser l’enfant,</li>
+              <li>• un pont entre l’enfant, les parents et les professionnels.</li>
+            </ul>
+          </div>
+
+          <div class="summary-text">
+            Ces règles ne sont pas des détails techniques : ce sont des
+            <strong>promesses de design</strong> qui guident chaque décision sur HAVRE.
+          </div>
+
+          <div class="pill-row">
+            <div class="pill safe">Pas de géolocalisation</div>
+            <div class="pill safe">Pas de diagnostic</div>
+            <div class="pill neutral">Accès pro limité & tracé</div>
+            <div class="pill danger">Anti-surveillance</div>
+          </div>
+        </aside>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    HAVRE – Sécurité & garde-fous • Version prototype – contenu susceptible d’évoluer avec les retours des familles et des professionnels.<br />
+    <span class="lang-note">🇬🇧 English translation coming soon.</span>
+  </footer>
+</body>
+</html>

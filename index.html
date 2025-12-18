@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>HAVRE – Le havre émotionnel pour votre enfant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg-main: #f6f4ee;
+      --bg-soft: #eef7f2;
+      --bg-card: #ffffff;
+      --accent: #4cc38a;
+      --accent-soft: #3ba7c9;
+      --accent-alt: #2a8f68;
+      --text-main: #102018;
+      --text-muted: #5f7b6d;
+      --border-soft: rgba(120, 164, 143, 0.45);
+      --danger: #ef4444;
+      --warning: #f97316;
+      --shadow-soft: 0 22px 45px rgba(24, 48, 32, 0.18);
+      --radius-xl: 18px;
+      --radius-2xl: 26px;
+      --max-width: 1120px;
+      --havre-logo: url("assets/img/logo-havre.png");
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      background: radial-gradient(circle at top, #faf8f3 0, var(--bg-main) 55%, #f1eee7 100%);
+      color: var(--text-main);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* Layout */
+
+    .page-shell {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 20px 16px 40px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(18px);
+      background: rgba(255, 255, 255, 0.9);
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .header-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-logo {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: var(--havre-logo) center/cover no-repeat;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 0 10px rgba(76, 195, 138, 0.25);
+      color: transparent;
+      font-size: 0;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-name {
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      font-size: 14px;
+      text-transform: uppercase;
+    }
+
+    .brand-tagline {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+    }
+
+    nav a {
+      padding: 6px 10px;
+      border-radius: 999px;
+      color: var(--text-muted);
+      transition: background 0.18s ease, color 0.18s ease, transform 0.1s ease;
+    }
+
+    nav a:hover {
+      background: var(--bg-soft);
+      color: var(--text-main);
+      transform: translateY(-1px);
+    }
+
+    .global-nav {
+      max-width: var(--max-width);
+      margin: 0 auto 16px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      background: rgba(255, 255, 255, 0.85);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .nav-logo {
+      width: 22px;
+      height: 22px;
+      border-radius: 7px;
+      background: var(--havre-logo) center/cover no-repeat;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 8px 16px rgba(24, 48, 32, 0.14);
+      display: inline-block;
+      flex-shrink: 0;
+      padding: 0;
+      line-height: 0;
+    }
+
+    .global-nav a:not(.nav-logo) {
+      font-size: 12px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      color: var(--text-muted);
+      border: 1px solid transparent;
+      transition: background 0.2s ease, color 0.2s ease, border 0.2s ease;
+    }
+
+    .global-nav a:not(.nav-logo).active,
+    .global-nav a:not(.nav-logo):hover {
+      background: linear-gradient(120deg, var(--accent), var(--accent-alt));
+      color: var(--text-main);
+      border-color: transparent;
+    }
+
+    .nav-cta {
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-soft));
+      color: var(--text-main);
+      font-weight: 600;
+      box-shadow: 0 10px 25px rgba(76, 195, 138, 0.25);
+    }
+
+    .nav-cta:hover {
+      filter: brightness(1.05);
+      transform: translateY(-0.5px);
+    }
+
+    /* Hero */
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.95fr);
+      gap: 32px;
+      padding-top: 32px;
+      align-items: center;
+    }
+
+    @media (max-width: 880px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    .hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(76,195,138,0.14);
+      border: 1px solid rgba(76,195,138,0.35);
+      font-size: 11px;
+      color: var(--accent-soft);
+      width: fit-content;
+    }
+
+    .hero-title {
+      font-size: clamp(26px, 4vw, 34px);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-title span {
+      background: linear-gradient(135deg, var(--accent), var(--accent-soft), var(--accent-alt));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+      max-width: 460px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .btn-primary {
+      padding: 11px 18px;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, var(--accent), var(--accent-soft));
+      color: var(--text-main);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 14px 35px rgba(76, 195, 138, 0.28);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.08s ease, box-shadow 0.12s ease, filter 0.12s ease;
+      text-decoration: none;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.03);
+      box-shadow: 0 18px 40px rgba(76, 195, 138, 0.32);
+    }
+
+    .btn-ghost {
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      background: var(--bg-card);
+      color: var(--text-main);
+      font-size: 13px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.15s ease, border-color 0.15s ease, transform 0.08s ease;
+    }
+
+    .btn-ghost:hover {
+      background: rgba(76,195,138,0.18);
+      border-color: rgba(76,195,138,0.6);
+      transform: translateY(-1px);
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 6px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .hero-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-meta-badge {
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: var(--bg-soft);
+      border: 1px solid var(--border-soft);
+    }
+
+    /* Mockups bloc */
+
+    .hero-right {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .child-phone {
+      position: relative;
+      width: 100%;
+      max-width: 360px;
+      aspect-ratio: 9 / 16;
+      border-radius: 38px;
+      background: radial-gradient(circle at top, #e9f7ef 0, #dff2e9 65%);
+      box-shadow: var(--shadow-soft);
+      padding: 14px 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-soft);
+      pointer-events: none;
+    }
+
+    .child-phone-notch {
+      width: 46%;
+      height: 18px;
+      border-radius: 999px;
+      background: #d4ebdd;
+      margin: 0 auto 10px;
+      border: 1px solid rgba(120,164,143,0.35);
+    }
+
+    .child-phone-screen {
+      height: calc(100% - 28px);
+      border-radius: 26px;
+      background: radial-gradient(circle at top, #fdfefc 0, #edf7f1 80%);
+      padding: 12px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      border: 1px solid rgba(42, 143, 104, 0.35);
+    }
+
+    .child-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    .child-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .child-logo-symbol {
+      width: 14px;
+      height: 14px;
+      border-radius: 5px;
+      background: var(--havre-logo) center/cover no-repeat;
+      box-shadow: 0 6px 12px rgba(24, 48, 32, 0.16);
+      flex-shrink: 0;
+    }
+
+    .child-logo-text {
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      font-size: 10px;
+      text-transform: uppercase;
+      color: var(--text-main);
+    }
+
+    .child-time {
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    .child-screen-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .child-screen-sub {
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-top: 1px;
+    }
+
+    .child-main {
+      display: grid;
+      grid-template-columns: 1.45fr 0.7fr;
+      gap: 8px;
+      align-items: stretch;
+      margin-top: 4px;
+    }
+
+    .child-card {
+      background: var(--bg-card);
+      border-radius: 16px;
+      padding: 10px;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 10px 22px rgba(24, 48, 32, 0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .child-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .child-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 20%, #ffe8cc 0%, #f7b26c 42%, #c8752a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 0 0 2px rgba(120,164,143,0.25);
+      border: 1px solid rgba(120,164,143,0.25);
+      flex-shrink: 0;
+    }
+
+    .child-meta-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .child-meta-sub {
+      font-size: 9px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .child-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(76, 195, 138, 0.14);
+      border: 1px solid rgba(76, 195, 138, 0.35);
+      font-size: 9px;
+      color: var(--accent-soft);
+      margin-top: 4px;
+      width: fit-content;
+    }
+
+    .child-status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px rgba(76, 195, 138, 0.45);
+    }
+
+    .child-mood-text {
+      font-size: 10px;
+      line-height: 1.4;
+      color: var(--text-main);
+    }
+
+    .child-mood-text span {
+      color: var(--accent-soft);
+      font-weight: 600;
+    }
+
+    .child-helper-card {
+      border-radius: 12px;
+      border: 1px solid rgba(120,164,143,0.28);
+      background: rgba(238,247,242,0.65);
+      padding: 8px 8px 7px;
+      font-size: 9px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .child-helper-card strong {
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    .child-mood-column {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .child-mood-label-top {
+      font-size: 9px;
+      color: #b44a4a;
+    }
+
+    .child-mood-label-bottom {
+      font-size: 9px;
+      color: var(--accent-soft);
+    }
+
+    .child-mood-bar-wrapper {
+      position: relative;
+      width: 28px;
+      height: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .child-mood-bar {
+      width: 10px;
+      height: 130px;
+      border-radius: 999px;
+      background: linear-gradient(to top, #4cc38a 0%, #8fd66a 20%, #ffd666 45%, #f7b955 65%, #ff7a5c 85%, #e96f6f 100%);
+      box-shadow: 0 0 10px rgba(233, 111, 111, 0.2), 0 0 0 1px rgba(16, 32, 24, 0.05);
+      position: relative;
+    }
+
+    .child-mood-handle {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 35%;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #ffffff 0%, #eef7f2 45%, #dff2e9 100%);
+      box-shadow: 0 6px 12px rgba(24, 48, 32, 0.16), 0 0 0 2px rgba(42, 143, 104, 0.35);
+      border: 1px solid rgba(120,164,143,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      font-weight: 600;
+      color: var(--accent-soft);
+    }
+
+    .child-mood-value {
+      font-size: 9px;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    .child-missions {
+      margin-top: 6px;
+      background: var(--bg-card);
+      border-radius: 16px;
+      padding: 8px 10px;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 10px 22px rgba(24, 48, 32, 0.1);
+    }
+
+    .child-missions-title {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .child-missions-subtitle {
+      font-size: 9px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .child-missions-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .child-mission-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 9px;
+      color: var(--text-main);
+      padding: 6px 6px;
+      border-radius: 10px;
+      border: 1px solid rgba(120,164,143,0.22);
+      background: rgba(238, 247, 242, 0.55);
+    }
+
+    .child-mission-checkbox {
+      width: 14px;
+      height: 14px;
+      border-radius: 999px;
+      border: 2px solid rgba(42, 143, 104, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background: transparent;
+    }
+
+    .child-mission-check {
+      font-size: 9px;
+      opacity: 0;
+      color: #ffffff;
+    }
+
+    .child-mini-note {
+      font-size: 9px;
+      color: var(--text-muted);
+      margin-top: auto;
+    }
+
+    .device-stack {
+      position: relative;
+      width: 100%;
+      max-width: 360px;
+      aspect-ratio: 9 / 16;
+      border-radius: 38px;
+      background: radial-gradient(circle at top, #f7fbf8 0, #e7f0ea 65%);
+      box-shadow: var(--shadow-soft);
+      padding: 16px 10px;
+      overflow: hidden;
+      border: 1px solid var(--border-soft);
+    }
+
+    .device-notch {
+      width: 46%;
+      height: 18px;
+      border-radius: 999px;
+      background: #dfe9e2;
+      margin: 0 auto 10px;
+    }
+
+    .device-screen {
+      border-radius: 26px;
+      background: radial-gradient(circle at top, #ffffff 0, #eef7f2 70%);
+      padding: 14px 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--text-main);
+    }
+
+    .device-screen-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--text-muted);
+      font-size: 10px;
+      margin-bottom: 6px;
+    }
+
+    .device-avatar {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      margin-top: 6px;
+    }
+
+    .device-avatar-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 18px;
+      background: radial-gradient(circle at 20% 0%, #fbbf24 0, #f97316 28%, #7c2d12 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      box-shadow: 0 14px 30px rgba(24, 48, 32, 0.2);
+    }
+
+    .device-avatar-name {
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .device-avatar-caption {
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    .device-routine {
+      margin-top: 12px;
+      padding: 8px;
+      border-radius: 14px;
+      background: var(--bg-soft);
+      border: 1px solid var(--border-soft);
+    }
+
+    .device-routine-title {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .device-task {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 10px;
+      padding: 3px 0;
+      color: var(--text-main);
+    }
+
+    .device-task span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .device-task-check {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 1px solid rgba(148,163,184,0.6);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+    }
+
+    .device-task-check.done {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--text-main);
+    }
+
+    .device-footer {
+      margin-top: 10px;
+      padding-top: 8px;
+      border-top: 1px dashed rgba(120, 164, 143, 0.6);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .device-footer-label {
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    .emotion-bar-wrapper {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .emotion-bar {
+      position: relative;
+      flex: 1;
+      height: 80px;
+      border-radius: 999px;
+      background: linear-gradient(to top, #ef4444, #f97316, #facc15, #22c55e);
+      overflow: hidden;
+      box-shadow: inset 0 0 0 1px rgba(24, 48, 32, 0.25);
+    }
+
+    .emotion-thumb {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 22%;
+      width: 22px;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(16, 32, 24, 0.95);
+      box-shadow: 0 0 0 1px rgba(148,163,184,0.8);
+    }
+
+    .emotion-labels {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      font-size: 9px;
+      color: var(--text-muted);
+    }
+
+    .device-note {
+      font-size: 9px;
+      color: var(--text-muted);
+    }
+
+    .device-glow {
+      position: absolute;
+      inset: 50% auto auto 50%;
+      transform: translate(-50%, -30%);
+      width: 260px;
+      height: 260px;
+      background: radial-gradient(circle, rgba(56,189,248,0.16), transparent 65%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    /* Sections */
+
+    section {
+      margin-top: 56px;
+    }
+
+    .section-heading {
+      margin-bottom: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .section-kicker {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent-soft);
+    }
+
+    .section-title {
+      font-size: 20px;
+      letter-spacing: -0.02em;
+    }
+
+    .section-description {
+      font-size: 13px;
+      color: var(--text-muted);
+      max-width: 560px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 880px) {
+      .grid-2 {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .card {
+      border-radius: var(--radius-xl);
+      background: linear-gradient(180deg, #ffffff, #f2f7f3);
+      border: 1px solid var(--border-soft);
+      padding: 18px 16px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .card-light {
+      background: var(--bg-soft);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border-soft);
+      padding: 18px 16px;
+    }
+
+    .tag-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: var(--bg-soft);
+      border: 1px solid var(--border-soft);
+      color: var(--text-muted);
+    }
+
+    ul.clean {
+      list-style: none;
+      margin-top: 10px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    ul.clean li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 4px 0;
+    }
+
+    ul.clean li::before {
+      content: "•";
+      color: var(--accent-soft);
+      margin-top: 2px;
+    }
+
+    .pill-row {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 11px;
+    }
+
+    .pill {
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: var(--bg-soft);
+      border: 1px solid var(--border-soft);
+      color: var(--text-muted);
+    }
+
+    .pill-positive {
+      border-color: rgba(76,195,138,0.6);
+      color: var(--accent-soft);
+    }
+
+    .security-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 16px;
+      margin-top: 10px;
+    }
+
+    .security-card {
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border-soft);
+      background: var(--bg-card);
+      padding: 12px 12px 14px;
+      font-size: 12px;
+    }
+
+    .security-title {
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    /* CTA section */
+
+    .cta {
+      margin-top: 60px;
+      margin-bottom: 24px;
+      border-radius: var(--radius-2xl);
+      background: radial-gradient(circle at top left, rgba(76,195,138,0.18), transparent 55%),
+                  radial-gradient(circle at bottom right, rgba(59,167,201,0.2), transparent 55%),
+                  linear-gradient(to bottom right, #ffffff, #f2f7f3);
+      border: 1px solid rgba(148,163,184,0.45);
+      box-shadow: var(--shadow-soft);
+      padding: 22px 18px 20px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 18px;
+      align-items: center;
+    }
+
+    @media (max-width: 780px) {
+      .cta {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .cta-title {
+      font-size: 18px;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+
+    .cta-text {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .cta-form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    @media (max-width: 780px) {
+      .cta-form {
+        justify-content: flex-start;
+      }
+    }
+
+    .btn-ghost-light {
+      padding: 9px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      background: #ffffff;
+      color: var(--text-main);
+      font-size: 13px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s ease, transform 0.08s ease;
+    }
+
+    .btn-ghost-light:hover {
+      background: rgba(76,195,138,0.18);
+      transform: translateY(-1px);
+    }
+
+    footer {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: center;
+      padding: 12px 16px 28px;
+    }
+
+    footer a {
+      color: var(--accent-soft);
+    }
+
+    .lang-note {
+      margin-top: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+    <div class="global-nav">
+    <a class="nav-logo" href="index.html" aria-label="HAVRE"></a>
+    <a href="index.html" class="active">Concept HAVRE</a>
+    <a href="mascotte-enfant.html">App enfant</a>
+    <a href="ecran -enfant.html">Écran enfant</a>
+    <a href="havre-parent-mockups.html">App parent</a>
+    <a href="mascotte-parents.html">Mascotte (parents)</a>
+    <a href="havrepro.html">HAVRE Pro / TES</a>
+    <a href="securite.html">Sécurité</a>
+  </div>
+  <header>
+    <div class="header-inner">
+      <div class="brand">
+        <div class="brand-logo">H</div>
+        <div class="brand-text">
+          <div class="brand-name">HAVRE</div>
+          <div class="brand-tagline">App d’ancrage émotionnel</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#enfant">Pour votre enfant</a>
+        <a href="#parents">Pour les parents</a>
+        <a href="#bracelet">Bracelet & Watch</a>
+        <a href="#securite">Sécurité</a>
+        <a
+          class="nav-cta"
+          href="mailto:contact.havre@icloud.com?subject=Rejoindre%20la%20liste%20d%27attente%20HAVRE&body=Bonjour%20%C3%A9quipe%20HAVRE,%0A%0AJe%20souhaite%20rejoindre%20la%20liste%20d%27attente.%0A%0ANom:%0APr%C3%A9nom:%0AAdresse%20e-mail:%0A%0AMerci!%0A"
+        >
+          Rejoindre la liste d’attente
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-left">
+        <div class="hero-label">
+          <span>🧠 Enfants sensibles, parents épuisés…</span>
+          <span>Et si on vous aidait tous les deux ?</span>
+        </div>
+        <h1 class="hero-title">
+          HAVRE, l’app qui transforme la tempête intérieure de votre enfant<br />
+          en <span>langage compréhensible</span>.
+        </h1>
+        <p class="hero-subtitle">
+          Une routine claire, une jauge émotionnelle à glisser du doigt, une mascotte rassurante
+          et un tableau de bord pour les parents. HAVRE n’éteint pas les émotions : il les rend enfin
+          visibles, partageables et gérables.
+        </p>
+        <div class="hero-actions">
+          <a
+            class="btn-primary"
+            href="mailto:contact.havre@icloud.com?subject=Rejoindre%20la%20liste%20d%27attente%20HAVRE&body=Bonjour%20%C3%A9quipe%20HAVRE,%0A%0AJe%20souhaite%20rejoindre%20la%20liste%20d%27attente.%0A%0ANom:%0APr%C3%A9nom:%0AAdresse%20e-mail:%0A%0AMerci!%0A"
+          >
+            💚 Rejoindre la liste d’attente
+          </a>
+          <button class="btn-ghost" onclick="document.getElementById('enfant').scrollIntoView({behavior:'smooth'})">
+            👀 Voir comment ça fonctionne
+          </button>
+        </div>
+        <div class="hero-meta">
+          <span class="hero-meta-badge">Pensé avec un parent d’enfant anxieux</span>
+          <span>•</span>
+          <span>Compatible iPhone, Apple Watch & futur bracelet dédié</span>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="child-phone" aria-hidden="true">
+          <div class="child-phone-notch"></div>
+          <div class="child-phone-screen">
+            <div class="child-header">
+              <div class="child-logo">
+                <span class="child-logo-symbol"></span>
+                <span class="child-logo-text">HAVRE</span>
+              </div>
+              <span class="child-time">18:42</span>
+            </div>
+
+            <div>
+              <div class="child-screen-title">Comment tu te sens aujourd'hui ?</div>
+              <div class="child-screen-sub">Tu peux cliquer ou glisser la barre pour montrer ton ressenti.</div>
+            </div>
+
+            <div class="child-main">
+              <div class="child-card">
+                <div class="child-info">
+                  <div class="child-avatar">🦊</div>
+                  <div>
+                    <div class="child-meta-title">Ton espace d'émotion</div>
+                    <div class="child-meta-sub">Ce n’est pas noté. Tu peux juste dire comment tu te sens.</div>
+                    <div class="child-status-pill">
+                      <span class="child-status-dot"></span>
+                      <span>Ça va, je me sens bien</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="child-mood-text">
+                  Là, tu es plutôt : <span>tranquille</span>.<br />
+                  Si ça change, tu peux ajuster la barre. Même un tout petit peu.
+                </div>
+
+                <div class="child-helper-card">
+                  <strong>Astuce :</strong> si tu es “trop plein”, on peut essayer une mini pause,
+                  un verre d’eau, ou 10 respirations.
+                </div>
+              </div>
+
+              <div class="child-mood-column">
+                <div class="child-mood-label-top">Trop plein</div>
+                <div class="child-mood-bar-wrapper">
+                  <div class="child-mood-bar">
+                    <div class="child-mood-handle">35%</div>
+                  </div>
+                </div>
+                <div class="child-mood-label-bottom">Calme</div>
+                <div class="child-mood-value">Ressenti actuel : 35%</div>
+              </div>
+            </div>
+
+            <div class="child-missions">
+              <div class="child-missions-title">Tes missions du moment</div>
+              <div class="child-missions-subtitle">Tu peux en faire quelques-unes. Tu coches quand c’est fait.</div>
+              <div class="child-missions-list">
+                <div class="child-mission-item">
+                  <div class="child-mission-checkbox"><span class="child-mission-check">✔</span></div>
+                  <div>Boire un grand verre d’eau</div>
+                </div>
+                <div class="child-mission-item">
+                  <div class="child-mission-checkbox"><span class="child-mission-check">✔</span></div>
+                  <div>Faire 10 respirations calmes</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="child-mini-note">Aperçu du design App enfant.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- POUR L'ENFANT -->
+    <section id="enfant">
+      <div class="section-heading">
+        <div class="section-kicker">Pour votre enfant</div>
+        <h2 class="section-title">Une app qui parle sa langue, même quand les mots ne sortent pas.</h2>
+        <p class="section-description">
+          HAVRE donne à votre enfant une structure rassurante et un moyen ultra simple d’exprimer ce qu’il
+          ressent, sans devoir trouver les bons mots, ni “faire un effort” supplémentaire.
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <span class="tag-pill">🕒 Routines courtes & précises</span>
+          <ul class="clean">
+            <li>Des “missions” claires, adaptées à sa journée : matin, après l’école, soir.</li>
+            <li>Des horaires réalistes, testés en conditions réelles chez des familles.</li>
+            <li>Les missions restent visibles : l’enfant voit sa progression, pas juste une liste qui disparaît.</li>
+          </ul>
+
+          <span class="tag-pill" style="margin-top:14px;">🌈 Jauge de ressenti</span>
+          <ul class="clean">
+            <li>Une grande barre verticale en dégradé (vert → rouge), glissable du pouce.</li>
+            <li>Pas de texte compliqué : une couleur, un geste, une information claire.</li>
+            <li>Idéal pour les enfants anxieux, hypersensibles ou qui ont du mal à verbaliser.</li>
+          </ul>
+
+          <span class="tag-pill" style="margin-top:14px;">🦊 Avatar-réconfort</span>
+          <ul class="clean">
+            <li>Une mascotte choisie par l’enfant (gamer, nature, musique, sportif…).</li>
+            <li>Des petites phrases de soutien qui s’affichent au bon moment :</li>
+            <li>“Tu n’es pas seul.” • “On y va étape par étape.” • “Je suis là avec toi.”</li>
+          </ul>
+        </div>
+
+        <div class="card-light">
+          <div class="tag-pill">🎮 Pensé pour la réalité</div>
+          <p style="font-size:13px;margin-top:10px;color:var(--text-muted);">
+            Votre enfant a du mal quand il n’y a “rien de prévu” ? Il tourne en rond, s’accroche aux animaux,
+            provoque sa sœur, monte en pression ?
+          </p>
+          <p style="font-size:13px;margin-top:8px;color:var(--text-muted);">
+            HAVRE structure ces temps “vides” en rituels courts, avec des missions concrètes et un cadre stable.
+            Pas pour le contrôler, mais pour qu’il se sente ancré.
+          </p>
+
+          <div class="pill-row">
+            <span class="pill-positive">Rituels du matin</span>
+            <span class="pill-positive">Retour d’école</span>
+            <span class="pill-positive">Soir & coucher</span>
+            <span class="pill">Week-end</span>
+            <span class="pill">Vacances</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- POUR LES PARENTS -->
+    <section id="parents">
+      <div class="section-heading">
+        <div class="section-kicker">Pour les parents</div>
+        <h2 class="section-title">Un tableau de bord émotionnel pour comprendre sans deviner.</h2>
+        <p class="section-description">
+          HAVRE ne juge pas votre façon de faire : il vous aide à mieux voir ce qui se passe à l’intérieur
+          de votre enfant, pour ajuster vos réactions, réduire les conflits et limiter les crises.
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card-light">
+          <span class="tag-pill">📊 Vue d’ensemble</span>
+          <ul class="clean">
+            <li>État émotionnel actuel de votre enfant, mis à jour en temps réel.</li>
+            <li>Mini-historique sur la journée : quand les choses montent, quand elles redescendent.</li>
+            <li>Lien possible avec certaines activités : devoirs, transition école/maison, temps d’écran…</li>
+          </ul>
+
+          <span class="tag-pill" style="margin-top:14px;">💬 Encouragement silencieux</span>
+          <ul class="clean">
+            <li>Votre enfant passe en orange ? Vous recevez une notification.</li>
+            <li>En un tap, vous lui envoyez un message doux affiché par sa mascotte :</li>
+            <li>“Je pense à toi.” • “Respire, tu es capable.” • “On en parle tranquillement plus tard.”</li>
+          </ul>
+
+          <span class="tag-pill" style="margin-top:14px;">👨‍👩‍👦 Pensé pour les familles</span>
+          <ul class="clean">
+            <li>Compatible multi-parents : chacun peut voir l’état de l’enfant et envoyer un soutien.</li>
+            <li>Mode automatique limité dans le temps : jamais à la place du lien humain.</li>
+            <li>Tout est conçu pour renforcer la relation, pas pour vous remplacer.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="tag-pill">Exemple de tableau de bord parent</div>
+          <ul class="clean" style="margin-top:10px;">
+            <li>08:00 — 🟢 Calme (petit-dej)</li>
+            <li>10:30 — 🟡 Légèrement tendu (maths)</li>
+            <li>14:00 — 🟠 Stressé (récréation compliquée)</li>
+            <li>17:30 — 🟢 Reposé (activité calme à la maison)</li>
+          </ul>
+          <p style="font-size:13px;margin-top:10px;color:var(--text-muted);">
+            En consultation avec un spécialiste, ces données peuvent vous aider à illustrer :
+            <strong>“Ce jour-là, ça a dérapé ici, à ce moment précis, dans ce contexte.”</strong>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- BRACELET & WATCH -->
+    <section id="bracelet">
+      <div class="section-heading">
+        <div class="section-kicker">Bracelet & Apple Watch</div>
+        <h2 class="section-title">Un geste discret au poignet, une information claire pour le parent.</h2>
+        <p class="section-description">
+          Au-delà de l’iPhone, HAVRE peut vivre sur un bracelet dédié ou sur l’Apple Watch de votre enfant :
+          un simple glissement du doigt sur la barre en dégradé, sans sortir le téléphone.
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <span class="tag-pill">📟 HAVRE Band (bracelet dédié)</span>
+          <ul class="clean">
+            <li>Mini-écran vertical, fond noir, grande barre en dégradé du bas vers le haut.</li>
+            <li>Avatar 8-bit et petites phrases de soutien qui apparaissent quand il en a besoin.</li>
+            <li>Mode école & mode nuit : ultra discret, vibrations douces, luminosité minimale.</li>
+          </ul>
+
+          <span class="tag-pill" style="margin-top:14px;">⌚ Apple Watch</span>
+          <ul class="clean">
+            <li>Cadran animé côté enfant : la mascotte vit sur sa montre, comme Mickey ou Buzz.</li>
+            <li>Complication côté parent : un simple coup d’œil sur votre Watch vous montre son état.</li>
+            <li>Vous pouvez envoyer un encouragement sans sortir votre téléphone.</li>
+          </ul>
+        </div>
+
+        <div class="card-light">
+          <span class="tag-pill">💓 Biométrie douce (optionnelle)</span>
+          <ul class="clean">
+            <li>Possible corrélation entre : sommeil, rythme cardiaque moyen et pics d’anxiété.</li>
+            <li>Jamais de diagnostic, jamais d’alarme agressive : des tendances, pas des verdicts.</li>
+            <li>Des informations utiles à partager avec un professionnel si vous le souhaitez.</li>
+          </ul>
+          <p style="font-size:12px;margin-top:8px;color:var(--text-muted);">
+            HAVRE reste un outil de soutien émotionnel, pas un dispositif médical. Les données servent
+            à mieux comprendre, pas à étiqueter.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECURITE -->
+    <section id="securite">
+      <div class="section-heading">
+        <div class="section-kicker">Sécurité & éthique</div>
+        <h2 class="section-title">Les émotions de votre enfant sont précieuses. Ses données aussi.</h2>
+        <p class="section-description">
+          HAVRE est conçu avec une obsession : aider sans sur-contrôler, soutenir sans remplacer, protéger
+          sans enfermer. L’enfant reste un enfant, pas un “profil de données”.
+        </p>
+      </div>
+
+      <div class="security-grid">
+        <div class="security-card">
+          <div class="security-title">🔐 Données chiffrées</div>
+          <p>
+            Toutes les données sont chiffrées en transit et au repos. Aucune vente à des tiers, aucune
+            publicité ciblée, jamais.
+          </p>
+        </div>
+        <div class="security-card">
+          <div class="security-title">🧒 Respect de l’enfant</div>
+          <p>
+            Pas de notation, pas de “score”, pas de pression supplémentaire. La jauge est un outil
+            d’expression, pas un jugement.
+          </p>
+        </div>
+        <div class="security-card">
+          <div class="security-title">👨‍👩‍👦 Contrôle parental</div>
+          <p>
+            Paramètres avancés réservés aux parents. Mode sécurisé possible pour éviter les catastrophes
+            type activation de VoiceOver.
+          </p>
+        </div>
+        <div class="security-card">
+          <div class="security-title">⚖️ Éthique avant tout</div>
+          <p>
+            HAVRE ne pose pas de diagnostic, ne remplace ni un psy ni un pédopsy. Il offre un langage
+            commun pour mieux travailler ensemble.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA FINALE -->
+    <section id="cta" class="cta">
+      <div>
+        <h2 class="cta-title">Vous voulez être parmi les premiers à tester HAVRE ?</h2>
+        <p class="cta-text">
+          Nous construisons HAVRE avec des parents comme vous, qui vivent vraiment l’anxiété, les crises,
+          les soirées qui dérapent pour “un détail”. Laissez votre e-mail, et nous vous contacterons
+          quand une version test sera prête.
+        </p>
+        <p class="cta-text">
+          Vous pouvez aussi nous écrire directement à
+          <a href="mailto:contact.havre@icloud.com">contact.havre@icloud.com</a>.
+        </p>
+      </div>
+      <div class="cta-form">
+        <a
+          class="btn-primary"
+          href="mailto:contact.havre@icloud.com?subject=Je%20veux%20%C3%AAtre%20inform%C3%A9(e)%20de%20HAVRE&body=Bonjour%20%C3%A9quipe%20HAVRE,%0A%0AJe%20souhaite%20%C3%AAtre%20inform%C3%A9(e)%20des%20prochaines%20%C3%A9tapes%20et%20tests.%0A%0AMerci!%0A"
+        >
+          Je veux être informé(e)
+        </a>
+        <a
+          class="btn-ghost-light"
+          href="mailto:?subject=Découvrir%20HAVRE%20-%20outil%20d%27accompagnement&body=Bonjour,%0A%0AJe%20te%20partage%20HAVRE,%20un%20outil%20pour%20accompagner%20les%20parents%20et%20professionnels.%0ATu%20peux%20le%20d%C3%A9couvrir%20ici%20:%20https://havre.app%0A%0AN%27h%C3%A9site%20pas%20%C3%A0%20me%20dire%20si%20tu%20veux%20en%20parler.%0A%0A"
+        >
+          Parler de HAVRE à un pro
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    HAVRE — projet en cours d’exploration avec des parents & des professionnels.<br />
+    Cette page est une maquette conceptuelle. Aucune donnée réelle n’est collectée ici.<br />
+    <span class="lang-note">🇬🇧 English translation coming soon.</span>
+  </footer>
+</body>
+</html>

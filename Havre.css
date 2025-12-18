@@ -1,0 +1,632 @@
+/* ========================================================= */
+/*                HAVRE – THEME OFFICIEL V1                  */
+/*         Palette vert/bleu douce + fond papier             */
+/* ========================================================= */
+
+/* -------------------- */
+/* 1. Variables globales */
+/* -------------------- */
+
+:root {
+  /* Fond global */
+  --bg-main: #f6f4ee;
+  --bg-gradient-top: #faf8f3;
+  --bg-gradient-bottom: #f1eee7;
+
+  /* Cartes et surfaces */
+  --bg-card: #ffffff;
+  --bg-card-soft: #eef7f2;
+
+  /* Accents – palette HAVRE */
+  --accent: #4cc38a;       /* Vert principal */
+  --accent-soft: #2a8f68;  /* Vert profond */
+  --accent-alt: #3ba7c9;   /* Bleu-vert */
+
+  /* Texte */
+  --text-main: #102018;
+  --text-muted: #5f7b6d;
+
+  /* Bordures / ombres */
+  --border-subtle: rgba(76, 195, 138, 0.35);
+  --border-soft: rgba(120, 164, 143, 0.45);
+  --shadow-strong: 0 26px 40px rgba(24, 48, 32, 0.18);
+  --shadow-soft: 0 18px 28px rgba(24, 48, 32, 0.12);
+
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+
+  /* États */
+  --danger-soft: #ff6b6b;
+  --success-soft: #4cc38a;
+  --warning-soft: #f7b955;
+}
+
+/* -------------------- */
+/* 2. Reset & Base */
+/* -------------------- */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro", "Segoe UI", sans-serif;
+  background: radial-gradient(
+    circle at top,
+    var(--bg-gradient-top),
+    var(--bg-main) 55%,
+    var(--bg-gradient-bottom)
+  );
+  color: var(--text-main);
+}
+
+/* Liens */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Page container */
+.page-container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 30px 20px 40px;
+}
+
+/* -------------------- */
+/* 3. Header */
+/* -------------------- */
+
+header {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-soft);
+  position: sticky;
+  top: 0;
+  z-index: 99;
+}
+
+.nav-inner {
+  max-width: 1100px;
+  margin: auto;
+  padding: 14px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* LOGO HAVRE – image */
+.brand-logo {
+  width: 38px;
+  height: 38px;
+  background: url("../img/logo-havre.png") center/cover no-repeat;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(76, 195, 138, 0.35);
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-name {
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+.brand-tagline {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* Navigation */
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+nav .nav-link {
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  color: var(--text-muted);
+  transition: 0.15s;
+}
+
+nav .nav-link:hover {
+  background: var(--bg-card-soft);
+  color: var(--accent-soft);
+}
+
+nav .nav-link.active {
+  color: white;
+  background: linear-gradient(120deg, var(--accent), var(--accent-alt));
+  box-shadow: 0 0 12px rgba(76, 195, 138, 0.3);
+}
+
+/* ---------------------------- */
+/* 4. Hero marketing */
+/* ---------------------------- */
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  align-items: center;
+  gap: 24px;
+  margin-top: 20px;
+}
+
+.hero-kicker {
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+}
+
+.hero-title {
+  font-size: clamp(28px, 4vw, 38px);
+  line-height: 1.18;
+  margin: 10px 0;
+}
+
+.hero-title span {
+  color: var(--accent);
+}
+
+.hero-text {
+  color: var(--text-muted);
+  font-size: 15px;
+  line-height: 1.6;
+  max-width: 550px;
+}
+
+.hero-meta {
+  margin-top: 10px;
+  font-size: 12px;
+}
+
+.hero-actions {
+  margin-top: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.btn-primary {
+  background: linear-gradient(120deg, var(--accent), var(--accent-soft));
+  color: white;
+  border-radius: 999px;
+  padding: 10px 18px;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: var(--shadow-soft);
+}
+
+.btn-secondary {
+  border-radius: 999px;
+  border: 1px solid var(--accent-soft);
+  background: var(--bg-card);
+  padding: 10px 18px;
+  font-size: 14px;
+  cursor: pointer;
+  color: var(--accent-soft);
+}
+
+/* ---------------------------- */
+/* 5. Faux téléphone (hero droite) */
+/* ---------------------------- */
+
+.phone-shell {
+  width: 100%;
+  max-width: 430px;
+  background: radial-gradient(circle at top, #e9f7ef 0, #dff2e9 65%);
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(76, 195, 138, 0.4);
+  padding: 14px;
+  box-shadow: var(--shadow-soft);
+}
+
+.phone-notch {
+  margin: auto;
+  width: 44%;
+  height: 16px;
+  background: #d4ebdd;
+  border-radius: 8px;
+}
+
+.phone-screen {
+  margin-top: 10px;
+  background: radial-gradient(circle at top, #fdfefc 0, #edf7f1 80%);
+  border-radius: var(--radius-lg);
+  padding: 12px;
+  border: 1px solid rgba(42, 143, 104, 0.4);
+}
+
+/* Top bar */
+
+.top-bar {
+  font-size: 12px;
+  color: var(--text-muted);
+  display: flex;
+  justify-content: space-between;
+}
+
+/* App header */
+
+.app-header {
+  margin-top: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.app-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.app-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* Avatar & mascotte */
+
+.avatar-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-card-soft);
+  padding: 5px 9px;
+  border-radius: 999px;
+  border: 1px solid var(--border-soft);
+  font-size: 12px;
+}
+
+.avatar-badge {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(76, 195, 138, 0.25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Mascotte bannière */
+
+.mascot-banner {
+  margin-top: 16px;
+  background: var(--bg-card-soft);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+  padding: 12px;
+  display: flex;
+  gap: 12px;
+}
+
+.mascot-avatar-big {
+  width: 46px;
+  height: 46px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+}
+
+.mascot-title {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.mascot-text {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* ---------------------------- */
+/* 6. Missions + jauge verticale dans le téléphone */
+/* ---------------------------- */
+
+.hero-phone-layout {
+  margin-top: 16px;
+  display: flex;
+  gap: 12px;
+  align-items: stretch;
+}
+
+/* Colonne gauche : missions */
+
+.hero-missions-card {
+  flex: 1;
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  padding: 10px 12px;
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-soft);
+}
+
+.hero-missions-title {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.hero-missions-list {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.hero-mission {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+}
+
+.hero-mission-status {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid var(--accent-soft);
+}
+
+.hero-mission-status--done {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+/* Colonne droite : barre verticale fine */
+
+.hero-emotion-column {
+  width: 54px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 0;
+}
+
+.hero-emotion-label {
+  font-size: 9px;
+  text-align: center;
+  color: var(--text-muted);
+  line-height: 1.2;
+}
+
+.hero-emotion-bar-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 4px 0;
+}
+
+.hero-emotion-bar {
+  width: 14px;
+  height: 132px;
+  border-radius: 999px;
+  background: linear-gradient(
+    to top,
+    #4cc38a,
+    #8fd66a,
+    #f7d45d,
+    #f7b955,
+    #e96f6f
+  );
+  position: relative;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+}
+
+.hero-emotion-thumb {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 26%;
+  width: 22px;
+  height: 10px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1px solid rgba(42, 143, 104, 0.6);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+}
+
+.hero-emotion-legend {
+  font-size: 8px;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* ---------------------------- */
+/* 7. Sections génériques */
+/* ---------------------------- */
+
+.section {
+  margin-top: 50px;
+}
+
+.section-title {
+  font-size: 22px;
+  margin-bottom: 8px;
+}
+
+.section-text {
+  font-size: 15px;
+  color: var(--text-muted);
+  max-width: 640px;
+}
+
+/* Cartes stackées */
+
+.cards-stack {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card {
+  background: white;
+  padding: 16px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+}
+
+.card-header {
+  margin-bottom: 8px;
+}
+
+.card-chip {
+  display: inline-block;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--bg-card-soft);
+  border: 1px solid var(--border-subtle);
+}
+
+.card-body {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.card-body ul {
+  padding-left: 18px;
+  margin-top: 6px;
+}
+
+.card-body li {
+  margin-bottom: 4px;
+}
+
+/* Résumé / CTA */
+
+.summary-panel {
+  background: var(--bg-card);
+  padding: 18px;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--accent-soft);
+  box-shadow: var(--shadow-soft);
+}
+
+.summary-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--bg-card-soft);
+  border: 1px solid var(--border-subtle);
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.summary-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--accent);
+}
+
+.summary-title {
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.summary-text {
+  margin-top: 8px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* ---------------------------- */
+/* 8. Footer */
+/* ---------------------------- */
+
+.site-footer {
+  text-align: center;
+  padding: 20px 0 30px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* ---------------------------- */
+/* 9. Responsive */
+/* ---------------------------- */
+
+@media (max-width: 860px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .nav-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 520px) {
+  .hero-phone-layout {
+    gap: 8px;
+  }
+
+  .hero-emotion-column {
+    width: 48px;
+  }
+
+  .hero-emotion-bar {
+    height: 120px;
+  }
+}
+/* ---------------------------- */
+/* 12. Mise en page HAVRE Pro   */
+/* ---------------------------- */
+
+.pro-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.9fr);
+  gap: 18px;
+  align-items: flex-start;
+  margin-top: 20px;
+}
+
+@media (max-width: 860px) {
+  .pro-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+/* ========================= */
+/* MODE ÉCRAN TÉLÉPHONE      */
+/* ========================= */
+
+.app-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 24px 12px 40px;
+}
+

@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>HAVRE – Jauge émotionnelle + missions (Pack complet)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root{
+      /* HAVRE V1 */
+      --bg-main: #f6f4ee;
+      --bg-gradient-top: #faf8f3;
+      --bg-gradient-bottom: #f1eee7;
+
+      --bg-card: #ffffff;
+      --bg-soft: #eef7f2;
+
+      --accent: #4cc38a;
+      --accent-soft: #2a8f68;
+      --accent-alt: #3ba7c9;
+
+      --text-main: #102018;
+      --text-muted: #5f7b6d;
+
+      --border-soft: rgba(120, 164, 143, 0.45);
+      --border-subtle: rgba(76, 195, 138, 0.35);
+
+      --shadow-strong: 0 26px 40px rgba(24, 48, 32, 0.18);
+      --shadow-soft: 0 18px 28px rgba(24, 48, 32, 0.12);
+
+      /* Dynamiques (JS) */
+      --status-color: var(--accent-soft);
+      --status-bg: rgba(76, 195, 138, 0.14);
+      --status-border: rgba(76, 195, 138, 0.35);
+      --status-dot: var(--accent);
+      --status-dot-glow: rgba(76, 195, 138, 0.55);
+      --handle-ring: rgba(42, 143, 104, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 16px;
+      padding: 24px 10px 28px;
+      background: radial-gradient(circle at top, var(--bg-gradient-top) 0%, var(--bg-main) 55%, var(--bg-gradient-bottom) 100%);
+      color: var(--text-main);
+    }
+
+    /* Navigation pill */
+    .global-nav {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .nav-logo {
+      width: 22px;
+      height: 22px;
+      border-radius: 7px;
+      background: url("assets/img/logo-havre.png") center/cover no-repeat;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 8px 16px rgba(24, 48, 32, 0.14);
+      display: inline-block;
+      flex-shrink: 0;
+      padding: 0;
+      line-height: 0;
+    }
+
+    .global-nav a {
+      font-size: 12px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      color: var(--text-muted);
+      border: 1px solid transparent;
+      transition: background 0.2s ease, color 0.2s ease;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .global-nav a.active,
+    .global-nav a:hover {
+      background: linear-gradient(120deg, var(--accent), var(--accent-alt));
+      color: #ffffff;
+    }
+
+    /* Faux écran de téléphone */
+    .phone {
+      width: 390px;
+      height: 820px;
+      border-radius: 36px;
+      padding: 18px 18px 20px;
+      background: radial-gradient(circle at top, #e9f7ef 0%, #dff2e9 65%);
+      box-shadow:
+        0 28px 60px rgba(24, 48, 32, 0.20),
+        0 0 0 2px rgba(16, 32, 24, 0.04);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--border-soft);
+    }
+
+    .notch {
+      width: 140px;
+      height: 22px;
+      background: #d4ebdd;
+      border-radius: 0 0 16px 16px;
+      margin: 0 auto 16px;
+      flex-shrink: 0;
+      border: 1px solid rgba(120,164,143,0.35);
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      flex-shrink: 0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo-symbol {
+      width: 24px;
+      height: 24px;
+      border-radius: 8px;
+      background: url("assets/img/logo-havre.png") center/cover no-repeat;
+      box-shadow: 0 10px 18px rgba(24, 48, 32, 0.14);
+      border: 1px solid rgba(120,164,143,0.35);
+    }
+
+    .logo-text {
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      font-size: 13px;
+      text-transform: uppercase;
+      color: var(--text-main);
+    }
+
+    .header-time {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .screen-title {
+      font-size: 18px;
+      font-weight: 650;
+      margin-bottom: 4px;
+      flex-shrink: 0;
+      color: var(--text-main);
+    }
+
+    .screen-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      flex-shrink: 0;
+    }
+
+    /* Zone centrale : carte + barre */
+    .main {
+      display: grid;
+      grid-template-columns: 1.5fr 0.7fr;
+      gap: 16px;
+      align-items: stretch;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border-radius: 20px;
+      padding: 16px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--border-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:-40px -60px auto auto;
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle at 30% 30%, rgba(59,167,201,0.18), rgba(76,195,138,0.10), transparent 70%);
+      transform: rotate(18deg);
+      pointer-events:none;
+    }
+
+    .child-info {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    /* Mascotte + animation douce */
+    .avatar-wrap{
+      width: 62px;
+      height: 62px;
+      position: relative;
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+    }
+
+    .avatar-halo{
+      position:absolute;
+      inset:-10px;
+      border-radius: 50%;
+      background: radial-gradient(circle at center, rgba(76,195,138,0.20), rgba(59,167,201,0.14), transparent 70%);
+      animation: haloPulse 3.8s ease-in-out infinite;
+    }
+
+    .avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 20%, #ffe8cc 0%, #f7b26c 42%, #c8752a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      box-shadow: 0 0 0 2px rgba(120,164,143,0.25);
+      border: 1px solid rgba(120,164,143,0.25);
+      animation: floaty 3.2s ease-in-out infinite;
+      position: relative;
+      user-select: none;
+    }
+
+    .avatar .eye{
+      position:absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(16,32,24,0.55);
+      top: 22px;
+      animation: blink 5.5s infinite;
+      transform-origin: center;
+    }
+    .avatar .eye.left{ left: 18px; }
+    .avatar .eye.right{ right: 18px; }
+
+    .avatar .cheek{
+      position:absolute;
+      width: 10px;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.22);
+      top: 30px;
+      opacity: 0.9;
+    }
+    .avatar .cheek.left{ left: 10px; }
+    .avatar .cheek.right{ right: 10px; }
+
+    @keyframes floaty{
+      0%,100%{ transform: translateY(0); }
+      50%{ transform: translateY(-3px); }
+    }
+    @keyframes haloPulse{
+      0%,100%{ transform: scale(1); opacity: .85; }
+      50%{ transform: scale(1.05); opacity: 1; }
+    }
+    @keyframes blink{
+      0%, 92%, 100% { transform: scaleY(1); }
+      94%, 96% { transform: scaleY(0.1); }
+    }
+
+    .child-meta h2 {
+      font-size: 15px;
+      font-weight: 650;
+      color: var(--text-main);
+    }
+
+    .child-meta p {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--status-bg);
+      border: 1px solid var(--status-border);
+      font-size: 11px;
+      color: var(--status-color);
+      margin-top: 4px;
+      width: fit-content;
+      transition: background .18s ease, border-color .18s ease, color .18s ease;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--status-dot);
+      box-shadow: 0 0 10px var(--status-dot-glow);
+      transition: background .18s ease, box-shadow .18s ease;
+    }
+
+    .mood-text {
+      font-size: 13px;
+      line-height: 1.45;
+      color: var(--text-main);
+    }
+
+    .mood-text span {
+      color: var(--accent-soft);
+      font-weight: 650;
+    }
+
+    .hint {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .helper-card{
+      border-radius: 14px;
+      border: 1px solid rgba(120,164,143,0.28);
+      background: rgba(238,247,242,0.65);
+      padding: 10px 10px 9px;
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+    .helper-card strong{ color: var(--text-main); font-weight: 650; }
+
+    /* Colonne barre verticale */
+    .mood-column {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      user-select: none;
+    }
+
+    .mood-label-top {
+      font-size: 11px;
+      color: #b44a4a;
+    }
+
+    .mood-label-bottom {
+      font-size: 11px;
+      color: var(--accent-soft);
+    }
+
+    .mood-bar-wrapper {
+      position: relative;
+      width: 56px; /* un peu plus large pour le drag confortable */
+      height: 250px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 0;
+      touch-action: none; /* important pour le drag mobile */
+    }
+
+    .mood-bar {
+      width: 12px;
+      height: 210px;
+      border-radius: 999px;
+      background: linear-gradient(to top,
+        #4cc38a 0%,
+        #8fd66a 20%,
+        #ffd666 45%,
+        #f7b955 65%,
+        #ff7a5c 85%,
+        #e96f6f 100%);
+      box-shadow:
+        0 0 14px rgba(233, 111, 111, 0.25),
+        0 0 0 1px rgba(16, 32, 24, 0.05);
+      position: relative;
+      cursor: pointer;
+    }
+
+    .mood-bar::after{
+      content:"";
+      position:absolute;
+      left: 2px;
+      top: 6px;
+      width: 3px;
+      height: calc(100% - 12px);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.28);
+      opacity: 0.8;
+      pointer-events:none;
+    }
+
+    .mood-handle {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #ffffff 0%, #eef7f2 45%, #dff2e9 100%);
+      box-shadow:
+        0 10px 18px rgba(24, 48, 32, 0.16),
+        0 0 0 2px var(--handle-ring);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent-soft);
+      border: 1px solid rgba(120,164,143,0.25);
+      pointer-events: none;
+      transition: box-shadow .16s ease;
+    }
+
+    .mood-value {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+      text-align: center;
+    }
+
+    /* Bloc missions en bas */
+    .missions {
+      margin-top: 14px;
+      background: var(--bg-card);
+      border-radius: 18px;
+      padding: 12px 14px 10px;
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-soft);
+      flex-shrink: 0;
+    }
+
+    .missions-title {
+      font-size: 13px;
+      font-weight: 650;
+      margin-bottom: 6px;
+      color: var(--text-main);
+    }
+
+    .missions-subtitle {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .missions-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      max-height: 185px;
+      overflow: auto;
+      padding-right: 4px;
+    }
+
+    .missions-list::-webkit-scrollbar { width: 4px; }
+    .missions-list::-webkit-scrollbar-thumb { background: rgba(120,164,143,0.35); border-radius: 999px; }
+    .missions-list::-webkit-scrollbar-track { background: transparent; }
+
+    .mission-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--text-main);
+      padding: 6px 8px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.15s ease, transform 0.1s ease;
+      border: 1px solid rgba(120,164,143,0.22);
+      background: rgba(238, 247, 242, 0.55);
+    }
+
+    .mission-item:hover {
+      background: rgba(76, 195, 138, 0.12);
+      transform: translateY(-1px);
+    }
+
+    .mission-checkbox {
+      width: 16px;
+      height: 16px;
+      border-radius: 999px;
+      border: 2px solid rgba(42, 143, 104, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background: transparent;
+    }
+
+    .mission-item.done .mission-checkbox {
+      background: var(--accent);
+      border-color: var(--accent);
+      box-shadow: 0 0 10px rgba(76, 195, 138, 0.45);
+    }
+
+    .mission-check-icon {
+      font-size: 11px;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: opacity 0.12s ease, transform 0.12s ease;
+      color: #ffffff;
+    }
+
+    .mission-item.done .mission-check-icon {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .mission-text { flex: 1; }
+
+    .mission-item.done .mission-text {
+      text-decoration: line-through;
+      opacity: 0.65;
+    }
+
+    .footer {
+      margin-top: 8px;
+      font-size: 11px;
+      display: flex;
+      justify-content: space-between;
+      color: var(--text-muted);
+      opacity: 0.95;
+      flex-shrink: 0;
+    }
+
+    .footer strong {
+      color: var(--text-main);
+      font-weight: 650;
+    }
+
+    .lang-note {
+      margin-top: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--text-muted);
+      justify-content: center;
+      width: 100%;
+    }
+
+    @media (max-width: 420px){
+      .phone{ width: min(390px, 96vw); }
+    }
+  </style>
+</head>
+<body>
+  <div class="global-nav">
+    <a class="nav-logo" href="index.html" aria-label="HAVRE"></a>
+    <a href="index.html">Concept HAVRE</a>
+    <a href="mascotte-enfant.html">App enfant</a>
+    <a href="ecran -enfant.html" class="active">Écran enfant</a>
+    <a href="havre-parent-mockups.html">App parent</a>
+    <a href="mascotte-parents.html">Mascotte (parents)</a>
+    <a href="havrepro.html">HAVRE Pro / TES</a>
+    <a href="securite.html">Sécurité</a>
+  </div>
+
+  <div class="phone">
+    <div class="notch"></div>
+
+    <header class="header">
+      <div class="logo">
+        <div class="logo-symbol"></div>
+        <div class="logo-text">HAVRE</div>
+      </div>
+      <div class="header-time">18:42</div>
+    </header>
+
+    <div class="screen-title">Comment tu te sens aujourd'hui ?</div>
+    <div class="screen-subtitle">Tu peux cliquer ou glisser la barre pour montrer ton ressenti.</div>
+
+    <main class="main">
+      <!-- Carte texte + avatar -->
+      <section class="card">
+        <div class="child-info">
+          <div class="avatar-wrap">
+            <div class="avatar-halo"></div>
+            <div class="avatar" aria-label="Mascotte HAVRE">
+              🦊
+              <span class="eye left"></span>
+              <span class="eye right"></span>
+              <span class="cheek left"></span>
+              <span class="cheek right"></span>
+            </div>
+          </div>
+
+          <div class="child-meta">
+            <h2>Ton espace d'émotion</h2>
+            <p>Ce n’est pas noté. Tu peux juste dire comment tu te sens.</p>
+            <div class="status-pill" aria-live="polite">
+              <span class="status-dot"></span>
+              <span id="pill-text">Ça va, je me sens bien</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mood-text">
+          Là, tu es plutôt : <span id="mood-word">tranquille</span>.
+          <br>
+          Si ça change, tu peux ajuster la barre. Même un tout petit peu.
+        </div>
+
+        <div class="helper-card" id="helperCard">
+          <strong>Astuce :</strong> si tu es “trop plein”, on peut essayer une mini pause,
+          un verre d’eau, ou 10 respirations.
+        </div>
+
+      </section>
+
+      <!-- Barre verticale -->
+      <aside class="mood-column">
+        <div class="mood-label-top">Trop plein</div>
+
+        <div class="mood-bar-wrapper" id="moodWrapper">
+          <div
+            class="mood-bar"
+            id="moodBar"
+            role="slider"
+            aria-label="Jauge de ressenti"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="35"
+            tabindex="0"
+          ></div>
+
+          <div class="mood-handle" id="moodHandle">35%</div>
+        </div>
+
+        <div class="mood-label-bottom">Calme</div>
+        <div class="mood-value" id="moodValue">Ressenti actuel : 35%</div>
+      </aside>
+    </main>
+
+    <!-- Missions du jour -->
+  <section class="missions">
+    <div class="missions-title">Tes missions du moment</div>
+    <div class="missions-subtitle">Tu peux en faire quelques-unes. Tu coches quand c’est fait.</div>
+
+      <div class="missions-list">
+        <div class="mission-item" data-id="1">
+          <div class="mission-checkbox"><span class="mission-check-icon">✔</span></div>
+          <div class="mission-text">Boire un grand verre d’eau</div>
+        </div>
+
+        <div class="mission-item" data-id="2">
+          <div class="mission-checkbox"><span class="mission-check-icon">✔</span></div>
+          <div class="mission-text">Faire 10 respirations calmes</div>
+        </div>
+
+        <div class="mission-item" data-id="3">
+          <div class="mission-checkbox"><span class="mission-check-icon">✔</span></div>
+          <div class="mission-text">Ranger un petit coin (2 minutes)</div>
+        </div>
+
+        <div class="mission-item" data-id="4">
+          <div class="mission-checkbox"><span class="mission-check-icon">✔</span></div>
+          <div class="mission-text">Mettre ton linge sale au bon endroit</div>
+        </div>
+
+        <div class="mission-item" data-id="5">
+          <div class="mission-checkbox"><span class="mission-check-icon">✔</span></div>
+          <div class="mission-text">Préparer ton sac pour demain</div>
+        </div>
+
+        <div class="mission-item" data-id="6">
+          <div class="mission-checkbox"><span class="mission-check-icon">✔</span></div>
+          <div class="mission-text">Faire une mini pause sans écran (5 minutes)</div>
+        </div>
+
+        <div class="mission-item" data-id="7">
+          <div class="mission-checkbox"><span class="mission-check-icon">✔</span></div>
+          <div class="mission-text">Dire 1 chose qui s’est bien passée aujourd’hui</div>
+        </div>
+
+        <div class="mission-item" data-id="8">
+          <div class="mission-checkbox"><span class="mission-check-icon">✔</span></div>
+          <div class="mission-text">Choisir une activité calme (dessin, lego, lecture)</div>
+        </div>
+
+        <div class="mission-item" data-id="9">
+          <div class="mission-checkbox"><span class="mission-check-icon">✔</span></div>
+          <div class="mission-text">Faire un petit morceau de devoirs (10 minutes)</div>
+        </div>
+
+        <div class="mission-item" data-id="10">
+          <div class="mission-checkbox"><span class="mission-check-icon">✔</span></div>
+          <div class="mission-text">Préparer tes vêtements pour demain</div>
+        </div>
+      </div>
+    </section>
+
+  <footer class="footer">
+    <div><strong>Info</strong> : exemple de test HAVRE.</div>
+    <div>Rien n’est enregistré ici.</div>
+  </footer>
+  <div class="lang-note">🇬🇧 English translation coming soon.</div>
+</div>
+
+  <script>
+    const bar = document.getElementById('moodBar');
+    const wrapper = document.getElementById('moodWrapper');
+    const handle = document.getElementById('moodHandle');
+    const moodValue = document.getElementById('moodValue');
+    const moodWord = document.getElementById('mood-word');
+    const pillText = document.getElementById('pill-text');
+    const helperCard = document.getElementById('helperCard');
+
+    // 0 = calme / 1 = trop plein
+    let level = 0.35;
+
+    // 15 ressentis (0 → 100)
+    const phrases = [
+      { max: 6,   word: "super zen",              pill: "Je suis vraiment calme",         tip: "Top. Profite d’un moment doux. Tu peux juste continuer ta journée tranquillement." },
+      { max: 13,  word: "tranquille",             pill: "Ça va, je me sens bien",         tip: "Nickel. Si tu veux, choisis une petite mission facile pour te sentir fier." },
+      { max: 20,  word: "bien dans ma tête",      pill: "Ça roule",                       tip: "Tu es bien. Garde ce rythme : un petit verre d’eau et c’est parfait." },
+      { max: 27,  word: "un peu agité",           pill: "Ça bouge un peu",                tip: "Ça bouge un peu. On peut faire 5 respirations ou une mini pause debout." },
+      { max: 33,  word: "un peu tendu",           pill: "Je commence à stresser",         tip: "Ok. On ralentit : 10 secondes, on souffle, et on fait une petite chose simple." },
+      { max: 40,  word: "bof / pas top",          pill: "Je suis moyen",                  tip: "Tu es moyen. C’est ok. Dis-toi : une mini action = déjà une victoire." },
+      { max: 46,  word: "stressé",                pill: "J’ai la boule au ventre",        tip: "Respire doucement. Si tu peux : eau, pause, puis une mission très facile." },
+      { max: 53,  word: "sur les nerfs",          pill: "Ça m’énerve vite",               tip: "Quand ça énerve : pause de 1 minute. On relâche les épaules et on souffle." },
+      { max: 60,  word: "trop de choses en tête", pill: "Je me sens chargé",              tip: "Tu es chargé. On fait plus petit : une seule chose à la fois, pas tout d’un coup." },
+      { max: 66,  word: "au bord des larmes",     pill: "J’ai envie de pleurer",          tip: "Tu as le droit. On cherche un endroit calme et on fait 10 respirations lentes." },
+      { max: 73,  word: "ça déborde",             pill: "J’ai besoin d’aide",             tip: "Tu as besoin d’aide. Essaye : “Je peux avoir un câlin / une pause / un moment calme ?”" },
+      { max: 80,  word: "cocotte-minute",         pill: "J’ai besoin de souffler",        tip: "On stoppe. Eau + pause. Si tu peux : se poser 2 minutes sans parler." },
+      { max: 86,  word: "je sature",              pill: "Stop… c’est trop",               tip: "C’est trop. On fait une pause maintenant. Tu n’as pas à tout gérer tout seul." },
+      { max: 93,  word: "au bord d’exploser",     pill: "Je suis vraiment trop plein",    tip: "On se met en sécurité émotionnelle : calme, respiration, et demander un adulte." },
+      { max: 100, word: "tempête dans ma tête",   pill: "Je suis en grosse crise",        tip: "Là c’est tempête. Tu peux demander tout de suite : “J’ai besoin d’aide maintenant.”" },
+    ];
+
+    function pickPhrase(percent){
+      return phrases.find(p => percent <= p.max) || phrases[phrases.length - 1];
+    }
+
+    function setStatusTheme(percent){
+      // Thème doux (calme → warning → danger), toujours HAVRE
+      if (percent < 35){
+        document.documentElement.style.setProperty('--status-color', 'var(--accent-soft)');
+        document.documentElement.style.setProperty('--status-bg', 'rgba(76,195,138,0.14)');
+        document.documentElement.style.setProperty('--status-border', 'rgba(76,195,138,0.35)');
+        document.documentElement.style.setProperty('--status-dot', 'var(--accent)');
+        document.documentElement.style.setProperty('--status-dot-glow', 'rgba(76,195,138,0.55)');
+        document.documentElement.style.setProperty('--handle-ring', 'rgba(42,143,104,0.35)');
+      } else if (percent < 70){
+        document.documentElement.style.setProperty('--status-color', '#7a5a1a');
+        document.documentElement.style.setProperty('--status-bg', 'rgba(247,185,85,0.16)');
+        document.documentElement.style.setProperty('--status-border', 'rgba(247,185,85,0.45)');
+        document.documentElement.style.setProperty('--status-dot', '#f7b955');
+        document.documentElement.style.setProperty('--status-dot-glow', 'rgba(247,185,85,0.55)');
+        document.documentElement.style.setProperty('--handle-ring', 'rgba(247,185,85,0.45)');
+      } else {
+        document.documentElement.style.setProperty('--status-color', '#8a2f2f');
+        document.documentElement.style.setProperty('--status-bg', 'rgba(239,106,106,0.14)');
+        document.documentElement.style.setProperty('--status-border', 'rgba(239,106,106,0.45)');
+        document.documentElement.style.setProperty('--status-dot', '#ef6a6a');
+        document.documentElement.style.setProperty('--status-dot-glow', 'rgba(239,106,106,0.55)');
+        document.documentElement.style.setProperty('--handle-ring', 'rgba(239,106,106,0.45)');
+      }
+    }
+
+    function clamp(n, min, max){ return Math.min(max, Math.max(min, n)); }
+
+    function percentFromEvent(clientY){
+      const rect = bar.getBoundingClientRect();
+      const y = clamp(clientY - rect.top, 0, rect.height);
+      // y=0 haut -> 100%, y=bas -> 0%
+      const p = 100 - (y / rect.height * 100);
+      return clamp(p, 0, 100);
+    }
+
+    function setLevelFromPercent(percent){
+      level = percent / 100;
+
+      // position handle (sur wrapper, aligné avec la barre)
+      const barRect = bar.getBoundingClientRect();
+      const wrapRect = wrapper.getBoundingClientRect();
+
+      const yInsideBar = (1 - level) * barRect.height; // 0 en bas, 100 en haut
+      const topInWrapper = (barRect.top - wrapRect.top) + yInsideBar;
+
+      handle.style.top = topInWrapper + 'px';
+
+      handle.textContent = Math.round(percent) + '%';
+      moodValue.textContent = 'Ressenti actuel : ' + Math.round(percent) + '%';
+      bar.setAttribute('aria-valuenow', String(Math.round(percent)));
+
+      const p = pickPhrase(percent);
+      moodWord.textContent = p.word;
+      pillText.textContent = p.pill;
+      helperCard.innerHTML = '<strong>Astuce :</strong> ' + p.tip;
+
+      setStatusTheme(percent);
+    }
+
+    // Init
+    setLevelFromPercent(35);
+
+    // CLIC
+    bar.addEventListener('click', (e) => {
+      const p = percentFromEvent(e.clientY);
+      setLevelFromPercent(p);
+    });
+
+    // DRAG (Pointer Events)
+    let dragging = false;
+
+    function onPointerMove(e){
+      if (!dragging) return;
+      const p = percentFromEvent(e.clientY);
+      setLevelFromPercent(p);
+    }
+
+    wrapper.addEventListener('pointerdown', (e) => {
+      // On commence drag si on clique dans la zone (bar + autour)
+      dragging = true;
+      wrapper.setPointerCapture(e.pointerId);
+
+      // Si le down est en dehors de la barre, on ramène sur le centre de la barre
+      const p = percentFromEvent(e.clientY);
+      setLevelFromPercent(p);
+    });
+
+    wrapper.addEventListener('pointermove', onPointerMove);
+
+    wrapper.addEventListener('pointerup', (e) => {
+      dragging = false;
+      try { wrapper.releasePointerCapture(e.pointerId); } catch(_) {}
+    });
+
+    wrapper.addEventListener('pointercancel', () => {
+      dragging = false;
+    });
+
+    // CLAVIER (↑ ↓)
+    bar.addEventListener('keydown', (e) => {
+      const current = Number(bar.getAttribute('aria-valuenow') || 35);
+      if (e.key === 'ArrowUp' || e.key === 'ArrowRight'){
+        e.preventDefault();
+        setLevelFromPercent(clamp(current + 3, 0, 100));
+      }
+      if (e.key === 'ArrowDown' || e.key === 'ArrowLeft'){
+        e.preventDefault();
+        setLevelFromPercent(clamp(current - 3, 0, 100));
+      }
+      if (e.key === 'Home'){
+        e.preventDefault();
+        setLevelFromPercent(0);
+      }
+      if (e.key === 'End'){
+        e.preventDefault();
+        setLevelFromPercent(100);
+      }
+    });
+
+    // Missions cochées
+    document.querySelectorAll('.mission-item').forEach(item => {
+      item.addEventListener('click', () => item.classList.toggle('done'));
+    });
+  </script>
+</body>
+</html>

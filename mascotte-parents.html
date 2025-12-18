@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>HAVRE – Les mascottes émotionnelles</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      /* Fond global (papier) */
+      --bg-main: #f6f4ee;
+      --bg-card: #ffffff;
+      --bg-soft: #eef7f2;
+
+      /* Accents HAVRE */
+      --accent: #4cc38a;       /* Vert principal */
+      --accent-alt: #3ba7c9;   /* Bleu-vert */
+
+      /* Texte */
+      --text-main: #102018;
+      --text-muted: #5f7b6d;
+
+      /* Bordures / ombres */
+      --border-soft: rgba(120, 164, 143, 0.45);
+      --radius-xl: 18px;
+      --shadow-soft: 0 24px 50px rgba(24, 48, 32, 0.18);
+      --max-width: 980px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      background: radial-gradient(circle at top, #faf8f3 0, var(--bg-main) 55%, #f1eee7 100%);
+      color: var(--text-main);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+    }
+
+    body { min-height: 100vh; padding: 24px 12px 40px; }
+
+    .page { max-width: var(--max-width); margin: 0 auto; }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .brand { display: flex; align-items: center; gap: 10px; }
+
+    /* ✅ Logo officiel */
+    .brand-logo {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      background: url("assets/img/logo-havre.png") center/cover no-repeat;
+      box-shadow: 0 10px 18px rgba(24, 48, 32, 0.18);
+      flex-shrink: 0;
+    }
+
+    .brand-text { display: flex; flex-direction: column; gap: 2px; }
+
+    .brand-name { font-size: 14px; font-weight: 700; letter-spacing: 0.08em; }
+
+    .brand-sub { font-size: 11px; color: var(--text-muted); }
+
+    .header-note {
+      font-size: 11px;
+      color: var(--text-muted);
+      max-width: 260px;
+      text-align: right;
+    }
+
+    @media (max-width: 720px) {
+      header { flex-direction: column; align-items: flex-start; }
+      .header-note { text-align: left; }
+    }
+
+    .global-nav {
+      max-width: var(--max-width);
+      margin: 0 auto 18px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .nav-logo {
+      width: 22px;
+      height: 22px;
+      border-radius: 7px;
+      background: url("assets/img/logo-havre.png") center/cover no-repeat;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 8px 16px rgba(24, 48, 32, 0.14);
+      display: inline-block;
+      flex-shrink: 0;
+      padding: 0;
+      line-height: 0;
+    }
+
+    .global-nav a:not(.nav-logo) {
+      font-size: 12px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      color: var(--text-muted);
+      border: 1px solid transparent;
+      transition: background 0.2s ease, color 0.2s ease, border 0.2s ease;
+      text-decoration: none;
+    }
+
+    .global-nav a:not(.nav-logo).active,
+    .global-nav a:not(.nav-logo):hover {
+      background: linear-gradient(120deg, var(--accent), var(--accent-alt));
+      color: #ffffff;
+      border-color: transparent;
+    }
+
+    .lang-note {
+      margin-top: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--text-muted);
+      justify-content: center;
+      width: 100%;
+    }
+
+    .hero {
+      padding: 16px 14px 14px;
+      border-radius: 22px;
+      background: radial-gradient(circle at top left, rgba(59,167,201,0.18), transparent 55%),
+                  radial-gradient(circle at bottom right, rgba(76,195,138,0.16), transparent 55%),
+                  linear-gradient(to bottom right, #ffffff, #ffffff);
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 24px;
+    }
+
+    .hero-title {
+      font-size: 22px;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+
+    .hero-title span {
+      background: linear-gradient(135deg, var(--accent), var(--accent-alt));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-text { font-size: 13px; color: var(--text-muted); max-width: 640px; }
+
+    .hero-tags {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 11px;
+    }
+
+    .tag-pill {
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--text-muted);
+    }
+
+    /* Grid des mascottes */
+    .mascot-grid {
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .mascot-card {
+      border-radius: 18px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      padding: 12px 11px 13px;
+      box-shadow: 0 16px 35px rgba(24, 48, 32, 0.12);
+      font-size: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .mascot-header { display: flex; align-items: center; gap: 8px; }
+
+    .mascot-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: 0 10px 22px rgba(24, 48, 32, 0.14);
+      flex-shrink: 0;
+      background: rgba(76,195,138,0.12);
+      border: 1px solid rgba(120,164,143,0.35);
+    }
+
+    /* petits fonds différents (optionnel, même layout) */
+    .avatar-pixel { background: radial-gradient(circle at 20% 0%, rgba(59,167,201,0.35), rgba(59,167,201,0.10)); }
+    .avatar-lya   { background: radial-gradient(circle at 20% 0%, rgba(76,195,138,0.35), rgba(76,195,138,0.10)); }
+    .avatar-melo  { background: radial-gradient(circle at 20% 0%, rgba(59,167,201,0.28), rgba(76,195,138,0.10)); }
+    .avatar-bolt  { background: radial-gradient(circle at 20% 0%, rgba(76,195,138,0.28), rgba(59,167,201,0.12)); }
+    .avatar-nova  { background: radial-gradient(circle at 20% 0%, rgba(95,123,109,0.22), rgba(95,123,109,0.08)); }
+
+    .mascot-info { display: flex; flex-direction: column; gap: 2px; }
+
+    .mascot-name { font-size: 13px; font-weight: 600; }
+
+    .mascot-tagline { font-size: 11px; color: var(--text-muted); }
+
+    .mascot-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 3px;
+      font-size: 10px;
+    }
+
+    .badge {
+      padding: 2px 6px;
+      border-radius: 999px;
+      border: 1px solid rgba(120,164,143,0.55);
+      color: var(--text-muted);
+      background: rgba(238,247,242,0.65);
+    }
+
+    .badge-gamer   { border-color: rgba(59,167,201,0.75); color: #1e6f86; }
+    .badge-nature  { border-color: rgba(76,195,138,0.75); color: #1f6d4f; }
+    .badge-music   { border-color: rgba(59,167,201,0.60); color: #2a6f86; }
+    .badge-sport   { border-color: rgba(76,195,138,0.60); color: #2a6d52; }
+    .badge-neutral { border-color: rgba(120,164,143,0.65); color: #3c5a4d; }
+
+    .mascot-body { margin-top: 4px; font-size: 12px; color: var(--text-muted); }
+    .mascot-body p + p { margin-top: 4px; }
+
+    .mascot-footer {
+      margin-top: 6px;
+      font-size: 11px;
+      color: var(--text-muted);
+      border-top: 1px dashed rgba(120, 164, 143, 0.55);
+      padding-top: 4px;
+    }
+
+    .section-title {
+      margin-top: 28px;
+      font-size: 16px;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+
+    .section-text { font-size: 13px; color: var(--text-muted); max-width: 720px; }
+
+    .tips-grid {
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 14px;
+    }
+
+    .tip-card {
+      border-radius: 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      padding: 10px 11px;
+      font-size: 12px;
+      color: var(--text-muted);
+      box-shadow: 0 14px 26px rgba(24, 48, 32, 0.10);
+    }
+
+    .tip-title { font-size: 12px; font-weight: 600; margin-bottom: 4px; color: var(--text-main); }
+
+    footer {
+      margin-top: 24px;
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: center;
+      opacity: 0.9;
+    }
+  </style>
+</head>
+
+<body>
+<div class="global-nav">
+  <a class="nav-logo" href="index.html" aria-label="HAVRE"></a>
+  <a href="index.html">Concept HAVRE</a>
+  <a href="mascotte-enfant.html">App enfant</a>
+  <a href="ecran -enfant.html">Écran enfant</a>
+  <a href="havre-parent-mockups.html">App parent</a>
+  <a href="mascotte-parents.html" class="active">Mascotte (parents)</a>
+  <a href="havrepro.html">HAVRE Pro / TES</a>
+  <a href="securite.html">Sécurité</a>
+</div>
+
+<div class="lang-note">🇬🇧 English translation coming soon.</div>
+
+<div class="page">
+  <header>
+    <div class="brand">
+      <div class="brand-logo"></div>
+      <div class="brand-text">
+        <div class="brand-name">HAVRE</div>
+        <div class="brand-sub">App de soutien émotionnel pour enfants</div>
+      </div>
+    </div>
+    <div class="header-note">
+      Les mascottes ne remplacent pas un suivi professionnel.<br />
+      Elles offrent à votre enfant un compagnon stable pour parler de ce qu’il ressent.
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1 class="hero-title">
+      Les mascottes HAVRE : <span>des compagnons émotionnels sur mesure</span>.
+    </h1>
+    <p class="hero-text">
+      Les enfants n’ont pas tous le même univers. Certains se projettent dans le jeu vidéo,
+      d’autres dans la nature, la musique ou le sport. Les mascottes HAVRE sont conçues pour
+      s’adapter à ces univers, afin que votre enfant se sente moins seul et plus compris
+      quand il exprime ce qu’il vit.
+    </p>
+    <div class="hero-tags">
+      <div class="tag-pill">🧠 Outils de projection émotionnelle</div>
+      <div class="tag-pill">🎨 Univers choisis par l’enfant</div>
+      <div class="tag-pill">🧸 Présence rassurante, non jugeante</div>
+    </div>
+  </section>
+
+  <!-- Grid des mascottes -->
+  <section>
+    <div class="mascot-grid">
+      <!-- Pixel -->
+      <article class="mascot-card">
+        <div class="mascot-header">
+          <div class="mascot-avatar avatar-pixel">🎮</div>
+          <div class="mascot-info">
+            <div class="mascot-name">Pixel</div>
+            <div class="mascot-tagline">“On passe au niveau suivant, ensemble.”</div>
+            <div class="mascot-badges">
+              <span class="badge badge-gamer">Univers gamer</span>
+              <span class="badge">Missions, niveaux, progression</span>
+            </div>
+          </div>
+        </div>
+        <div class="mascot-body">
+          <p>
+            Pixel est pensé pour les enfants qui aiment les jeux vidéo et comprennent bien les
+            métaphores de “missions” et “niveaux”. Avec lui, la journée devient une partie à jouer :
+            on avance étape par étape, sans obligation de “tout réussir”.
+          </p>
+          <p>
+            Psychologiquement, Pixel aide à transformer certaines situations anxiogènes
+            en “challenges” plus maîtrisables, tout en gardant un ton doux et non compétitif.
+          </p>
+        </div>
+        <div class="mascot-footer">
+          Idéal si votre enfant : parle souvent en termes de jeu, de niveaux, de “quêtes” et
+          aime voir sa progression visuellement.
+        </div>
+      </article>
+
+      <!-- Lya -->
+      <article class="mascot-card">
+        <div class="mascot-header">
+          <div class="mascot-avatar avatar-lya">🌿</div>
+          <div class="mascot-info">
+            <div class="mascot-name">Lya</div>
+            <div class="mascot-tagline">“Respire, je suis là.”</div>
+            <div class="mascot-badges">
+              <span class="badge badge-nature">Univers nature</span>
+              <span class="badge">Calme & ancrage</span>
+            </div>
+          </div>
+        </div>
+        <div class="mascot-body">
+          <p>
+            Lya est un petit esprit de la forêt, très doux. Elle convient bien aux enfants
+            sensibles aux sons, aux lumières, aux stimulations, et qui cherchent un repère
+            visuel apaisant.
+          </p>
+          <p>
+            Elle invite à ralentir, respirer, se reconnecter à des images de calme. Sa manière
+            de parler est très simple, sans performance, centrée sur la sécurité.
+          </p>
+        </div>
+        <div class="mascot-footer">
+          Idéale pour les profils très anxieux, hypersensibles, ou ceux qui se ressourcent
+          à l’extérieur, dans la nature ou avec les animaux.
+        </div>
+      </article>
+
+      <!-- Melo -->
+      <article class="mascot-card">
+        <div class="mascot-header">
+          <div class="mascot-avatar avatar-melo">🎵</div>
+          <div class="mascot-info">
+            <div class="mascot-name">Melo</div>
+            <div class="mascot-tagline">“On reste dans le bon rythme.”</div>
+            <div class="mascot-badges">
+              <span class="badge badge-music">Univers musique</span>
+              <span class="badge">Rythme & fluidité</span>
+            </div>
+          </div>
+        </div>
+        <div class="mascot-body">
+          <p>
+            Melo parle en images musicales : tempo, rythme, crescendo, retour au calme.
+            Elle peut être très aidante pour les enfants qui se régulent en écoutant de la
+            musique ou en chantant.
+          </p>
+          <p>
+            L’objectif n’est pas d’ajouter des sons partout, mais d’offrir un langage
+            alternatif : “Aujourd’hui, tout va très vite, on ralentit un peu le morceau”.
+          </p>
+        </div>
+        <div class="mascot-footer">
+          Intéressante si votre enfant adore la musique, fredonne souvent, ou se calme plus
+          facilement en ayant un fond sonore doux.
+        </div>
+      </article>
+
+      <!-- Bolt -->
+      <article class="mascot-card">
+        <div class="mascot-header">
+          <div class="mascot-avatar avatar-bolt">⚡</div>
+          <div class="mascot-info">
+            <div class="mascot-name">Bolt</div>
+            <div class="mascot-tagline">“Tu gères ça comme un champion.”</div>
+            <div class="mascot-badges">
+              <span class="badge badge-sport">Univers sport</span>
+              <span class="badge">Énergie & valorisation</span>
+            </div>
+          </div>
+        </div>
+        <div class="mascot-body">
+          <p>
+            Bolt convient aux enfants très physiques, qui vivent les émotions dans le corps :
+            agitation, besoin de bouger, tensions musculaires, impulsivité.
+          </p>
+          <p>
+            Il ne pousse pas à la performance, mais valorise l’effort : “Tu as fait une
+            grosse journée, ton corps a travaillé fort, on l’aide à se reposer”.
+          </p>
+        </div>
+        <div class="mascot-footer">
+          Pertinent si votre enfant est passionné de sport, ou s’il a du mal à rester assis
+          et a besoin qu’on reconnaisse son énergie sans le dévaloriser.
+        </div>
+      </article>
+
+      <!-- Nova -->
+      <article class="mascot-card">
+        <div class="mascot-header">
+          <div class="mascot-avatar avatar-nova">⭐</div>
+          <div class="mascot-info">
+            <div class="mascot-name">Nova</div>
+            <div class="mascot-tagline">“On avance doucement, à ton rythme.”</div>
+            <div class="mascot-badges">
+              <span class="badge badge-neutral">Univers neutre</span>
+              <span class="badge">Rassurant & flexible</span>
+            </div>
+          </div>
+        </div>
+        <div class="mascot-body">
+          <p>
+            Nova est volontairement neutre : une petite étoile, simple, chaleureuse,
+            qui ne renvoie à aucun univers précis. Elle s’adapte bien aux enfants qui
+            ne savent pas trop ce qu’ils aiment, ou qui changent souvent.
+          </p>
+          <p>
+            C’est un bon point de départ dans les périodes où tout est déjà très chargé
+            pour l’enfant et qu’on veut éviter de lui en imposer encore plus.
+          </p>
+        </div>
+        <div class="mascot-footer">
+          Option à privilégier si votre enfant ne se reconnaît pas dans un thème précis,
+          ou si vous voulez commencer par quelque chose de très doux et neutre.
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Conseils pour les parents -->
+  <section>
+    <h2 class="section-title">Comment choisir (et utiliser) une mascotte avec votre enfant ?</h2>
+    <p class="section-text">
+      Le choix de la mascotte peut devenir un moment de discussion précieuse entre vous et votre enfant.
+      Il n’y a pas de “bonne” ou “mauvaise” mascotte : seulement celle qui, pour l’instant, lui parle le plus.
+    </p>
+
+    <div class="tips-grid">
+      <div class="tip-card">
+        <div class="tip-title">1. Laisser l’enfant choisir</div>
+        <p>
+          Vous pouvez lui montrer les différentes mascottes et lui demander :
+          “Laquelle te ressemble le plus en ce moment ?” ou “Avec qui tu aimerais passer ta journée ?”.
+        </p>
+      </div>
+
+      <div class="tip-card">
+        <div class="tip-title">2. Aucun choix n’est définitif</div>
+        <p>
+          L’enfant peut changer de mascotte plus tard. Cela évite que le choix devienne
+          une source d’angoisse ou de perfectionnisme. Ce n’est pas un test, c’est un compagnon.
+        </p>
+      </div>
+
+      <div class="tip-card">
+        <div class="tip-title">3. Utiliser la mascotte pour parler d’émotions</div>
+        <p>
+          Vous pouvez dire : “Je vois que Pixel est souvent en orange aujourd’hui, tu crois que c’est
+          parce que l’école te stresse ?”. Cela permet à l’enfant de projeter sur la mascotte plutôt que
+          de se sentir jugé lui-même.
+        </p>
+      </div>
+
+      <div class="tip-card">
+        <div class="tip-title">4. Garder un ton non jugeant</div>
+        <p>
+          Les mascottes ne sont jamais là pour dire “tu as mal fait” mais pour valider : “C’était
+          une grosse émotion”, “Tu as fait de ton mieux”, “On réessaiera ensemble”.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    HAVRE – Concept en développement pour soutenir les enfants anxieux et leurs familles.<br />
+    Les mascottes sont des supports d’accompagnement, pas un avis médical ou un diagnostic.
+  </footer>
+</div>
+</body>
+</html>

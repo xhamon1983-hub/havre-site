@@ -1,0 +1,10 @@
+{
+  "age_6_8": [
+    { "title": "Préparer le sac", "time": "07h30 – 07h45" },
+    { "title": "Ranger la chambre", "time": "16h30 – 16h45" }
+  ],
+  "age_9_12": [
+    { "title": "Devoirs", "time": "17h00 – 17h30" },
+    { "title": "Préparer le lunch", "time": "19h00 – 19h15" }
+  ]
+}
