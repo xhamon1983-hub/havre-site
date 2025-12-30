@@ -222,6 +222,7 @@
       cursor: pointer;
       transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.08s ease;
       box-shadow: 0 10px 22px rgba(24, 48, 32, 0.10);
+      position: relative;
     }
 
     .mascot-card:hover {
@@ -232,6 +233,26 @@
     .mascot-card.selected {
       border-color: rgba(76,195,138,0.95);
       box-shadow: 0 0 0 1px rgba(76,195,138,0.55);
+    }
+
+    /* ✅ Mise en avant douce de la mascotte officielle */
+    .mascot-card.official {
+      border-color: rgba(76,195,138,0.55);
+      background:
+        radial-gradient(circle at top right, rgba(76,195,138,0.10), transparent 55%),
+        var(--bg-card);
+    }
+
+    .official-badge {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      font-size: 9px;
+      padding: 2px 7px;
+      border-radius: 999px;
+      border: 1px solid rgba(76,195,138,0.55);
+      background: rgba(238,247,242,0.85);
+      color: #1f6d4f;
     }
 
     .mascot-top { display: flex; align-items: center; gap: 8px; }
@@ -250,6 +271,7 @@
     }
 
     /* Garde tes thèmes, mais adaptés HAVRE (plus doux) */
+    .mascot-avatar.renard  { background: radial-gradient(circle at 20% 0%, rgba(76,195,138,0.34) 0, rgba(59,167,201,0.10) 60%); }
     .mascot-avatar.pixel   { background: radial-gradient(circle at 20% 0%, rgba(59,167,201,0.30) 0, rgba(59,167,201,0.10) 55%); }
     .mascot-avatar.nature  { background: radial-gradient(circle at 20% 0%, rgba(76,195,138,0.30) 0, rgba(76,195,138,0.10) 55%); }
     .mascot-avatar.music   { background: radial-gradient(circle at 20% 0%, rgba(59,167,201,0.24) 0, rgba(76,195,138,0.10) 60%); }
@@ -273,6 +295,7 @@
       background: rgba(238,247,242,0.70);
     }
 
+    .badge.theme-official{ border-color: rgba(76,195,138,0.70); color: #1f6d4f; }
     .badge.theme-gamer   { border-color: rgba(59,167,201,0.65); color: #1e6f86; }
     .badge.theme-nature  { border-color: rgba(76,195,138,0.70); color: #1f6d4f; }
     .badge.theme-music   { border-color: rgba(59,167,201,0.55); color: #2a6f86; }
@@ -377,7 +400,31 @@
 
     <!-- Grille de mascottes -->
     <div class="mascot-grid">
-      <div class="mascot-card selected">
+
+      <!-- ✅ Renardo (OFFICIEL) -->
+      <div class="mascot-card official" data-name="Renardo" data-emoji="🦊"
+           data-desc="Renardo est la mascotte HAVRE. Il est là pour t’aider à dire ce que tu ressens, sans te presser, avec douceur."
+           data-cta="Je choisis Renardo">
+        
+        <div class="mascot-top">
+          <div class="mascot-avatar renard">🦊</div>
+          <div class="mascot-info">
+            <div class="mascot-name">Renardo</div>
+            <div class="mascot-tagline">“On est une équipe. Je suis là.”</div>
+            <div class="mascot-badges">
+              <span class="badge theme-official">HAVRE</span>
+              <span class="badge">Refuge</span>
+            </div>
+          </div>
+        </div>
+        <div class="mascot-quote">
+          Renardo est ton compagnon “refuge”. Il t’aide à parler de tes émotions, même quand c’est difficile.
+        </div>
+      </div>
+
+      <div class="mascot-card selected" data-name="Pixel" data-emoji="🎮"
+           data-desc="Pixel est parfait si tu aimes les jeux vidéo et les “missions”. Il t’aide à voir ta journée comme un jeu où on avance étape par étape."
+           data-cta="Je choisis Pixel">
         <div class="mascot-top">
           <div class="mascot-avatar pixel">🎮</div>
           <div class="mascot-info">
@@ -395,7 +442,9 @@
         </div>
       </div>
 
-      <div class="mascot-card">
+      <div class="mascot-card" data-name="Lya" data-emoji="🌿"
+           data-desc="Lya t’accompagne comme un petit esprit de la forêt. Elle est idéale si tu aimes le calme, les animaux et les endroits tranquilles."
+           data-cta="Je choisis Lya">
         <div class="mascot-top">
           <div class="mascot-avatar nature">🌿</div>
           <div class="mascot-info">
@@ -413,7 +462,9 @@
         </div>
       </div>
 
-      <div class="mascot-card">
+      <div class="mascot-card" data-name="Melo" data-emoji="🎵"
+           data-desc="Melo est là si la musique t’aide à te sentir mieux. Elle te rappelle que même les journées difficiles peuvent retrouver un bon tempo."
+           data-cta="Je choisis Melo">
         <div class="mascot-top">
           <div class="mascot-avatar music">🎵</div>
           <div class="mascot-info">
@@ -431,7 +482,9 @@
         </div>
       </div>
 
-      <div class="mascot-card">
+      <div class="mascot-card" data-name="Bolt" data-emoji="⚡"
+           data-desc="Bolt t’encourage quand tu as beaucoup d’énergie ou de colère dans le corps. Il t’aide à transformer tout ça en courage."
+           data-cta="Je choisis Bolt">
         <div class="mascot-top">
           <div class="mascot-avatar sport">⚡</div>
           <div class="mascot-info">
@@ -449,7 +502,9 @@
         </div>
       </div>
 
-      <div class="mascot-card">
+      <div class="mascot-card" data-name="Nova" data-emoji="⭐"
+           data-desc="Nova est une étoile qui reste avec toi dans toutes les situations. Si tu ne sais pas encore ce que tu préfères, elle est un bon début."
+           data-cta="Je choisis Nova">
         <div class="mascot-top">
           <div class="mascot-avatar neutral">⭐</div>
           <div class="mascot-info">
@@ -467,7 +522,7 @@
         </div>
       </div>
 
-      <div class="mascot-card" style="opacity:0.45;">
+      <div class="mascot-card" style="opacity:0.45;" aria-disabled="true">
         <div class="mascot-top">
           <div class="mascot-avatar neutral">➕</div>
           <div class="mascot-info">
@@ -486,18 +541,49 @@
       </div>
     </div>
 
-    <div class="bottom-panel">
-      <div class="bottom-title">Tu as choisi : Pixel 🎮</div>
-      <p>
+    <div class="bottom-panel" id="bottomPanel">
+      <div class="bottom-title" id="bottomTitle">Tu as choisi : Pixel 🎮</div>
+      <p id="bottomText">
         Cette mascotte va t’accompagner dans tes routines et sur ta barre d’émotion.
         Si ce n’est pas le bon choix, tu peux en essayer une autre avec ton parent.
       </p>
       <div class="bottom-actions">
-        <button class="btn-primary">Je choisis Pixel</button>
-        <button class="btn-ghost">Je veux voir les autres avant</button>
+        <button class="btn-primary" id="primaryBtn">Je choisis Pixel</button>
+        <button class="btn-ghost" id="ghostBtn">Je veux voir les autres avant</button>
       </div>
     </div>
+
   </div>
 </div>
+
+<script>
+  const cards = document.querySelectorAll('.mascot-card');
+  const bottomTitle = document.getElementById('bottomTitle');
+  const bottomText  = document.getElementById('bottomText');
+  const primaryBtn  = document.getElementById('primaryBtn');
+
+  function setSelected(card) {
+    cards.forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+
+    const name = card.getAttribute('data-name') || 'Mascotte';
+    const emoji = card.getAttribute('data-emoji') || '🙂';
+    const desc = card.getAttribute('data-desc') || '';
+    const cta = card.getAttribute('data-cta') || 'Je choisis';
+
+    bottomTitle.textContent = `Tu as choisi : ${name} ${emoji}`;
+    bottomText.innerHTML =
+      `Cette mascotte va t’accompagner dans tes routines et sur ta barre d’émotion.<br>` +
+      `<span style="color: var(--text-muted);">${desc}</span>`;
+    primaryBtn.textContent = cta;
+  }
+
+  cards.forEach(card => {
+    // Ignore "Bientôt..." (pas de data-name + opacity)
+    if (card.hasAttribute('aria-disabled')) return;
+
+    card.addEventListener('click', () => setSelected(card));
+  });
+</script>
 </body>
 </html>
