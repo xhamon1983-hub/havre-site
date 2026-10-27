@@ -1,0 +1,3 @@
+# Les maquettes archivées restent consultables mais ne sont pas indexées
+/archive/*
+  X-Robots-Tag: noindex
