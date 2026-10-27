@@ -715,73 +715,6 @@ h3 {
   color: var(--green-deep);
 }
 
-/* Blocs */
-.block {
-  display: grid;
-  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-  gap: 40px;
-  align-items: start;
-}
-
-.block + .block {
-  margin-top: 56px;
-  padding-top: 56px;
-  border-top: 1px solid var(--line);
-}
-
-.block .lead {
-  font-size: 17px;
-}
-
-.points {
-  list-style: none;
-  display: grid;
-  gap: 14px;
-}
-
-.points li {
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  padding: 16px 18px;
-  color: var(--muted);
-  font-size: 16px;
-}
-
-.points b {
-  color: var(--text);
-}
-
-.mascots {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
-  margin-top: 14px;
-}
-
-.mascot {
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  padding: 14px;
-  font-size: 14px;
-  color: var(--muted);
-}
-
-.mascot b {
-  display: block;
-  color: var(--text);
-  font-size: 16px;
-}
-
-.mascot span {
-  font-size: 24px;
-}
-
-.block .btn {
-  margin-top: 18px;
-}
-
 /* Engagements */
 .promises {
   display: grid;
@@ -805,31 +738,12 @@ h3 {
   margin-bottom: 4px;
 }
 
-/* Appel final */
-.final {
-  text-align: center;
-}
-
-.final .lead {
-  margin: 12px auto 24px;
-}
-
 @media (max-width: 860px) {
   .timeline,
   .promises {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .block {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 20px;
-  }
-}
-
-@media (max-width: 480px) {
-  .mascots {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
 }
 
 /* ========== Page de remerciement ========== */
@@ -902,4 +816,545 @@ h3 {
 
 .share .btn {
   margin-top: 16px;
+}
+
+/* ========== Maquettes d’écrans de l’app (page « Le projet ») ========== */
+
+.screens {
+  display: flex;
+  gap: 28px;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.screen-item {
+  width: 270px;
+}
+
+.screen-item figcaption {
+  margin-top: 16px;
+  font-size: 15px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.screen-item figcaption b {
+  display: block;
+  color: var(--text);
+  font-size: 16px;
+}
+
+.phone {
+  width: 270px;
+  height: 560px;
+  border-radius: 42px;
+  background: #13201a;
+  padding: 10px;
+  box-shadow: 0 30px 60px rgba(16, 32, 24, 0.22);
+}
+
+.phone-screen {
+  position: relative;
+  height: 100%;
+  border-radius: 33px;
+  overflow: hidden;
+  background: #f7f5ef;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+}
+
+.phone-screen::before {
+  content: "";
+  position: absolute;
+  top: 9px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 78px;
+  height: 22px;
+  border-radius: 999px;
+  background: #13201a;
+  z-index: 2;
+}
+
+.m-status {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 22px 0;
+  font-size: 11px;
+  font-weight: 700;
+  height: 34px;
+}
+
+.m-body {
+  flex: 1;
+  padding: 10px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.m-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.m-title {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.m-sub {
+  font-size: 11.5px;
+  color: var(--muted);
+}
+
+.m-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.m-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 12px;
+}
+
+.m-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.m-btn {
+  display: block;
+  text-align: center;
+  padding: 10px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--green), var(--teal));
+  font-weight: 700;
+  font-size: 12.5px;
+}
+
+.m-btn-ghost {
+  background: #fff;
+  border: 1px solid var(--line);
+}
+
+/* Jauge enfant */
+.m-gauge-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.m-gauge {
+  position: relative;
+  width: 46px;
+  height: 196px;
+  border-radius: 999px;
+  background: linear-gradient(to top, #4cc38a 0%, #4cc38a 22%, #f6c445 38%, #f97316 66%, #ef4444 100%);
+  flex-shrink: 0;
+}
+
+.m-handle {
+  position: absolute;
+  left: -6px;
+  right: -6px;
+  height: 26px;
+  border-radius: 999px;
+  background: #fff;
+  border: 3px solid var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.m-levels {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--muted);
+  padding: 4px 0;
+}
+
+.m-levels .on {
+  color: var(--text);
+  font-weight: 800;
+}
+
+.m-bubble {
+  background: var(--bg-tint);
+  border-radius: 16px 16px 16px 4px;
+  padding: 10px 12px;
+  font-size: 12px;
+}
+
+.m-mission {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  padding: 7px 0;
+}
+
+.m-mission + .m-mission {
+  border-top: 1px solid var(--line);
+}
+
+.m-check {
+  width: 18px;
+  height: 18px;
+  border-radius: 6px;
+  border: 2px solid var(--line);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: #fff;
+}
+
+.m-check.done {
+  background: var(--green);
+  border-color: var(--green);
+}
+
+.m-mission .done-text {
+  color: var(--muted);
+  text-decoration: line-through;
+}
+
+/* Choix de la mascotte */
+.m-mascots {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.m-mascot {
+  background: #fff;
+  border: 1.5px solid var(--line);
+  border-radius: 16px;
+  padding: 10px;
+  text-align: center;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.m-mascot span {
+  display: block;
+  font-size: 28px;
+  line-height: 1.2;
+}
+
+.m-mascot b {
+  display: block;
+  color: var(--text);
+  font-size: 12.5px;
+}
+
+.m-mascot.selected {
+  border: 2.5px solid var(--green);
+  background: var(--bg-tint);
+}
+
+/* Pause respiration */
+.m-breathe {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 14px;
+}
+
+.m-circle {
+  width: 168px;
+  height: 168px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffffff 0 34%, rgba(76, 195, 138, 0.35) 35% 62%, rgba(59, 167, 201, 0.18) 63%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 46px;
+}
+
+.m-breathe .m-title {
+  font-size: 22px;
+}
+
+.m-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.m-dots i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--line);
+}
+
+.m-dots i.on {
+  background: var(--green);
+}
+
+.m-message {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 10px 12px;
+  text-align: left;
+  font-size: 12px;
+}
+
+.m-message b {
+  display: block;
+  font-size: 10.5px;
+  color: var(--muted);
+}
+
+/* Tableau parent */
+.m-now {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.m-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.m-day {
+  display: grid;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.m-day div {
+  display: grid;
+  grid-template-columns: 38px 1fr;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+}
+
+.m-day span {
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.m-day i {
+  display: block;
+  height: 22px;
+  border-radius: 8px;
+  font-style: normal;
+  font-size: 10.5px;
+  padding: 3px 8px;
+  color: var(--text);
+}
+
+.m-pattern {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  padding: 5px 0;
+}
+
+.m-pattern b {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Notification parent */
+.m-notif {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 10px 12px;
+  box-shadow: 0 8px 20px rgba(16, 32, 24, 0.12);
+  font-size: 12px;
+}
+
+.m-notif .app {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10.5px;
+  color: var(--muted);
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+
+.m-replies {
+  display: grid;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.m-reply {
+  border: 1.5px solid var(--line);
+  border-radius: 14px;
+  padding: 8px 10px;
+  font-size: 12px;
+  background: #fff;
+}
+
+.m-reply.selected {
+  border-color: var(--green);
+  background: var(--bg-tint);
+  font-weight: 600;
+}
+
+/* HAVRE Pro (écran d’ordinateur) */
+.laptop {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.laptop-screen {
+  background: #13201a;
+  border-radius: 18px 18px 0 0;
+  padding: 12px;
+}
+
+.laptop-base {
+  height: 16px;
+  background: linear-gradient(#d9e2dd, #b9c7bf);
+  border-radius: 0 0 18px 18px;
+  margin: 0 -18px;
+}
+
+.pro {
+  background: #f7f5ef;
+  border-radius: 8px;
+  padding: 18px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: 16px;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.pro-head {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pro-head b {
+  font-size: 16px;
+}
+
+.pro-key {
+  font-size: 11.5px;
+  background: var(--bg-tint);
+  color: var(--green-deep);
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-weight: 700;
+}
+
+.pro-chart svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.pro-side {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+}
+
+.pro-side .m-card p {
+  margin-top: 4px;
+  font-size: 12.5px;
+}
+
+.pro-note {
+  font-size: 12px;
+  color: var(--muted);
+  border-left: 3px solid var(--green);
+  padding-left: 8px;
+  margin-top: 6px;
+}
+
+/* Comment on construit / participer */
+.ways {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.way {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.way p {
+  flex: 1;
+}
+
+.way .btn {
+  margin-top: 12px;
+  align-self: flex-start;
+}
+
+.timeline a {
+  color: var(--green-deep);
+  font-weight: 600;
+}
+
+@media (max-width: 860px) {
+  .screens {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 6px 20px 24px;
+    margin: 0 -20px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .screen-item {
+    flex-shrink: 0;
+    scroll-snap-align: center;
+  }
+
+  .pro {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ways {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }

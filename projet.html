@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <title>Le projet HAVRE – l’app d’ancrage émotionnel en préparation</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Où va HAVRE : une app enfant, une app parent et un outil pour les professionnels, construits à partir des retours des familles qui testent le kit." />
+  <meta name="description" content="Découvrez les écrans de l’app HAVRE : une jauge pour l’enfant, un tableau de bord pour le parent et un outil pour les professionnels, construits avec les familles." />
   <meta property="og:title" content="Le projet HAVRE" />
-  <meta property="og:description" content="Une app enfant, une app parent et un outil pour les professionnels, construits avec les familles." />
+  <meta property="og:description" content="Une app pour l’enfant, une app pour le parent et un outil pour les professionnels, construits avec les familles." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://havre-site.netlify.app/projet.html" />
   <meta property="og:image" content="https://havre-site.netlify.app/assets/kit/kit-partage.jpg" />
@@ -30,12 +30,16 @@
     <section class="page-hero">
       <div class="wrap">
         <span class="eyebrow">Le projet HAVRE</span>
-        <h1>Le kit est la première étape.</h1>
+        <h1>Le kit est la première étape. Voici la suite.</h1>
         <p class="lead">
-          À terme, HAVRE sera une app pour l’enfant, une app pour le parent et un outil pour les
-          professionnels qui les accompagnent. Nous la construirons à partir de ce que les familles
-          nous apprennent avec le kit.
+          HAVRE sera une app pour l’enfant, une app pour le parent et un outil pour les professionnels
+          qui les accompagnent. Les écrans ci-dessous sont nos maquettes : la version finale sera
+          construite à partir de ce que les familles nous apprennent avec le kit.
         </p>
+        <div class="hero-actions">
+          <a class="btn" href="#enfant">Voir les écrans</a>
+          <a class="btn btn-quiet" href="#participer">Participer au projet</a>
+        </div>
       </div>
     </section>
 
@@ -43,75 +47,243 @@
     <section>
       <div class="wrap">
         <ol class="timeline">
-          <li><span class="status">Fait</span><b>Les maquettes</b>Les premiers écrans de l’app enfant et de l’app parent.</li>
+          <li><span class="status">Fait</span><b>Les maquettes</b>Les écrans de l’app enfant, de l’app parent et de HAVRE Pro. <a href="#enfant">Les voir</a></li>
           <li class="now"><span class="status">Maintenant</span><b>Le kit maison</b>Les premières familles testent les idées de HAVRE sur papier.</li>
-          <li><span class="status">Ensuite</span><b>Un prototype</b>Une première version de l’app, construite à partir de vos retours.</li>
-          <li><span class="status">Plus tard</span><b>HAVRE Pro et la montre</b>L’outil pour les professionnels, et peut-être une version montre ou bracelet.</li>
+          <li><span class="status">Ensuite</span><b>Un prototype</b>Une première version de l’app, testée par des familles pilotes.</li>
+          <li><span class="status">Plus tard</span><b>HAVRE Pro et la montre</b>L’outil pour les professionnels, et une version montre ou bracelet.</li>
         </ol>
       </div>
     </section>
 
-    <section class="section-tint">
+    <!-- App enfant -->
+    <section class="section-tint" id="enfant">
       <div class="wrap">
-        <!-- App enfant -->
-        <div class="block">
-          <div>
-            <span class="eyebrow">Pour l’enfant</span>
-            <h2>Une app qui parle sa langue.</h2>
-            <p class="lead">La jauge du kit, en version numérique : un geste du pouce, une couleur, et un compagnon qui l’accompagne.</p>
-          </div>
-          <div>
-            <ul class="points">
-              <li><b>Une jauge à glisser du doigt</b>, du vert au rouge, pour dire où il en est sans chercher ses mots.</li>
-              <li><b>Des missions courtes</b> pour structurer les temps vides : matin, retour d’école, soirée.</li>
-              <li><b>Une mascotte qu’il choisit</b>, qui affiche de petites phrases de soutien au bon moment.</li>
-            </ul>
-            <div class="mascots">
-              <div class="mascot"><span>🦊</span><b>Renardo</b>Le refuge, doux et polyvalent</div>
-              <div class="mascot"><span>🎮</span><b>Pixel</b>Pour les fans de jeux vidéo</div>
-              <div class="mascot"><span>🌿</span><b>Lya</b>Pour les enfants très sensibles</div>
-              <div class="mascot"><span>🎵</span><b>Melo</b>Pour ceux qui se calment en musique</div>
-              <div class="mascot"><span>⚡</span><b>Bolt</b>Pour les enfants qui ont besoin de bouger</div>
-              <div class="mascot"><span>⭐</span><b>Nova</b>Neutre, pour commencer en douceur</div>
+        <div class="section-head">
+          <span class="eyebrow">Pour l’enfant</span>
+          <h2>Une app qui parle sa langue.</h2>
+          <p class="lead">La jauge du kit devient un geste du pouce. Un compagnon choisi par l’enfant l’accompagne, et l’aide à redescendre quand ça monte.</p>
+        </div>
+
+        <div class="screens">
+          <figure class="screen-item">
+            <div class="phone"><div class="phone-screen">
+              <div class="m-status"><span>16:42</span><span>●●●</span></div>
+              <div class="m-body">
+                <div class="m-head">
+                  <div><div class="m-title">Salut Léo 👋</div><div class="m-sub">Comment tu te sens ?</div></div>
+                  <div class="m-avatar">🦊</div>
+                </div>
+                <div class="m-card">
+                  <div class="m-label">Ma jauge</div>
+                  <div class="m-gauge-row">
+                    <div class="m-gauge"><div class="m-handle" style="top: 56px;">😟</div></div>
+                    <div class="m-levels">
+                      <span>Cocotte-minute</span>
+                      <span class="on">Stressé</span>
+                      <span>Un peu tendu</span>
+                      <span>Calme</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="m-bubble">🦊 Merci de me le dire. On fait une pause ensemble ?</div>
+                <span class="m-btn">Respirer avec Renardo</span>
+              </div>
+            </div></div>
+            <figcaption><b>La jauge</b>Il glisse la barre, sans chercher ses mots.</figcaption>
+          </figure>
+
+          <figure class="screen-item">
+            <div class="phone"><div class="phone-screen">
+              <div class="m-status"><span>16:42</span><span>●●●</span></div>
+              <div class="m-body">
+                <div><div class="m-title">Choisis ton compagnon</div><div class="m-sub">Tu pourras en changer quand tu veux.</div></div>
+                <div class="m-mascots">
+                  <div class="m-mascot selected"><span>🦊</span><b>Renardo</b>Doux et rassurant</div>
+                  <div class="m-mascot"><span>🎮</span><b>Pixel</b>Fan de jeux vidéo</div>
+                  <div class="m-mascot"><span>🌿</span><b>Lya</b>Calme comme la forêt</div>
+                  <div class="m-mascot"><span>🎵</span><b>Melo</b>Tout en musique</div>
+                  <div class="m-mascot"><span>⚡</span><b>Bolt</b>Plein d’énergie</div>
+                  <div class="m-mascot"><span>⭐</span><b>Nova</b>Tout en douceur</div>
+                </div>
+                <span class="m-btn">C’est lui !</span>
+              </div>
+            </div></div>
+            <figcaption><b>Son compagnon</b>Six mascottes, pour six façons de vivre ses émotions.</figcaption>
+          </figure>
+
+          <figure class="screen-item">
+            <div class="phone"><div class="phone-screen">
+              <div class="m-status"><span>16:44</span><span>●●●</span></div>
+              <div class="m-body">
+                <div class="m-breathe">
+                  <div class="m-circle">🦊</div>
+                  <div><div class="m-title">Inspire…</div><div class="m-sub">Gonfle ton ventre comme un ballon.</div></div>
+                  <div class="m-dots"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div>
+                </div>
+                <div class="m-message">
+                  <span>💚</span>
+                  <div><b>Message de Maman</b>Je pense à toi. On en parle tranquillement ce soir.</div>
+                </div>
+              </div>
+            </div></div>
+            <figcaption><b>La pause</b>Une respiration guidée, et un mot doux de son parent.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- App parent -->
+    <section id="parent">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">Pour le parent</span>
+          <h2>Comprendre, sans surveiller.</h2>
+          <p class="lead">Le carnet du kit, en mieux : voir quand ça monte, repérer ce qui revient, et être présent même à distance.</p>
+        </div>
+
+        <div class="screens">
+          <figure class="screen-item">
+            <div class="phone"><div class="phone-screen">
+              <div class="m-status"><span>17:05</span><span>●●●</span></div>
+              <div class="m-body">
+                <div><div class="m-title">Aujourd’hui</div><div class="m-sub">Mardi · Léo</div></div>
+                <div class="m-card m-now">
+                  <span class="m-dot" style="background:#4cc38a;"></span>
+                  <div><b>Calme</b><div class="m-sub">Redescendu après la pause de 16:44</div></div>
+                </div>
+                <div class="m-card">
+                  <div class="m-label">Sa journée</div>
+                  <div class="m-day">
+                    <div><span>08:00</span><i style="background:#c9eedb;">Petit-déjeuner</i></div>
+                    <div><span>10:30</span><i style="background:#fcebb8;">Maths</i></div>
+                    <div><span>14:00</span><i style="background:#c9eedb;">Récréation</i></div>
+                    <div><span>16:40</span><i style="background:#fdd2b3;">Devoirs</i></div>
+                    <div><span>17:00</span><i style="background:#c9eedb;">Après la pause</i></div>
+                  </div>
+                </div>
+                <div class="m-card">
+                  <div class="m-label">Ce qui revient cette semaine</div>
+                  <div class="m-pattern"><span>Devoirs</span><b>3 fois</b></div>
+                  <div class="m-pattern"><span>Retour d’école</span><b>2 fois</b></div>
+                </div>
+              </div>
+            </div></div>
+            <figcaption><b>Le tableau du jour</b>Où ça monte, où ça redescend, et ce qui revient.</figcaption>
+          </figure>
+
+          <figure class="screen-item">
+            <div class="phone"><div class="phone-screen">
+              <div class="m-status"><span>16:41</span><span>●●●</span></div>
+              <div class="m-body">
+                <div class="m-notif">
+                  <div class="app"><span>HAVRE</span><span>maintenant</span></div>
+                  Léo est passé en <b>orange</b> pendant les devoirs.
+                </div>
+                <div class="m-card">
+                  <div class="m-label">Envoyer un mot doux</div>
+                  <div class="m-replies">
+                    <div class="m-reply selected">Je pense à toi. On en parle tranquillement ce soir.</div>
+                    <div class="m-reply">Respire, tu es capable.</div>
+                    <div class="m-reply">Fais une pause, les devoirs peuvent attendre.</div>
+                  </div>
+                </div>
+                <span class="m-btn">Envoyer</span>
+                <div class="m-sub" style="text-align:center;">Le message s’affiche par Renardo, sur l’écran de Léo.</div>
+              </div>
+            </div></div>
+            <figcaption><b>La réponse guidée</b>Des mots qui apaisent, plutôt qu’une leçon à chaud.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- HAVRE Pro -->
+    <section class="section-tint" id="pro">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">Pour les professionnels</span>
+          <h2>HAVRE Pro : un langage commun avec la famille.</h2>
+          <p class="lead">Pour les psychologues, TES, éducateurs et écoles. Le parent partage un accès limité dans le temps : le professionnel arrive en rencontre avec des exemples concrets, jamais avec un diagnostic.</p>
+        </div>
+
+        <div class="laptop">
+          <div class="laptop-screen">
+            <div class="pro">
+              <div class="pro-head">
+                <div><b>Léo, 9 ans</b> <span class="muted">· semaine du 3 mars</span></div>
+                <span class="pro-key">🔑 Accès partagé par le parent · expire dans 6 jours</span>
+              </div>
+              <div class="pro-chart m-card">
+                <div class="m-label">Intensité ressentie · pic du jour</div>
+                <svg viewBox="0 0 520 240" role="img" aria-label="Courbe de la semaine : pics le mardi et le jeudi">
+                  <rect x="40" y="10" width="470" height="52" fill="#fde2e2" />
+                  <rect x="40" y="62" width="470" height="52" fill="#fde9d9" />
+                  <rect x="40" y="114" width="470" height="52" fill="#fdf3d2" />
+                  <rect x="40" y="166" width="470" height="52" fill="#dff4e9" />
+                  <polyline points="60,124 130,52 200,148 270,72 340,118 410,170 480,160" fill="none" stroke="#102018" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" />
+                  <g fill="#fff" stroke="#102018" stroke-width="2.5">
+                    <circle cx="60" cy="124" r="5" /><circle cx="130" cy="52" r="6" /><circle cx="200" cy="148" r="5" />
+                    <circle cx="270" cy="72" r="6" /><circle cx="340" cy="118" r="5" /><circle cx="410" cy="170" r="5" /><circle cx="480" cy="160" r="5" />
+                  </g>
+                  <g font-size="12" font-weight="700" fill="#102018">
+                    <rect x="94" y="22" width="74" height="20" rx="10" fill="#fff" stroke="#dde7e1" />
+                    <text x="131" y="36" text-anchor="middle">Maths 10:30</text>
+                    <rect x="230" y="42" width="80" height="20" rx="10" fill="#fff" stroke="#dde7e1" />
+                    <text x="270" y="56" text-anchor="middle">Devoirs 17:00</text>
+                  </g>
+                  <g font-size="12" fill="#5a7468" text-anchor="middle">
+                    <text x="60" y="236">Lun</text><text x="130" y="236">Mar</text><text x="200" y="236">Mer</text><text x="270" y="236">Jeu</text>
+                    <text x="340" y="236">Ven</text><text x="410" y="236">Sam</text><text x="480" y="236">Dim</text>
+                  </g>
+                </svg>
+              </div>
+              <div class="pro-side">
+                <div class="m-card">
+                  <div class="m-label">Pics récurrents</div>
+                  <p>Mardi vers 10:30 (maths) · Jeudi vers 17:00 (devoirs)</p>
+                </div>
+                <div class="m-card">
+                  <div class="m-label">Ce qui aide</div>
+                  <p>Collation avant les devoirs · 10 minutes dehors · respiration avec Renardo</p>
+                </div>
+                <div class="m-card">
+                  <div class="m-label">Note du parent</div>
+                  <p class="pro-note">« Jeudi, il avait mal dormi. La pause dehors a tout changé. »</p>
+                </div>
+              </div>
             </div>
           </div>
+          <div class="laptop-base"></div>
         </div>
+      </div>
+    </section>
 
-        <!-- App parent -->
-        <div class="block">
-          <div>
-            <span class="eyebrow">Pour le parent</span>
-            <h2>Comprendre, sans surveiller.</h2>
-            <p class="lead">Le carnet du kit, en mieux : des repères dans la journée et un moyen d’être présent, même à distance.</p>
-          </div>
-          <ul class="points">
-            <li><b>Voir quand ça monte et quand ça redescend</b>, et repérer ce qui revient : devoirs, transitions, fatigue.</li>
-            <li><b>Envoyer un message doux</b>, affiché par la mascotte : «&nbsp;Je pense à toi.&nbsp;» «&nbsp;On en parle tranquillement plus tard.&nbsp;»</li>
-            <li><b>Rester cohérents entre parents</b> : mêmes repères, même ton.</li>
-          </ul>
+    <!-- Comment on construit -->
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">Notre méthode</span>
+          <h2>Comment on construit HAVRE.</h2>
         </div>
-
-        <!-- HAVRE Pro -->
-        <div class="block">
-          <div>
-            <span class="eyebrow">Pour les professionnels</span>
-            <h2>HAVRE Pro : un langage commun avec la famille.</h2>
-            <p class="lead">Pour les psychologues, TES, éducateurs et écoles. Un éclairage sur le quotidien de l’enfant, jamais un diagnostic.</p>
+        <div class="grid-3">
+          <div class="card">
+            <h3>📄 Sur papier d’abord</h3>
+            <p>Avant de coder, on vérifie avec le kit que les idées aident vraiment : la jauge, le plan pour redescendre, le carnet du parent.</p>
           </div>
-          <div>
-            <ul class="points">
-              <li><b>Une courbe émotionnelle contextualisée</b> sur la journée, la semaine ou le mois, pour préparer une rencontre avec des exemples concrets.</li>
-              <li><b>Un accès donné par le parent</b>, avec une clé limitée dans le temps et révocable à tout moment.</li>
-              <li><b>Chacun voit ce dont il a besoin</b> : un TES ne voit pas la même chose qu’un psychologue.</li>
-            </ul>
-            <a class="btn btn-quiet" href="mailto:contact.havre@icloud.com?subject=Pilote%20clinique%20-%20HAVRE%20Pro&body=Bonjour%20%C3%A9quipe%20HAVRE,%0A%0AJe%20souhaite%20discuter%20d%27un%20pilote%20clinique.%0A%0ANom%20:%0AProfession%20:%0AStructure%20/-%20%C3%A9tablissement%20:%0ALieu%20(ville%2C%20pays)%20:%0ANombre%20d%27enfants%20suivis%20concern%C3%A9s%20:%0ADisponibilit%C3%A9s%20pour%20un%20%C3%A9change%20:%0A%0AMerci!%0A">Discuter d’un projet pilote</a>
+          <div class="card">
+            <h3>👨‍👩‍👧 Avec des familles et des pros</h3>
+            <p>Chaque retour compte. Les familles qui testent le kit, puis les familles pilotes, décident de ce qui entre dans l’app.</p>
+          </div>
+          <div class="card">
+            <h3>🔒 La sécurité dès le départ</h3>
+            <p>Les garde-fous ne sont pas ajoutés à la fin : ils guident chaque écran. <a href="#engagements">Voir nos engagements</a></p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Engagements -->
-    <section id="engagements">
+    <section class="section-tint" id="engagements">
       <div class="wrap">
         <div class="section-head">
           <span class="eyebrow">Nos engagements</span>
@@ -128,12 +300,63 @@
       </div>
     </section>
 
-    <!-- Appel final -->
-    <section class="section-tint final">
+    <!-- Participer -->
+    <section id="participer">
       <div class="wrap">
-        <h2>Construisez HAVRE avec nous.</h2>
-        <p class="lead">Essayez le kit pendant une semaine, et dites-nous ce qui aide vraiment.</p>
-        <a class="btn" href="index.html#recevoir">Recevoir le kit gratuit</a>
+        <div class="section-head">
+          <span class="eyebrow">Participer</span>
+          <h2>Construisez HAVRE avec nous.</h2>
+          <p class="lead">Trois façons de rejoindre le projet, selon votre place.</p>
+        </div>
+        <div class="ways">
+          <div class="card way">
+            <h3>Tester le kit</h3>
+            <p>Le point de départ : une semaine avec le kit gratuit, puis vos retours.</p>
+            <a class="btn" href="index.html#recevoir">Recevoir le kit</a>
+          </div>
+          <div class="card way">
+            <h3>Devenir famille pilote</h3>
+            <p>Vous voulez essayer les premières versions de l’app avec votre enfant et nous dire ce qui marche&nbsp;?</p>
+            <a class="btn btn-quiet" href="mailto:contact.havre@icloud.com?subject=Famille%20pilote%20HAVRE&body=Bonjour%20%C3%A9quipe%20HAVRE,%0A%0ANous%20aimerions%20devenir%20famille%20pilote.%0A%0A%C3%82ge%20de%20l%27enfant%20:%0AT%C3%A9l%C3%A9phone%20utilis%C3%A9%20(iPhone,%20Android)%20:%0AVille%20:%0A%0AMerci%20!%0A">Nous écrire</a>
+          </div>
+          <div class="card way">
+            <h3>Vous êtes professionnel</h3>
+            <p>Psychologue, TES, enseignant : partagez le kit aux familles, ou discutons d’un projet pilote HAVRE Pro.</p>
+            <a class="btn btn-quiet" href="mailto:contact.havre@icloud.com?subject=Pilote%20clinique%20-%20HAVRE%20Pro&body=Bonjour%20%C3%A9quipe%20HAVRE,%0A%0AJe%20souhaite%20discuter%20d%27un%20pilote%20clinique.%0A%0ANom%20:%0AProfession%20:%0AStructure%20/-%20%C3%A9tablissement%20:%0ALieu%20(ville%2C%20pays)%20:%0ANombre%20d%27enfants%20suivis%20concern%C3%A9s%20:%0ADisponibilit%C3%A9s%20pour%20un%20%C3%A9change%20:%0A%0AMerci!%0A">Discuter d’un pilote</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ projet -->
+    <section class="section-tint">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">Questions fréquentes</span>
+          <h2>Sur l’app HAVRE</h2>
+        </div>
+        <div class="faq">
+          <details>
+            <summary>Quand l’app sera-t-elle disponible&nbsp;?</summary>
+            <p>Nous n’avons pas encore de date. Le prototype viendra après les retours des familles qui testent le kit, puis il sera essayé par des familles pilotes avant d’être ouvert à tous.</p>
+          </details>
+          <details>
+            <summary>Sur quels appareils&nbsp;?</summary>
+            <p>L’app est d’abord pensée pour l’iPhone et l’Apple Watch. Une version montre ou bracelet dédié viendra plus tard.</p>
+          </details>
+          <details>
+            <summary>Les écrans de cette page sont-ils définitifs&nbsp;?</summary>
+            <p>Non. Ce sont nos maquettes. Elles vont évoluer avec ce que les familles et les professionnels nous apprennent.</p>
+          </details>
+          <details>
+            <summary>Qui est derrière HAVRE&nbsp;?</summary>
+            <p>Un parent qui a vécu les montées de pression de son enfant, et qui construit HAVRE avec d’autres familles et des professionnels de l’accompagnement.</p>
+          </details>
+          <details>
+            <summary>Les données de mon enfant seront-elles protégées&nbsp;?</summary>
+            <p>Oui : le minimum de données, chiffrées, jamais vendues, et supprimables à tout moment. Les professionnels n’y accèdent que si vous leur donnez une clé, limitée dans le temps. <a href="#engagements">Voir nos engagements</a>.</p>
+          </details>
+        </div>
       </div>
     </section>
   </main>
