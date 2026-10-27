@@ -1,2 +1,12 @@
-# Ancienne URL (avec espace) de l'écran enfant
-/ecran%20-enfant.html  /ecran-enfant.html  301
+# Anciennes pages de l'app, réunies dans la page « Le projet »
+/ecran%20-enfant.html       /projet.html  301
+/ecran-enfant.html          /projet.html  301
+/mascotte-enfant.html       /projet.html  301
+/mascotte-parents.html      /projet.html  301
+/havre-parent-mockups.html  /projet.html  301
+/havrepro.html              /projet.html  301
+/securite.html              /projet.html  301
+
+# L'inscription au kit se fait maintenant sur la page d'accueil
+/kit.html                   /             301
+/kit                        /             301
