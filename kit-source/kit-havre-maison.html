@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Kit HAVRE maison</title>
+<!-- Source du PDF assets/kit/kit-havre-maison.pdf : regénérer avec `node kit-source/build-pdf.js` -->
+<style>
+  @page { size: Letter; margin: 0; }
+
+  :root {
+    --green: #4cc38a;
+    --green-deep: #2a8f68;
+    --teal: #3ba7c9;
+    --yellow: #f6c445;
+    --orange: #f97316;
+    --red: #ef4444;
+    --violet: #8b7fd6;
+    --amber: #f59e0b;
+    --text: #102018;
+    --muted: #5f7b6d;
+    --line: #cfdcd5;
+    --cream: #faf8f3;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: Inter, system-ui, sans-serif, "Noto Color Emoji";
+    color: var(--text);
+    font-size: 11pt;
+    line-height: 1.4;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .page {
+    width: 8.5in;
+    height: 11in;
+    padding: 0.55in 0.6in 0.75in;
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+    break-after: page;
+  }
+  .page:last-child { page-break-after: auto; break-after: auto; }
+
+  .page-footer {
+    position: absolute;
+    left: 0.6in; right: 0.6in; bottom: 0.35in;
+    display: flex;
+    justify-content: space-between;
+    font-size: 8pt;
+    color: var(--muted);
+    border-top: 1px solid var(--line);
+    padding-top: 6px;
+  }
+
+  .eyebrow {
+    font-size: 8.5pt;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--green-deep);
+  }
+  h1 { font-size: 30pt; line-height: 1.05; letter-spacing: -0.02em; font-weight: 800; }
+  h2 { font-size: 21pt; line-height: 1.1; letter-spacing: -0.01em; font-weight: 800; margin-top: 4px; }
+  h3 { font-size: 11.5pt; font-weight: 700; margin-bottom: 6px; }
+  .lead { font-size: 11.5pt; color: var(--muted); margin-top: 8px; }
+  .muted { color: var(--muted); }
+  .small { font-size: 9pt; }
+
+  .box {
+    border: 1.5px solid var(--line);
+    border-radius: 14px;
+    padding: 14px 16px;
+  }
+  .box-soft { background: #eef8f2; border-color: #cfe9db; }
+
+  .write-line {
+    border-bottom: 1.5px dotted #9fb5aa;
+    height: 26px;
+  }
+
+  .check {
+    display: inline-block;
+    width: 13px; height: 13px;
+    border: 1.5px solid #7d998b;
+    border-radius: 3px;
+    vertical-align: -2px;
+    margin-right: 7px;
+  }
+
+  /* ---------- Page 1 : couverture ---------- */
+  .cover-top { display: flex; align-items: center; gap: 12px; }
+  .cover-top img { width: 46px; height: 46px; border-radius: 12px; }
+  .cover-top .brand { font-weight: 800; font-size: 14pt; letter-spacing: 0.04em; }
+  .cover-hero {
+    margin-top: 22px;
+    padding: 26px 26px 22px;
+    border-radius: 22px;
+    background: linear-gradient(135deg, #e6f6ee, #e3f2f8);
+  }
+  .cover-hero h1 span { color: var(--green-deep); }
+  .contents { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 18px; margin-top: 18px; }
+  .contents div { display: flex; gap: 10px; align-items: baseline; font-size: 10.5pt; }
+  .contents b { color: var(--green-deep); min-width: 14px; }
+  .rules { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+  .rule { background: var(--cream); border-radius: 12px; padding: 10px 12px; font-size: 10pt; }
+  .rule b { display: block; margin-bottom: 2px; }
+  .week { display: flex; gap: 8px; margin-top: 10px; }
+  .week div {
+    flex: 1;
+    border-radius: 12px;
+    padding: 10px 12px;
+    font-size: 9.5pt;
+    border: 1.5px solid var(--line);
+  }
+  .week div b { display: block; color: var(--green-deep); font-size: 10pt; }
+  .disclaimer { margin-top: 14px; font-size: 8.5pt; color: var(--muted); }
+
+  /* ---------- Page 2 : jauge ---------- */
+  .gauge-wrap { display: flex; gap: 22px; margin-top: 16px; height: 7.35in; }
+  .gauge {
+    width: 1.9in;
+    border-radius: 26px;
+    overflow: hidden;
+    border: 3px solid var(--text);
+    display: flex;
+    flex-direction: column;
+  }
+  .gauge .zone {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 800;
+    font-size: 12pt;
+    text-align: center;
+    border-bottom: 2px dashed rgba(255,255,255,0.7);
+  }
+  .gauge .zone:last-child { border-bottom: none; }
+  .gauge .zone .face { font-size: 34pt; line-height: 1.1; }
+  .z-red { background: var(--red); }
+  .z-orange { background: var(--orange); }
+  .z-yellow { background: var(--yellow); color: var(--text) !important; }
+  .z-green { background: var(--green); }
+
+  .gauge-side { flex: 1; display: flex; flex-direction: column; }
+  .gauge-side .row {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-left: 5px solid;
+    padding: 0 0 0 14px;
+    margin-bottom: 8px;
+  }
+  .gauge-side .row:last-child { margin-bottom: 0; }
+  .gauge-side .row p { font-size: 10pt; color: var(--muted); }
+  .gauge-side .row .write-line { margin-top: 2px; }
+  .helps { font-size: 9.5pt; font-weight: 600; margin-top: 6px; }
+
+  .cutout {
+    position: absolute;
+    right: 0.6in;
+    bottom: 0.9in;
+    width: 2.6in;
+    border: 2px dashed #7d998b;
+    border-radius: 10px;
+    padding: 8px 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #fff;
+  }
+  .cutout .scissors { position: absolute; top: -12px; left: 10px; background: #fff; font-size: 12pt; padding: 0 4px; }
+  .cutout .arrow {
+    width: 0; height: 0;
+    border-top: 22px solid transparent;
+    border-bottom: 22px solid transparent;
+    border-right: 30px solid var(--text);
+  }
+  .cutout .tag {
+    flex: 1;
+    background: var(--text);
+    color: #fff;
+    border-radius: 6px;
+    height: 44px;
+    margin-left: -8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 11pt;
+  }
+
+  /* ---------- Page 3 : plan ---------- */
+  .plan-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; }
+  .plan-grid .full { grid-column: 1 / -1; }
+  .checklist { display: grid; grid-template-columns: 1fr 1fr; gap: 5px 12px; font-size: 10pt; }
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .step {
+    border: 1.5px solid #cfe9db;
+    background: #f3faf6;
+    border-radius: 12px;
+    padding: 8px 10px 10px;
+    min-height: 1.05in;
+  }
+  .step .num {
+    width: 24px; height: 24px;
+    border-radius: 999px;
+    background: var(--green);
+    color: #fff;
+    font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10pt;
+  }
+  .ideas { font-size: 8.5pt; color: var(--muted); margin-top: 6px; }
+  .mascots { display: flex; justify-content: space-between; margin-top: 6px; }
+  .mascots div { text-align: center; font-size: 8.5pt; color: var(--muted); }
+  .mascots span { display: block; font-size: 20pt; line-height: 1.2; }
+  .secret {
+    display: flex; gap: 14px; align-items: center;
+    background: linear-gradient(135deg, #e6f6ee, #e3f2f8);
+    border: none;
+  }
+  .secret .key { font-size: 26pt; }
+  .signatures { display: flex; gap: 18px; font-size: 9.5pt; color: var(--muted); margin-top: 10px; }
+  .signatures div { flex: 1; }
+
+  /* ---------- Page 4 : cartes ---------- */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 1.66in;
+    margin-top: 10px;
+    border-top: 1.5px dashed #9fb5aa;
+    border-left: 1.5px dashed #9fb5aa;
+  }
+  .card {
+    border-right: 1.5px dashed #9fb5aa;
+    border-bottom: 1.5px dashed #9fb5aa;
+    padding: 8px 9px;
+    display: flex;
+    flex-direction: column;
+  }
+  .card .cat {
+    font-size: 7pt;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #fff;
+    border-radius: 999px;
+    padding: 2px 8px;
+    align-self: flex-start;
+  }
+  .card .title { font-weight: 800; font-size: 11pt; margin-top: 5px; display: flex; gap: 6px; align-items: center; }
+  .card .title .emo { font-size: 15pt; }
+  .card p { font-size: 9pt; color: #31463b; margin-top: 3px; flex: 1; }
+  .card .time { font-size: 8pt; color: var(--muted); font-weight: 600; }
+  .c-move .cat { background: var(--teal); }
+  .c-create .cat { background: var(--violet); }
+  .c-calm .cat { background: var(--green); }
+  .c-help .cat { background: var(--amber); }
+  .c-blank .cat { background: var(--text); }
+  .c-blank .write-line { height: 22px; }
+
+  /* ---------- Page 5 : carnet ---------- */
+  table.log { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 9.5pt; }
+  table.log th {
+    text-align: left;
+    background: #eef8f2;
+    padding: 7px 8px;
+    font-size: 8.5pt;
+    border: 1.5px solid #cfe9db;
+  }
+  table.log td { border: 1.5px solid var(--line); height: 0.74in; padding: 6px 8px; vertical-align: top; }
+  table.log tr.example td { color: #7d998b; font-style: italic; height: auto; background: #fbfcfb; }
+  .dots { display: flex; gap: 4px; }
+  .dots i { width: 13px; height: 13px; border-radius: 999px; border: 2px solid; display: inline-block; }
+  .dots i:nth-child(1) { border-color: var(--green); }
+  .dots i:nth-child(2) { border-color: var(--yellow); }
+  .dots i:nth-child(3) { border-color: var(--orange); }
+  .dots i:nth-child(4) { border-color: var(--red); }
+  .dots i.on { background: var(--orange); }
+  .tip { display: flex; gap: 12px; margin-top: 12px; }
+  .tip .box { flex: 1; font-size: 9.5pt; }
+
+  /* ---------- Page 6 : bilan ---------- */
+  .days { display: flex; gap: 8px; margin-top: 4px; }
+  .days span {
+    width: 30px; height: 30px;
+    border-radius: 999px;
+    border: 1.5px solid #9fb5aa;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 10pt;
+  }
+  .faces { display: flex; gap: 18px; font-size: 26pt; margin-top: 4px; }
+  .bilan { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; }
+  .bilan .full { grid-column: 1 / -1; }
+  .feedback {
+    margin-top: 14px;
+    border-radius: 18px;
+    padding: 16px 18px;
+    background: var(--text);
+    color: #fff;
+  }
+  .feedback h3 { font-size: 13pt; }
+  .feedback ol { margin: 6px 0 0 18px; font-size: 10pt; }
+  .feedback ol li { margin-bottom: 3px; }
+  .feedback .mail { margin-top: 8px; font-weight: 700; color: #9be3bf; }
+</style>
+</head>
+<body>
+
+<!-- =============================== PAGE 1 =============================== -->
+<section class="page">
+  <div class="cover-top">
+    <img src="../assets/img/logo-havre.png" alt="">
+    <div>
+      <div class="brand">HAVRE</div>
+      <div class="small muted">Le havre émotionnel pour votre enfant</div>
+    </div>
+  </div>
+
+  <div class="cover-hero">
+    <div class="eyebrow">Kit gratuit à imprimer · enfants d’environ 6 à 12 ans</div>
+    <h1 style="margin-top:8px;">Le kit HAVRE <span>maison</span></h1>
+    <p class="lead" style="color:#31463b;">
+      Pour aider votre enfant à montrer ce qu’il ressent, même quand les mots ne sortent pas,
+      et à redescendre quand ça monte. Sans écran, dès ce soir.
+    </p>
+    <div class="contents">
+      <div><b>1</b> Ce guide&nbsp;: comment s’y prendre</div>
+      <div><b>2</b> La jauge du frigo</div>
+      <div><b>3</b> Mon plan pour redescendre</div>
+      <div><b>4</b> Les cartes missions «&nbsp;temps vides&nbsp;»</div>
+      <div><b>5</b> Le carnet du parent</div>
+      <div><b>6</b> Le bilan de la semaine</div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:18px;">Quatre règles d’or</h3>
+  <div class="rules">
+    <div class="rule"><b>Présentez le kit à un moment calme.</b>Jamais en pleine crise&nbsp;: on apprend à nager hors de la tempête.</div>
+    <div class="rule"><b>La jauge appartient à votre enfant.</b>On ne corrige pas sa couleur. On peut juste dire&nbsp;: «&nbsp;Merci de me montrer.&nbsp;»</div>
+    <div class="rule"><b>Aucune note, aucune récompense liée à la couleur.</b>Rouge n’est pas «&nbsp;mal&nbsp;». C’est une information.</div>
+    <div class="rule"><b>Cherchez le «&nbsp;avant&nbsp;», pas le coupable.</b>Ce qui s’est passé juste avant est la piste la plus précieuse.</div>
+  </div>
+
+  <h3 style="margin-top:16px;">Votre semaine d’essai</h3>
+  <div class="week">
+    <div><b>Jour 1</b>Imprimez, affichez la jauge et remplissez le plan (page 3) ensemble.</div>
+    <div><b>Jours 2 à 6</b>Votre enfant bouge sa flèche quand il veut. Les cartes missions servent quand «&nbsp;il n’y a rien à faire&nbsp;».</div>
+    <div><b>Chaque soir</b>30 secondes dans le carnet (page 5), seulement si la jauge est montée.</div>
+    <div><b>Jour 7</b>Le bilan (page 6), à deux, et vos retours pour nous aider.</div>
+  </div>
+
+  <p class="disclaimer">
+    Ce kit est un outil d’accompagnement au quotidien. Ce n’est pas un outil médical et il ne remplace pas l’avis
+    d’un professionnel. Si vous êtes inquiet pour votre enfant, parlez-en à son médecin ou à un professionnel de santé.
+  </p>
+
+  <div class="page-footer"><span>Kit HAVRE maison · Guide</span><span>1 / 6</span></div>
+</section>
+
+<!-- =============================== PAGE 2 =============================== -->
+<section class="page">
+  <div class="eyebrow">À afficher sur le frigo</div>
+  <h2>La jauge de <span style="display:inline-block;width:2.6in;border-bottom:2px dotted #9fb5aa;"></span></h2>
+  <p class="lead">Déplace ta flèche quand tu veux, pour montrer où tu en es. Personne ne te note. Tu peux changer d’avis.</p>
+
+  <div class="gauge-wrap">
+    <div class="gauge">
+      <div class="zone z-red"><span class="face">😤</span>Cocotte-<br>minute</div>
+      <div class="zone z-orange"><span class="face">😟</span>Stressé</div>
+      <div class="zone z-yellow"><span class="face">😕</span>Un peu<br>tendu</div>
+      <div class="zone z-green"><span class="face">😌</span>Calme</div>
+    </div>
+
+    <div class="gauge-side">
+      <div class="row" style="border-color:var(--red);">
+        <h3>Cocotte-minute</h3>
+        <p>Trop plein. J’ai envie d’exploser, de crier ou de partir.</p>
+        <div class="helps">Ce qui m’aide ici&nbsp;:</div>
+        <div class="write-line"></div>
+      </div>
+      <div class="row" style="border-color:var(--orange);">
+        <h3>Stressé</h3>
+        <p>Beaucoup de choses dans ma tête. Mon corps est tendu.</p>
+        <div class="helps">Ce qui m’aide ici&nbsp;:</div>
+        <div class="write-line"></div>
+      </div>
+      <div class="row" style="border-color:var(--yellow);">
+        <h3>Un peu tendu</h3>
+        <p>Quelque chose me tracasse un peu, mais ça va.</p>
+        <div class="helps">Ce qui m’aide ici&nbsp;:</div>
+        <div class="write-line"></div>
+      </div>
+      <div class="row" style="border-color:var(--green);">
+        <h3>Calme</h3>
+        <p>Je me sens bien, posé, tranquille.</p>
+        <div class="helps">Ce que j’aime faire ici&nbsp;:</div>
+        <div class="write-line"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cutout">
+    <span class="scissors">✂️</span>
+    <div class="arrow"></div>
+    <div class="tag">MOI</div>
+  </div>
+
+  <div class="page-footer"><span>Découpe la flèche et accroche-la avec une pince à linge ou de la pâte adhésive.</span><span>2 / 6</span></div>
+</section>
+
+<!-- =============================== PAGE 3 =============================== -->
+<section class="page">
+  <div class="eyebrow">À remplir ensemble, un jour où tout va bien</div>
+  <h2>Mon plan pour redescendre</h2>
+  <p class="lead">Quand ça monte, c’est dur de réfléchir. Alors on prépare le plan maintenant, au calme, et on le suit le moment venu.</p>
+
+  <div class="plan-grid">
+    <div class="box">
+      <h3>Quand ça monte, mon corps me prévient</h3>
+      <div class="checklist">
+        <div><span class="check"></span>Mon cœur bat vite</div>
+        <div><span class="check"></span>J’ai chaud, je rougis</div>
+        <div><span class="check"></span>Mon ventre se serre</div>
+        <div><span class="check"></span>Je serre les poings</div>
+        <div><span class="check"></span>J’ai envie de crier</div>
+        <div><span class="check"></span>J’ai envie de pleurer</div>
+        <div><span class="check"></span>J’ai envie de me cacher</div>
+        <div><span class="check"></span>Autre&nbsp;: ……………</div>
+      </div>
+    </div>
+    <div class="box">
+      <h3>Ce qui peut faire monter ma jauge</h3>
+      <div class="checklist">
+        <div><span class="check"></span>Changer d’activité</div>
+        <div><span class="check"></span>Quand il n’y a rien à faire</div>
+        <div><span class="check"></span>Les devoirs</div>
+        <div><span class="check"></span>Une dispute</div>
+        <div><span class="check"></span>La fatigue, la faim</div>
+        <div><span class="check"></span>Le bruit, la foule</div>
+        <div><span class="check"></span>Certains copains</div>
+        <div><span class="check"></span>Autre&nbsp;: ……………</div>
+      </div>
+    </div>
+
+    <div class="box full">
+      <h3>Mes 3 étapes pour redescendre</h3>
+      <div class="steps">
+        <div class="step"><div class="num">1</div><div class="write-line"></div><div class="write-line"></div></div>
+        <div class="step"><div class="num">2</div><div class="write-line"></div><div class="write-line"></div></div>
+        <div class="step"><div class="num">3</div><div class="write-line"></div><div class="write-line"></div></div>
+      </div>
+      <div class="ideas">Idées&nbsp;: boire un grand verre d’eau · respirer comme un ballon · aller dans mon coin calme · serrer un coussin · dessiner · écouter de la musique · bouger dehors · un câlin</div>
+    </div>
+
+    <div class="box">
+      <h3>Ce qui m’aide de la part de mon parent</h3>
+      <div class="write-line"></div><div class="write-line"></div>
+    </div>
+    <div class="box">
+      <h3>Ce qui ne m’aide pas (même si c’est gentil)</h3>
+      <div class="write-line"></div><div class="write-line"></div>
+    </div>
+
+    <div class="box">
+      <h3>Mon compagnon (entoure-le)</h3>
+      <div class="mascots">
+        <div><span>🦊</span>Renardo</div>
+        <div><span>🎮</span>Pixel</div>
+        <div><span>🌿</span>Lya</div>
+        <div><span>🎵</span>Melo</div>
+        <div><span>⚡</span>Bolt</div>
+        <div><span>⭐</span>Nova</div>
+      </div>
+    </div>
+    <div class="box secret">
+      <div class="key">🔑</div>
+      <div style="flex:1;">
+        <h3 style="margin-bottom:2px;">Notre mot secret</h3>
+        <div class="small muted">Quand je le dis, ça veut dire «&nbsp;j’ai besoin d’aide&nbsp;», sans avoir à expliquer.</div>
+        <div class="write-line"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="signatures">
+    <div>Signé par&nbsp;: <span class="write-line" style="display:inline-block;width:1.5in;height:auto;"></span></div>
+    <div>et&nbsp;: <span class="write-line" style="display:inline-block;width:1.5in;height:auto;"></span></div>
+    <div>Le&nbsp;: <span class="write-line" style="display:inline-block;width:1in;height:auto;"></span></div>
+  </div>
+
+  <div class="page-footer"><span>Kit HAVRE maison · Mon plan pour redescendre</span><span>3 / 6</span></div>
+</section>
+
+<!-- =============================== PAGE 4 =============================== -->
+<section class="page">
+  <div class="eyebrow">À découper · pour les «&nbsp;il n’y a rien à faire&nbsp;»</div>
+  <h2>Les cartes missions</h2>
+  <p class="lead" style="margin-top:4px;">Pioche une carte, ou choisis-en une. Quand c’est fait, mets-la de côté&nbsp;: tu vois tout ce que tu as accompli.</p>
+
+  <div class="cards">
+    <div class="card c-move"><span class="cat">Bouger</span><div class="title"><span class="emo">🏃</span>Parcours éclair</div><p>Construis un parcours avec 3 obstacles (coussins, chaises…) et fais-le 3 fois.</p><span class="time">⏱ 10 min</span></div>
+    <div class="card c-move"><span class="cat">Bouger</span><div class="title"><span class="emo">💃</span>Une chanson, une danse</div><p>Mets ta chanson préférée et bouge jusqu’à la dernière note.</p><span class="time">⏱ 4 min</span></div>
+    <div class="card c-move"><span class="cat">Bouger</span><div class="title"><span class="emo">🐸</span>Grenouille &amp; kangourou</div><p>10 sauts de grenouille, 10 sauts de kangourou, puis 10 pas de géant.</p><span class="time">⏱ 3 min</span></div>
+
+    <div class="card c-create"><span class="cat">Créer</span><div class="title"><span class="emo">🦊</span>Dessine ton compagnon</div><p>Invente la mascotte qui t’aide quand ça monte. Donne-lui un nom et un pouvoir.</p><span class="time">⏱ 15 min</span></div>
+    <div class="card c-create"><span class="cat">Créer</span><div class="title"><span class="emo">🏕️</span>Cabane secrète</div><p>Construis une cabane avec des couvertures. Ce sera ton coin calme.</p><span class="time">⏱ 20 min</span></div>
+    <div class="card c-create"><span class="cat">Créer</span><div class="title"><span class="emo">📖</span>Histoire en 5 phrases</div><p>Raconte ou écris une histoire&nbsp;: un héros, un problème, une solution.</p><span class="time">⏱ 10 min</span></div>
+
+    <div class="card c-calm"><span class="cat">Se poser</span><div class="title"><span class="emo">🎈</span>Le ballon</div><p>Inspire en gonflant ton ventre comme un ballon, puis souffle tout doucement. 5 fois.</p><span class="time">⏱ 2 min</span></div>
+    <div class="card c-calm"><span class="cat">Se poser</span><div class="title"><span class="emo">🖐️</span>5-4-3-2-1</div><p>Trouve 5 choses que tu vois, 4 que tu entends, 3 que tu touches, 2 que tu sens, 1 que tu goûtes.</p><span class="time">⏱ 3 min</span></div>
+    <div class="card c-calm"><span class="cat">Se poser</span><div class="title"><span class="emo">🎧</span>Pause musique</div><p>Allonge-toi, ferme les yeux et écoute une chanson calme jusqu’au bout.</p><span class="time">⏱ 5 min</span></div>
+
+    <div class="card c-help"><span class="cat">Aider</span><div class="title"><span class="emo">🍎</span>Chef collation</div><p>Prépare une collation pour toi et pour quelqu’un de la maison.</p><span class="time">⏱ 10 min</span></div>
+    <div class="card c-help"><span class="cat">Aider</span><div class="title"><span class="emo">🎒</span>Le sac de demain</div><p>Prépare ton sac et tes vêtements pour demain. Toi-demain-matin te dira merci&nbsp;!</p><span class="time">⏱ 10 min</span></div>
+    <div class="card c-help"><span class="cat">Aider</span><div class="title"><span class="emo">💌</span>Petit mot surprise</div><p>Écris ou dessine un mot gentil et cache-le pour quelqu’un.</p><span class="time">⏱ 5 min</span></div>
+
+    <div class="card c-blank"><span class="cat">À toi</span><div class="title"><span class="emo">✨</span>Ma mission à moi</div><div class="write-line"></div><div class="write-line"></div></div>
+    <div class="card c-blank"><span class="cat">À toi</span><div class="title"><span class="emo">✨</span>Ma mission à moi</div><div class="write-line"></div><div class="write-line"></div></div>
+    <div class="card c-blank"><span class="cat">À toi</span><div class="title"><span class="emo">✨</span>Ma mission à moi</div><div class="write-line"></div><div class="write-line"></div></div>
+  </div>
+
+  <div class="page-footer"><span>Kit HAVRE maison · Cartes missions</span><span>4 / 6</span></div>
+</section>
+
+<!-- =============================== PAGE 5 =============================== -->
+<section class="page">
+  <div class="eyebrow">Pour le parent · 30 secondes le soir</div>
+  <h2>Le carnet&nbsp;: qu’est-ce qui s’est passé avant&nbsp;?</h2>
+  <p class="lead">Notez seulement les moments où la jauge est montée (orange ou rouge). Pas besoin de tout écrire&nbsp;: quelques mots suffisent.</p>
+
+  <table class="log">
+    <thead>
+      <tr>
+        <th style="width:15%;">Quand&nbsp;?</th>
+        <th style="width:40%;">Juste avant… <span class="muted" style="font-weight:500;">(où, avec qui, quelle activité, fatigue ou faim&nbsp;?)</span></th>
+        <th style="width:13%;">Couleur</th>
+        <th style="width:32%;">Ce qui a aidé à redescendre</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="example">
+        <td>Ex.&nbsp;: mardi, 16 h 45</td>
+        <td>Retour de l’école, devoirs de maths, il n’avait pas mangé.</td>
+        <td><div class="dots"><i></i><i></i><i class="on"></i><i></i></div></td>
+        <td>Collation, puis 10 min dehors. Devoirs après.</td>
+      </tr>
+      <tr><td></td><td></td><td><div class="dots"><i></i><i></i><i></i><i></i></div></td><td></td></tr>
+      <tr><td></td><td></td><td><div class="dots"><i></i><i></i><i></i><i></i></div></td><td></td></tr>
+      <tr><td></td><td></td><td><div class="dots"><i></i><i></i><i></i><i></i></div></td><td></td></tr>
+      <tr><td></td><td></td><td><div class="dots"><i></i><i></i><i></i><i></i></div></td><td></td></tr>
+      <tr><td></td><td></td><td><div class="dots"><i></i><i></i><i></i><i></i></div></td><td></td></tr>
+      <tr><td></td><td></td><td><div class="dots"><i></i><i></i><i></i><i></i></div></td><td></td></tr>
+      <tr><td></td><td></td><td><div class="dots"><i></i><i></i><i></i><i></i></div></td><td></td></tr>
+      <tr><td></td><td></td><td><div class="dots"><i></i><i></i><i></i><i></i></div></td><td></td></tr>
+    </tbody>
+  </table>
+
+  <div class="tip">
+    <div class="box box-soft"><b>Cherchez des répétitions, pas des coupables.</b> Une transition, une heure de la journée, une personne, la faim… Ce qui revient souvent est une vraie piste.</div>
+    <div class="box"><b>Utile en consultation.</b> Si vous voyez un professionnel, ce carnet l’aide à comprendre en 2 minutes ce qui se passe à la maison. Vous décidez de le montrer ou non.</div>
+  </div>
+
+  <div class="page-footer"><span>Kit HAVRE maison · Carnet du parent</span><span>5 / 6</span></div>
+</section>
+
+<!-- =============================== PAGE 6 =============================== -->
+<section class="page">
+  <div class="eyebrow">Jour 7 · à faire ensemble</div>
+  <h2>Le bilan de la semaine</h2>
+  <p class="lead">Pas de bonne ou de mauvaise semaine&nbsp;: on regarde simplement ce qu’on a appris.</p>
+
+  <div class="bilan">
+    <div class="box">
+      <h3>Combien de jours la jauge a-t-elle bougé&nbsp;?</h3>
+      <div class="days"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span></div>
+    </div>
+    <div class="box">
+      <h3>Pour l’enfant&nbsp;: le kit, c’était…</h3>
+      <div class="faces"><span>😕</span><span>😐</span><span>🙂</span><span>😄</span></div>
+    </div>
+    <div class="box full">
+      <h3>Ce qui revient souvent juste avant que ça monte</h3>
+      <div class="write-line"></div><div class="write-line"></div>
+    </div>
+    <div class="box">
+      <h3>Ce qui a le mieux aidé à redescendre</h3>
+      <div class="write-line"></div><div class="write-line"></div>
+    </div>
+    <div class="box">
+      <h3>La carte mission préférée</h3>
+      <div class="write-line"></div><div class="write-line"></div>
+    </div>
+    <div class="box full">
+      <h3>Ce qu’on change dans notre plan pour la semaine prochaine</h3>
+      <div class="write-line"></div><div class="write-line"></div>
+    </div>
+  </div>
+
+  <div class="feedback">
+    <h3>Aidez-nous à construire HAVRE avec vous 💚</h3>
+    <div class="small" style="opacity:0.85;">Vous faites partie des premières familles HAVRE. Vos réponses décident directement de ce que deviendra l’app. Répondez à notre e-mail du 7<sup>e</sup> jour, ou écrivez-nous en 3 lignes&nbsp;:</div>
+    <ol>
+      <li>Votre enfant a-t-il encore utilisé la jauge après le 3<sup>e</sup> jour&nbsp;?</li>
+      <li>Qu’est-ce qui a le plus aidé, et qu’est-ce qui n’a servi à rien&nbsp;?</li>
+      <li>Qu’est-ce qui vous a manqué&nbsp;?</li>
+    </ol>
+    <div class="mail">contact.havre@icloud.com · une photo de cette page suffit aussi&nbsp;!</div>
+  </div>
+
+  <div class="page-footer"><span>Kit HAVRE maison · Bilan</span><span>6 / 6</span></div>
+</section>
+
+</body>
+</html>
