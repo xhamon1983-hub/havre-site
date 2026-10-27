@@ -1,6 +1,9 @@
 # Architecture (brouillon)
 
-- HTML statique avec assets partagés.
-- CSS principal : assets/css/havre.css.
-- JS prototype : assets/js/havre.js (jauge, missions, onglets).
-- Données optionnelles : assets/data/*.json.
+- HTML statique, une page = un fichier autonome (CSS et JS intégrés dans la page).
+- Pages : index, ecran-enfant, mascotte-enfant, mascotte-parents,
+  havre-parent-mockups, havrepro, securite.
+- Images : assets/img/logo-havre.png (logo + image de partage réseaux sociaux).
+- Données de prototype (pas encore branchées aux pages) : havre-config.json,
+  assets/data/emotions.json, assets/data/missions.json.
+- Hébergement Netlify ; redirections dans _redirects.
