@@ -12,7 +12,9 @@
   <meta property="og:image" content="https://havre-site.netlify.app/assets/kit/kit-partage.jpg" />
   <link rel="alternate" hreflang="fr" href="https://havre-site.netlify.app/projet.html" />
   <link rel="alternate" hreflang="en" href="https://havre-site.netlify.app/en/project.html" />
-  <link rel="icon" href="assets/img/logo-havre.png" />
+  <link rel="canonical" href="https://havre-site.netlify.app/projet.html" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png" />
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png" />
   <link rel="stylesheet" href="assets/css/havre.css" />
 </head>
 <body>
@@ -317,14 +319,70 @@
           <div class="card way">
             <h3>Devenir famille pilote</h3>
             <p>Vous voulez essayer les premières versions de l’app avec votre enfant et nous dire ce qui marche&nbsp;?</p>
-            <a class="btn btn-quiet" href="mailto:contact.havre@icloud.com?subject=Famille%20pilote%20HAVRE&body=Bonjour%20%C3%A9quipe%20HAVRE,%0A%0ANous%20aimerions%20devenir%20famille%20pilote.%0A%0A%C3%82ge%20de%20l%27enfant%20:%0AT%C3%A9l%C3%A9phone%20utilis%C3%A9%20(iPhone,%20Android)%20:%0AVille%20:%0A%0AMerci%20!%0A">Nous écrire</a>
+            <a class="btn btn-quiet" href="#participer-form" data-role="Famille pilote">Nous écrire</a>
           </div>
           <div class="card way">
             <h3>Vous êtes professionnel</h3>
             <p>Psychologue, TES, enseignant : partagez le kit aux familles, ou discutons d’un projet pilote HAVRE Pro.</p>
-            <a class="btn btn-quiet" href="mailto:contact.havre@icloud.com?subject=Pilote%20clinique%20-%20HAVRE%20Pro&body=Bonjour%20%C3%A9quipe%20HAVRE,%0A%0AJe%20souhaite%20discuter%20d%27un%20pilote%20clinique.%0A%0ANom%20:%0AProfession%20:%0AStructure%20/-%20%C3%A9tablissement%20:%0ALieu%20(ville%2C%20pays)%20:%0ANombre%20d%27enfants%20suivis%20concern%C3%A9s%20:%0ADisponibilit%C3%A9s%20pour%20un%20%C3%A9change%20:%0A%0AMerci!%0A">Discuter d’un pilote</a>
+            <a class="btn btn-quiet" href="#participer-form" data-role="Professionnel">Discuter d’un pilote</a>
           </div>
         </div>
+        <div class="signup join" id="participer-form">
+          <div>
+            <span class="eyebrow">Participer</span>
+            <h2>Dites-nous qui vous êtes</h2>
+            <p class="lead">Nous répondons à chaque message personnellement, en général sous quelques jours.</p>
+          </div>
+          <form name="participer" method="POST" action="/merci.html?participer" data-netlify="true" netlify-honeypot="bot-field">
+            <input type="hidden" name="form-name" value="participer" />
+            <input type="hidden" name="langue" value="fr" />
+            <p class="hidden-field" aria-hidden="true">
+              <label>Ne pas remplir : <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+            </p>
+            <label>
+              Je suis…
+              <select name="role" required>
+                <option value="">—</option>
+                <option value="Famille pilote">Un parent qui veut devenir famille pilote</option>
+                <option value="Professionnel">Un professionnel (psy, TES, enseignant…)</option>
+                <option value="Autre">Autre</option>
+              </select>
+            </label>
+            <label>
+              Votre e-mail
+              <input type="email" name="email" required autocomplete="email" placeholder="vous@exemple.com" />
+            </label>
+            <div class="row-2">
+              <label>
+                <span>Prénom <span class="opt">(facultatif)</span></span>
+                <input type="text" name="prenom" autocomplete="given-name" />
+              </label>
+              <label>
+                <span>Ville <span class="opt">(facultatif)</span></span>
+                <input type="text" name="ville" autocomplete="address-level2" />
+              </label>
+            </div>
+            <label>
+              <span>Votre message <span class="opt">(facultatif)</span></span>
+              <textarea name="message" placeholder="Âge de l’enfant, votre rôle, ce qui vous intéresse…"></textarea>
+            </label>
+            <label class="consent">
+              <input type="checkbox" name="consentement" value="oui" required />
+              <span>J’accepte que HAVRE me recontacte au sujet de ma demande.</span>
+            </label>
+            <button class="btn" type="submit">Envoyer</button>
+            <p class="privacy">Votre e-mail n’est jamais revendu ni partagé. <a href="confidentialite.html">Politique de confidentialité</a>.</p>
+          </form>
+        </div>
+        <script>
+          // Pré-sélectionne le rôle quand on arrive depuis un bouton de la section.
+          document.querySelectorAll('a[data-role]').forEach(function (a) {
+            a.addEventListener('click', function () {
+              var s = document.querySelector('#participer-form select[name="role"]');
+              if (s) s.value = a.dataset.role;
+            });
+          });
+        </script>
       </div>
     </section>
 
@@ -367,9 +425,11 @@
       <nav>
         <a href="index.html">Le kit</a>
         <a href="mailto:contact.havre@icloud.com">Contact</a>
+        <a href="confidentialite.html">Confidentialité</a>
         <a href="en/project.html" hreflang="en" lang="en">English</a>
       </nav>
     </div>
   </footer>
+  <script data-goatcounter="https://havre-site.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>
