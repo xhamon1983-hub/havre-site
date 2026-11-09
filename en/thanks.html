@@ -5,7 +5,9 @@
   <title>Thank you – Your HAVRE Home Kit</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex" />
-  <link rel="icon" href="../assets/img/logo-havre.png" />
+  <link rel="canonical" href="https://havre-site.netlify.app/en/thanks.html" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon-32.png" />
+  <link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png" />
   <link rel="stylesheet" href="../assets/css/havre.css" />
 </head>
 <body>
@@ -17,8 +19,9 @@
     </div>
   </header>
 
-  <main class="thanks">
+  <main class="thanks" data-mode="kit">
     <span class="eyebrow">Thank you!</span>
+    <div data-when="kit">
     <h1>Your kit is ready.</h1>
     <p class="lead">You’re one of the first HAVRE families. Download the kit, print it and try it for a week.</p>
 
@@ -39,6 +42,16 @@
       <p>The kit is free. Share the link: havre-site.netlify.app/en/</p>
       <a class="btn btn-quiet" href="mailto:?subject=A%20free%20kit%20for%20anxious%20kids&body=Hi,%0A%0AI%20just%20found%20the%20HAVRE%20Home%20Kit:%20an%20emotions%20gauge%20for%20the%20fridge,%20a%20calm-down%20plan%20and%20mission%20cards.%20It%27s%20free:%0Ahttps://havre-site.netlify.app/en/%0A">Send it by email</a>
     </div>
+    </div>
+    <div data-when="participer">
+      <h1>Message received.</h1>
+      <p class="lead">Thank you for wanting to build HAVRE with us. We’ll reply personally, usually within a few days, from contact.havre@icloud.com.</p>
+      <p class="lead">In the meantime, if you haven’t already, the kit is the best way to discover HAVRE.</p>
+      <div class="download"><a class="btn" href="index.html#get-the-kit">Get the free kit</a></div>
+    </div>
+    <script>
+      if (/[?&]participate\b/.test(location.search)) document.querySelector('.thanks').dataset.mode = 'participer';
+    </script>
   </main>
 
   <footer class="site-footer">
@@ -48,8 +61,10 @@
         <a href="index.html">The kit</a>
         <a href="project.html">The project</a>
         <a href="mailto:contact.havre@icloud.com">Contact</a>
+        <a href="privacy.html">Privacy</a>
       </nav>
     </div>
   </footer>
+  <script data-goatcounter="https://havre-site.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>

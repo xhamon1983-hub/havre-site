@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /archive/
+Disallow: /merci.html
+Disallow: /en/thanks.html
+
+Sitemap: https://havre-site.netlify.app/sitemap.xml

@@ -5,7 +5,7 @@
   --bg-tint: #eef7f2;
   --card: #ffffff;
   --green: #4cc38a;
-  --green-deep: #2a8f68;
+  --green-deep: #237a58;
   --teal: #3ba7c9;
   --text: #102018;
   --muted: #5a7468;
@@ -535,7 +535,8 @@ h3 {
 
 .signup input[type="email"],
 .signup input[type="text"],
-.signup select {
+.signup select,
+.signup textarea {
   font: inherit;
   font-size: 16px;
   padding: 12px 14px;
@@ -546,8 +547,14 @@ h3 {
   width: 100%;
 }
 
+.signup textarea {
+  min-height: 96px;
+  resize: vertical;
+}
+
 .signup input:focus,
-.signup select:focus {
+.signup select:focus,
+.signup textarea:focus {
   outline: 2px solid var(--green);
   outline-offset: 1px;
 }
@@ -1357,4 +1364,63 @@ h3 {
   .ways {
     grid-template-columns: minmax(0, 1fr);
   }
+}
+
+/* ========== Formulaire « participer » (page « Le projet ») ========== */
+
+.join {
+  margin-top: 36px;
+}
+
+.join .lead {
+  margin-top: 10px;
+}
+
+/* ========== Page de remerciement : variante participation ========== */
+
+.thanks [data-when] {
+  display: none;
+}
+
+.thanks[data-mode="kit"] [data-when="kit"],
+.thanks[data-mode="participer"] [data-when="participer"] {
+  display: block;
+}
+
+/* ========== Pages texte (confidentialité, 404) ========== */
+
+.prose {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 56px 20px 72px;
+}
+
+.prose h2 {
+  font-size: 22px;
+  margin-top: 36px;
+}
+
+.prose p,
+.prose li {
+  margin-top: 10px;
+  color: #31463b;
+}
+
+.prose ul {
+  padding-left: 22px;
+}
+
+.prose .updated {
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+.notfound {
+  text-align: center;
+  padding: 96px 20px;
+}
+
+.notfound .btn {
+  margin-top: 24px;
 }

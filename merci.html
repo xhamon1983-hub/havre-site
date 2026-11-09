@@ -5,7 +5,9 @@
   <title>Merci – Votre kit HAVRE maison</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex" />
-  <link rel="icon" href="assets/img/logo-havre.png" />
+  <link rel="canonical" href="https://havre-site.netlify.app/merci.html" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png" />
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png" />
   <link rel="stylesheet" href="assets/css/havre.css" />
 </head>
 <body>
@@ -17,8 +19,9 @@
     </div>
   </header>
 
-  <main class="thanks">
+  <main class="thanks" data-mode="kit">
     <span class="eyebrow">Merci&nbsp;!</span>
+    <div data-when="kit">
     <h1>Votre kit est prêt.</h1>
     <p class="lead">Vous faites partie des premières familles HAVRE. Téléchargez le kit, imprimez-le et essayez-le pendant une semaine.</p>
 
@@ -39,6 +42,16 @@
       <p>Le kit est gratuit. Partagez-lui le lien : havre-site.netlify.app</p>
       <a class="btn btn-quiet" href="mailto:?subject=Un%20kit%20gratuit%20pour%20les%20enfants%20anxieux&body=Bonjour,%0A%0AJe%20viens%20de%20d%C3%A9couvrir%20le%20kit%20HAVRE%20maison%20:%20une%20jauge%20d%27%C3%A9motions%20pour%20le%20frigo,%20un%20plan%20pour%20redescendre%20et%20des%20cartes%20missions.%20C%27est%20gratuit%20:%0Ahttps://havre-site.netlify.app/%0A">Lui envoyer par e-mail</a>
     </div>
+    </div>
+    <div data-when="participer">
+      <h1>Message bien reçu.</h1>
+      <p class="lead">Merci de vouloir construire HAVRE avec nous. Nous vous répondons personnellement, en général sous quelques jours, depuis contact.havre@icloud.com.</p>
+      <p class="lead">En attendant, si ce n’est pas déjà fait, le kit est le meilleur moyen de découvrir HAVRE.</p>
+      <div class="download"><a class="btn" href="index.html#recevoir">Recevoir le kit gratuit</a></div>
+    </div>
+    <script>
+      if (/[?&]participer\b/.test(location.search)) document.querySelector('.thanks').dataset.mode = 'participer';
+    </script>
   </main>
 
   <footer class="site-footer">
@@ -48,8 +61,10 @@
         <a href="index.html">Le kit</a>
         <a href="projet.html">Le projet</a>
         <a href="mailto:contact.havre@icloud.com">Contact</a>
+        <a href="confidentialite.html">Confidentialité</a>
       </nav>
     </div>
   </footer>
+  <script data-goatcounter="https://havre-site.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>
